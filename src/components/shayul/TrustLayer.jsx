@@ -28,39 +28,28 @@ export default function TrustLayer() {
           </h2>
         </div>
 
-        {/* Market Problem Bar */}
-        <div className="bg-white/5 border border-white/10 rounded-sm p-6 mb-16">
-          <p className="text-white/50 text-xs font-bold tracking-widest uppercase mb-3">{trust.problemTitle[lang]}</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {trust.problemStats.map((s) => (
-              <div key={s.num.en} className="border-r border-white/10 pr-6 last:border-0">
-                <div className="text-3xl font-bold text-white/20 mb-1 font-mono">{s.num[lang]}</div>
-                <div className="text-white/50 text-xs leading-relaxed">{s.label[lang]}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Pillars Grid — hover to reveal content */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-start">
           {trust.pillars.map((p) => {
             const Icon = icons[p.icon];
             return (
               <div
                 key={p.num}
-                className="bg-white/4 border border-white/10 hover:border-[#009466]/40 rounded-sm p-6 group transition-all duration-300 hover:bg-white/7"
+                className="bg-white/4 border border-white/10 hover:border-[#009466]/40 rounded-sm p-6 group transition-all duration-300 hover:bg-white/7 min-h-[180px] flex flex-col"
               >
-                <div className="flex items-start justify-between mb-6">
+                <div className="flex items-start justify-between mb-5">
                   <div
-                    className="w-11 h-11 rounded-sm flex items-center justify-center"
+                    className="w-12 h-12 rounded-sm flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                     style={{ backgroundColor: `${p.color}20` }}
                   >
-                    <Icon size={22} style={{ color: p.color }} />
+                    <Icon size={24} style={{ color: p.color }} />
                   </div>
                   <span className="text-white/15 font-mono text-xs">{p.num}</span>
                 </div>
-                <h3 className="text-white font-bold text-base mb-3 leading-snug">{p.title[lang]}</h3>
-                <p className="text-white/45 text-sm leading-relaxed">{p.desc[lang]}</p>
+                <h3 className="text-white font-bold text-base leading-snug">{p.title[lang]}</h3>
+                <div className="max-h-0 opacity-0 group-hover:max-h-72 group-hover:opacity-100 group-hover:mt-4 overflow-hidden transition-all duration-300">
+                  <p className="text-white/55 text-sm leading-relaxed">{p.desc[lang]}</p>
+                </div>
               </div>
             );
           })}
