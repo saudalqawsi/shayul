@@ -10,13 +10,14 @@ function EquipCard({ eq }) {
 
   return (
     <div
-      className="relative snap-start flex-shrink-0 w-72 md:w-80 bg-[#0d2240] border border-white/10 rounded-sm overflow-hidden group cursor-pointer"
+      className="relative snap-start flex-shrink-0 w-[86vw] sm:w-[440px] md:w-[540px] lg:w-[600px] bg-[#0d2240] border border-white/10 rounded-sm overflow-hidden group cursor-pointer"
+      data-card
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       dir={dir}
     >
       {/* Image */}
-      <div className="relative h-52 overflow-hidden">
+      <div className="relative h-60 md:h-72 overflow-hidden">
         <Image
           src={eq.img}
           alt={eq.name[lang]}
@@ -97,9 +98,11 @@ export default function EquipmentVault() {
   const scrollRef = useRef(null);
 
   const scroll = (dirAmt) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: dirAmt * 340, behavior: "smooth" });
-    }
+    const el = scrollRef.current;
+    if (!el) return;
+    const card = el.querySelector("[data-card]");
+    const amount = card ? card.offsetWidth + 20 : 560;
+    el.scrollBy({ left: dirAmt * amount, behavior: "smooth" });
   };
 
   return (
@@ -121,29 +124,28 @@ export default function EquipmentVault() {
               <span className="text-white/40">{equipmentVault.title2[lang]}</span>
             </h2>
           </div>
-          {/* Scroll Controls */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => scroll(1)}
-              className="w-10 h-10 bg-white/8 border border-white/15 rounded-sm flex items-center justify-center text-white hover:bg-[#009466] transition-colors"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              onClick={() => scroll(-1)}
-              className="w-10 h-10 bg-white/8 border border-white/15 rounded-sm flex items-center justify-center text-white hover:bg-[#009466] transition-colors"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
         </div>
       </div>
 
       {/* Horizontal Scroll — peek next/prev */}
       <div className="relative">
-        {/* Edge fades to hint peeked cards */}
-        <div className="absolute top-0 bottom-4 left-0 w-20 bg-gradient-to-r from-[#081626] to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 bottom-4 right-0 w-20 bg-gradient-to-l from-[#081626] to-transparent pointer-events-none z-10" />
+        {/* Edge fades — darker on both sides */}
+        <div className="absolute top-0 bottom-4 left-0 w-24 md:w-40 bg-gradient-to-r from-[#081626] via-[#081626]/85 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 bottom-4 right-0 w-24 md:w-40 bg-gradient-to-l from-[#081626] via-[#081626]/85 to-transparent pointer-events-none z-10" />
+
+        {/* Arrows within the equipment thumbnail */}
+        <button
+          onClick={() => scroll(1)}
+          className="absolute left-4 md:left-6 top-[120px] md:top-[144px] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A1A30]/70 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-[#009466] hover:border-[#009466] transition-colors"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button
+          onClick={() => scroll(-1)}
+          className="absolute right-4 md:right-6 top-[120px] md:top-[144px] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A1A30]/70 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-[#009466] hover:border-[#009466] transition-colors"
+        >
+          <ChevronRight size={20} />
+        </button>
 
         <div
           ref={scrollRef}
@@ -159,7 +161,7 @@ export default function EquipmentVault() {
             <EquipCard key={eq.name.en} eq={eq} />
           ))}
           {/* CTA Card */}
-          <div className="snap-start flex-shrink-0 w-72 md:w-80 bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center">
+          <div className="snap-start flex-shrink-0 w-[86vw] sm:w-[440px] md:w-[540px] lg:w-[600px] bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center">
             <div className="w-14 h-14 bg-[#009466]/20 rounded-sm flex items-center justify-center mb-4">
               <Shield size={28} className="text-[#009466]" />
             </div>
