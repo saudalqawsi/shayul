@@ -3,7 +3,7 @@
 
 export const navLinks = [
   { label: { ar: "المعدات", en: "Equipment" }, href: "#equipment" },
-  { label: { ar: "كيف يعمل", en: "How It Works" }, href: "#how" },
+  { label: { ar: "رحلة الحجز", en: "Booking" }, href: "#how" },
   { label: { ar: "للمزوّدين", en: "For Providers" }, href: "/provider" },
   { label: { ar: "الأسعار", en: "Pricing" }, href: "#pricing" },
   { label: { ar: "تواصل معنا", en: "Contact" }, href: "#request" },
@@ -239,9 +239,11 @@ export const equipmentVault = {
 };
 
 export const how = {
-  eyebrow: { ar: "كيف يعمل", en: "How It Works" },
-  title1: { ar: "من الطلب", en: "From request" },
-  title2: { ar: "إلى الموقع.", en: "to site." },
+  eyebrow: { ar: "خريطة الحجز", en: "Booking Roadmap" },
+  title1: { ar: "خريطة الحجز", en: "Booking Roadmap" },
+  title2: { ar: "من الطلب إلى الموقع.", en: "from request to site." },
+  startTag: { ar: "بداية الحجز", en: "Booking start" },
+  endTag: { ar: "التسليم", en: "On site" },
   steps: [
     {
       num: "01",
