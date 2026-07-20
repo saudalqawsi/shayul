@@ -9,7 +9,7 @@ export const navLinks = [
 ];
 
 export const hero = {
-  badge: { ar: "كل معدة مغطّاة بالكامل", en: "Every Unit Fully Covered" },
+  badge: { ar: "التأمين الشامل — قريباً", en: "Full Insurance — Coming Soon" },
   title1: { ar: "استأجر، أنجز،", en: "Rent, Build," },
   title2: { ar: "واطمئن.", en: "Relax." },
   subtitle: {
@@ -69,7 +69,7 @@ export const trust = {
       icon: "Shield",
       color: "#0696B0",
       num: "02",
-      title: { ar: "التأمين المدمج", en: "Embedded Insurance" },
+      title: { ar: "التأمين المدمج — قريباً", en: "Embedded Insurance — Coming Soon" },
       desc: {
         ar: "بوليصة تأمين تصدر من بيانات العقد ذاتها مع كل عقد — تغطّي المعدة والأضرار الناتجة في الموقع، وتتيح الوصول للمشاريع الكبرى والحكومية.",
         en: "An insurance policy is issued from the contract's own data on every deal — covering the unit and on-site damages, and unlocking access to major and government projects.",
@@ -162,7 +162,7 @@ export const equipmentVault = {
   eyebrow: { ar: "معرض المعدات", en: "Equipment Vault" },
   title1: { ar: "الخزينة الحديدية —", en: "The Iron Vault —" },
   title2: { ar: "كل معدة جاهزة للتسليم.", en: "every unit ready for delivery." },
-  coverage: { ar: "مغطّى بالكامل", en: "Fully Covered" },
+  coverage: { ar: "تأمين — قريباً", en: "Insurance — Soon" },
   specLabels: {
     weight: { ar: "الوزن", en: "Weight" },
     hp: { ar: "القدرة", en: "Power" },
@@ -296,7 +296,7 @@ export const requestForm = {
   },
   guarantees: [
     { title: { ar: "عقد إلكتروني موثّق", en: "Notarized e-contract" }, desc: { ar: "يصدر فور الاتفاق على الشروط", en: "Issued the moment terms are agreed" } },
-    { title: { ar: "بوليصة تأمين شاملة", en: "Full insurance policy" }, desc: { ar: "تغطي المعدة والأضرار في الموقع", en: "Covers the unit and on-site damages" } },
+    { title: { ar: "بوليصة تأمين شاملة — قريباً", en: "Full insurance policy — coming soon" }, desc: { ar: "تغطي المعدة والأضرار في الموقع (قيد الإطلاق)", en: "Covers the unit and on-site damages (launching soon)" } },
     { title: { ar: "تسليم سريع", en: "Fast delivery" }, desc: { ar: "اليوم نفسه أو اليوم التالي للطلب", en: "Same or next day from request" } },
     { title: { ar: "تحصيل مضمون", en: "Guaranteed collection" }, desc: { ar: "عبر طرف محايد مرخّص من ساما", en: "via a SAMA-licensed neutral party" } },
   ],
@@ -349,6 +349,81 @@ export const footer = {
   copyright: { ar: "© ٢٠٢٦ شيول · جميع الحقوق محفوظة · v1.1", en: "© 2026 Shayul · All rights reserved · v1.1" },
   legal: { ar: ["سياسة الخصوصية", "شروط الاستخدام", "اتفاقية الخدمة"], en: ["Privacy Policy", "Terms of Use", "Service Agreement"] },
   tagline: { ar: "استأجر، أنجز، واطمئن", en: "Rent, Build, Relax" },
+};
+
+export const journey = {
+  eyebrow: { ar: "رحلة العميل", en: "Customer Journey" },
+  title1: { ar: "خريطة الطريق", en: "The Roadmap" },
+  title2: { ar: "من الطلب إلى التسليم.", en: "from request to delivery." },
+  intro: {
+    ar: "منصّة شيول مدفوعة بقاعدة بيانات مركزية يصل إليها طرفان: صاحب المشروع وصاحب المعدات. كل خطوة تُسجَّل وتُوثَّق في القاعدة — لكل طرف مسار وصول مخصّص.",
+    en: "Shayul runs on a single shared database with access for two sides — the project owner and the equipment owner. Every step is recorded and notarized, with a dedicated access path for each party.",
+  },
+  roles: [
+    { key: "client", icon: "User", color: "#009466", label: { ar: "صاحب المشروع (عميل)", en: "Project Owner (Client)" } },
+    { key: "provider", icon: "HardHat", color: "#0696B0", label: { ar: "صاحب المعدات (مزوّد)", en: "Equipment Owner (Provider)" } },
+    { key: "platform", icon: "Database", color: "#D4A537", label: { ar: "قاعدة بيانات شيول", en: "Shayul Database" } },
+  ],
+  insuranceSoon: { ar: "التأمين الشامل — قريباً", en: "Full insurance coverage — coming soon" },
+  stages: [
+    {
+      num: "01",
+      phase: { ar: "بداية", en: "Start" },
+      title: { ar: "الوصول والتسجيل", en: "Access & Onboarding" },
+      client: { ar: "ينشئ حساباً ويتحقق من بيانات شركته", en: "Creates an account and verifies company details" },
+      provider: { ar: "يسجّل أسطوله ويرفع معداته وأسعاره", en: "Registers fleet, uploads units and rates" },
+      platform: { ar: "تنشئ القاعدة ملفي وصول مستقلَّين", en: "Database provisions two independent access profiles" },
+    },
+    {
+      num: "02",
+      phase: { ar: "إدخال", en: "Input" },
+      title: { ar: "الطلب أو الإتاحة", en: "Request or Availability" },
+      client: { ar: "يرسل طلب معدات: النوع، العدد، المدة، الموقع", en: "Posts equipment request: type, quantity, duration, location" },
+      provider: { ar: "ينشر المعدات المتاحة وأسعارها في السوق", en: "Publishes available units and rates to the marketplace" },
+      platform: { ar: "تجهّز البيانات للمطابقة الجغرافية", en: "Prepares data for geographic matching" },
+    },
+    {
+      num: "03",
+      phase: { ar: "مطابقة", en: "Match" },
+      title: { ar: "المطابقة والعرض", en: "Matching & Quote" },
+      client: { ar: "يستلم عروضاً مطابقة ويقارنها", en: "Receives matched quotes and compares them" },
+      provider: { ar: "يستلم طلباً مؤهَّلاً ويرسل عرضه", en: "Receives a qualified lead and sends an offer" },
+      platform: { ar: "تطابق الطلب بالمعدات حسب الجغرافيا والمواصفات", en: "Matches the request to units by geography and spec" },
+    },
+    {
+      num: "04",
+      phase: { ar: "عقد وتأمين", en: "Contract & Insure" },
+      title: { ar: "العقد والتأمين", en: "Contract & Insurance" },
+      client: { ar: "يوقّع العقد الإلكتروني الموثّق", en: "Signs the notarized e-contract" },
+      provider: { ar: "يؤكّد الجاهزية ويرتب التسليم", en: "Confirms readiness and schedules dispatch" },
+      platform: { ar: "تصدر العقد؛ بوليصة التأمين تُطلق قريباً", en: "Issues the contract; insurance policy launching soon" },
+      insuranceSoon: true,
+    },
+    {
+      num: "05",
+      phase: { ar: "تنفيذ", en: "Execute" },
+      title: { ar: "الإرسال والتنفيذ", en: "Dispatch & Execute" },
+      client: { ar: "يؤكّد وصول المعدة إلى الموقع", en: "Confirms unit arrival on site" },
+      provider: { ar: "يسلّم المعدة ويبدأ التشغيل", en: "Delivers the unit and starts operation" },
+      platform: { ar: "تسجّل وقت التسليم في القاعدة", en: "Logs delivery time into the database" },
+    },
+    {
+      num: "06",
+      phase: { ar: "تسوية", en: "Settle" },
+      title: { ar: "التحقق والتسوية", en: "Verify & Settle" },
+      client: { ar: "يؤكّد إكمال العمل", en: "Confirms work completion" },
+      provider: { ar: "يستلم مستحقاته خلال يوم إلى يومين", en: "Receives payout within one to two days" },
+      platform: { ar: "تحرّر السداد عبر طرف محايد مرخّص من ساما", en: "Releases payment via a SAMA-licensed neutral party" },
+    },
+    {
+      num: "07",
+      phase: { ar: "إغلاق", en: "Close" },
+      title: { ar: "التقييم والتكرار", en: "Rate & Repeat" },
+      client: { ar: "يق ييّم التجربة ويُحفظ سجلّه", en: "Rates the experience; history saved" },
+      provider: { ar: "يبني سمعته ويصل لشريك مفضّل", en: "Builds reputation; reaches preferred-partner status" },
+      platform: { ar: "تخزّن السجل للطلبات المستقبلية الأسرع", en: "Stores the record for faster future requests" },
+    },
+  ],
 };
 
 export const logo = {

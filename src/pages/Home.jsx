@@ -4,6 +4,7 @@ import HeroSection from "@/components/shayul/HeroSection";
 import TrustLayer from "@/components/shayul/TrustLayer";
 import EquipmentVault from "@/components/shayul/EquipmentVault";
 import HowItWorks from "@/components/shayul/HowItWorks";
+import CustomerJourney from "@/components/shayul/CustomerJourney";
 import PricingSection from "@/components/shayul/PricingSection";
 import RequestForm from "@/components/shayul/RequestForm";
 import FooterSection from "@/components/shayul/FooterSection";
@@ -26,6 +27,7 @@ function HomeContent() {
       <TrustLayer />
       <EquipmentVault />
       <HowItWorks />
+      <CustomerJourney />
       <PricingSection />
       <RequestForm />
       <FooterSection />
