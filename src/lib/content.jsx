@@ -118,8 +118,8 @@ export const equipment = [
     tag: { ar: "الأعلى طلباً", en: "Most Requested" },
   },
   {
-    name: { ar: "حفارة JCB", en: "JCB Backhoe Loader" },
-    nameAlt: { ar: "JCB Backhoe Loader", en: "حفارة JCB" },
+    name: { ar: "حفارة / باك لودر", en: "Backhoe Loader" },
+    nameAlt: { ar: "Backhoe Loader", en: "حفارة / باك لودر" },
     specs: {
       weight: { ar: "٨ طن", en: "8 T" },
       hp: { ar: "٩٢ حصان", en: "92 HP" },
@@ -131,8 +131,34 @@ export const equipment = [
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
-    name: { ar: "قريدر", en: "Motor Grader G14" },
-    nameAlt: { ar: "Motor Grader G14", en: "قريدر" },
+    name: { ar: "بوبكات", en: "Bobcat" },
+    nameAlt: { ar: "Bobcat", en: "بوبكات" },
+    specs: {
+      weight: { ar: "٣ طن", en: "3 T" },
+      hp: { ar: "٧٥ حصان", en: "75 HP" },
+      size: { ar: "S175", en: "S175" },
+    },
+    daily: 900,
+    monthly: null,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/4cbd0f58b_generated_image.png",
+    tag: { ar: "متوفر الآن", en: "Available Now" },
+  },
+  {
+    name: { ar: "بوكلين", en: "Forklift Truck" },
+    nameAlt: { ar: "Forklift Truck", en: "بوكلين" },
+    specs: {
+      weight: { ar: "٨ طن", en: "8 T" },
+      hp: { ar: "٨٥ حصان", en: "85 HP" },
+      size: { ar: "٥ طن", en: "5 T" },
+    },
+    daily: 800,
+    monthly: 20000,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/dfc3795a8_generated_image.png",
+    tag: { ar: "متوفر الآن", en: "Available Now" },
+  },
+  {
+    name: { ar: "قريدر", en: "Motor Grader" },
+    nameAlt: { ar: "Motor Grader", en: "قريدر" },
     specs: {
       weight: { ar: "١٤ طن", en: "14 T" },
       hp: { ar: "٢٠٠ حصان", en: "200 HP" },
@@ -144,8 +170,8 @@ export const equipment = [
     tag: { ar: "للمشاريع الكبرى", en: "For Major Projects" },
   },
   {
-    name: { ar: "بلدوزر", en: "Bulldozer D9" },
-    nameAlt: { ar: "Bulldozer D9", en: "بلدوزر" },
+    name: { ar: "بلدوزر", en: "Bulldozer" },
+    nameAlt: { ar: "Bulldozer", en: "بلدوزر" },
     specs: {
       weight: { ar: "٤٩ طن", en: "49 T" },
       hp: { ar: "٤١٠ حصان", en: "410 HP" },
@@ -154,6 +180,58 @@ export const equipment = [
     daily: 3000,
     monthly: null,
     img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/db4997345_generated_1d460221.png",
+    tag: { ar: "دفع مقدّم", en: "Prepayment Required" },
+  },
+  {
+    name: { ar: "رصاصة / دكاكة", en: "Vibratory Roller" },
+    nameAlt: { ar: "Vibratory Roller", en: "رصاصة / دكاكة" },
+    specs: {
+      weight: { ar: "١٢ طن", en: "12 T" },
+      hp: { ar: "١٣٠ حصان", en: "130 HP" },
+      size: { ar: "١٤ طن", en: "14 T" },
+    },
+    daily: 700,
+    monthly: 16000,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/bc33f39ac_generated_image.png",
+    tag: { ar: "متوفر الآن", en: "Available Now" },
+  },
+  {
+    name: { ar: "قالب / شاحنة", en: "Dump Truck" },
+    nameAlt: { ar: "Dump Truck", en: "قالب / شاحنة" },
+    specs: {
+      weight: { ar: "٢٥ طن", en: "25 T" },
+      hp: { ar: "٤٠٠ حصان", en: "400 HP" },
+      size: { ar: "٦ محاور", en: "6-Axle" },
+    },
+    daily: 650,
+    monthly: 15000,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/b08bf5bed_generated_image.png",
+    tag: { ar: "متوفر الآن", en: "Available Now" },
+  },
+  {
+    name: { ar: "فوركلفت", en: "Telehandler" },
+    nameAlt: { ar: "Telehandler", en: "فوركلفت" },
+    specs: {
+      weight: { ar: "١٨ طن", en: "18 T" },
+      hp: { ar: "١٣٠ حصان", en: "130 HP" },
+      size: { ar: "R90", en: "R90" },
+    },
+    daily: 1000,
+    monthly: null,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/648246f79_generated_image.png",
+    tag: { ar: "للمشاريع الكبرى", en: "For Major Projects" },
+  },
+  {
+    name: { ar: "كرين", en: "Crane" },
+    nameAlt: { ar: "Crane", en: "كرين" },
+    specs: {
+      weight: { ar: "٤٠ طن", en: "40 T" },
+      hp: { ar: "٣٥٠ حصان", en: "350 HP" },
+      size: { ar: "٢٥ طن", en: "25 T" },
+    },
+    daily: 2500,
+    monthly: null,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/502a28737_generated_image.png",
     tag: { ar: "دفع مقدّم", en: "Prepayment Required" },
   },
 ];
