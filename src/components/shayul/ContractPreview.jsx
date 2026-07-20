@@ -1,116 +1,180 @@
 import React from "react";
-import { FileText, Stamp, ShieldCheck } from "lucide-react";
+import { Stamp, ShieldCheck } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { contract } from "@/lib/content";
+
+const crop = "absolute w-3 h-3 border-[#2b2b2b]";
 
 export default function ContractPreview() {
   const { lang, dir } = useI18n();
   const v = contract.scopeValues;
+  const ar = lang === "ar";
 
   return (
-    <div className="relative rounded-sm border border-white/10 bg-[#0c1e34] overflow-hidden shadow-2xl" dir={dir}>
-      {/* document window bar */}
-      <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-[#081626]">
-        <div className="flex items-center gap-2 text-white/70 text-xs font-mono">
-          <FileText size={14} className="text-[#009466]" />
-          {contract.ref}
-        </div>
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#009466]/15 border border-[#009466]/40">
-          <ShieldCheck size={12} className="text-[#009466]" />
-          <span className="text-[#009466] text-[10px] font-bold tracking-widest">{contract.seal[lang]}</span>
-        </div>
-      </div>
+    <div className="relative" style={{ transform: "rotate(-0.6deg)" }}>
+      {/* drop shadow / desk */}
+      <div className="absolute inset-0 translate-y-2 translate-x-1 bg-black/50 blur-xl rounded-sm" />
 
-      <div className="p-6 relative">
-        {/* watermark */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.04]">
-          <span className="text-white font-bold tracking-widest" style={{ fontSize: "5rem", transform: "rotate(-18deg)" }}>
-            {contract.watermark[lang]}
-          </span>
-        </div>
+      <div
+        className="relative bg-[#f4ecd8] text-[#232023] rounded-sm overflow-hidden"
+        style={{
+          boxShadow: "0 18px 50px -12px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(0,0,0,0.05)",
+          backgroundImage:
+            "radial-gradient(ellipse at 20% 10%, rgba(120,90,40,0.06), transparent 60%), radial-gradient(ellipse at 80% 90%, rgba(120,90,40,0.05), transparent 55%)",
+        }}
+        dir={dir}
+      >
+        {/* crop registration marks */}
+        <div className={`${crop} top-1 left-1 border-t border-l border-r-0 border-b-0`} />
+        <div className={`${crop} top-1 right-1 border-t border-r border-l-0 border-b-0`} />
+        <div className={`${crop} bottom-1 left-1 border-b border-l border-t-0 border-r-0`} />
+        <div className={`${crop} bottom-1 right-1 border-b border-r border-t-0 border-l-0`} />
 
-        <h3 className="relative text-white font-bold text-lg text-center mb-1">{contract.title[lang]}</h3>
-        <div className="relative text-center text-white/30 text-xs font-mono mb-6">{contract.ref}</div>
+        {/* double legal border */}
+        <div className="m-3 border border-[#232023]/35">
+          <div className="m-1.5 border border-[#232023]/20">
 
-        {/* parties */}
-        <div className="relative grid grid-cols-2 gap-3 mb-5">
-          <div className="bg-white/4 border border-white/10 rounded-sm p-3">
-            <div className="text-[#0696B0] text-[10px] font-bold tracking-widest uppercase mb-3">{contract.client[lang]}</div>
-            <div className="border-t border-white/25 w-3/4 mb-2" />
-            <div className="text-white/30 text-[11px]">___________</div>
-          </div>
-          <div className="bg-white/4 border border-white/10 rounded-sm p-3">
-            <div className="text-[#009466] text-[10px] font-bold tracking-widest uppercase mb-3">{contract.provider[lang]}</div>
-            <div className="border-t border-white/25 w-3/4 mb-2" />
-            <div className="text-white/30 text-[11px]">___________</div>
-          </div>
-        </div>
+            <div className="relative p-7 md:p-9">
+              {/* watermark */}
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <span
+                  className="text-[#232023] font-black tracking-[0.2em] select-none"
+                  style={{ fontSize: "4.5rem", opacity: 0.045, transform: "rotate(-22deg)", whiteSpace: "nowrap" }}
+                >
+                  {contract.watermark[lang]}
+                </span>
+              </div>
 
-        {/* scope */}
-        <div className="relative border-t border-dashed border-white/10 pt-4 mb-4">
-          <div className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-3">{contract.scopeLabel[lang]}</div>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
-            <div>
-              <div className="text-white/30 text-[11px]">{contract.equipmentLabel[lang]}</div>
-              <div className="text-white font-medium">{v.equipment[lang]}</div>
+              {/* Letterhead */}
+              <div className="relative flex items-start justify-between gap-4 mb-5">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-sm bg-[#0A1A30] flex items-center justify-center">
+                    <ShieldCheck size={18} className="text-[#D4A537]" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-[#0A1A30] text-base leading-none">{contract.logoText[lang]}</div>
+                    <div className="text-[#232023]/45 text-[9px] mt-0.5 tracking-widest font-mono">HEAVY EQUIPMENT · KSA</div>
+                  </div>
+                </div>
+                <div className="text-left" dir="ltr">
+                  <div className="text-[10px] font-mono text-[#232023]/55">{contract.ref}</div>
+                  <div className="text-[10px] font-mono text-[#232023]/55">{contract.serial.replace("{EN}", ar ? "AR" : "EN")}</div>
+                  <div className="text-[9px] text-[#232023]/45 mt-0.5">{contract.dateLabel[lang]}: {contract.issueDate[lang]}</div>
+                </div>
+              </div>
+
+              <div className="relative border-t-2 border-[#232023]/60 mb-1" />
+              <div className="relative border-t border-[#232023]/60 mb-6" />
+
+              {/* Notarized ribbon */}
+              <div className="relative flex items-center justify-center gap-2 mb-5">
+                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#b91c1c]/60 bg-[#b91c1c]/8">
+                  <Stamp size={12} className="text-[#b91c1c]" />
+                  <span className="text-[#b91c1c] text-[10px] font-bold tracking-[0.25em]">{contract.seal[lang]}</span>
+                </div>
+              </div>
+
+              {/* Title */}
+              <h3 className="relative text-center font-bold text-[#1a1a1a] text-lg md:text-xl tracking-wide mb-1">
+                {contract.title[lang]}
+              </h3>
+              <p className="relative text-center text-[#232023]/45 text-[10px] font-mono mb-7">
+                {ar ? "المملكة العربية السعودية — وثيقة ملزمة للأطراف" : "Kingdom of Saudi Arabia — binding instrument"}
+              </p>
+
+              {/* Parties */}
+              <div className="relative grid grid-cols-2 gap-5 mb-6">
+                {[
+                  { role: contract.client[lang], color: "#0696B0" },
+                  { role: contract.provider[lang], color: "#009466" },
+                ].map((p, i) => (
+                  <div key={i}>
+                    <div className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: p.color }}>
+                      {p.role}
+                    </div>
+                    <div className="text-[11px] text-[#232023]/60 mb-5">______________________</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Scope table */}
+              <div className="relative mb-6">
+                <div className="text-[#232023]/55 text-[10px] font-bold tracking-widest uppercase mb-2">
+                  {contract.scopeLabel[lang]}
+                </div>
+                <table className="w-full text-sm border-collapse">
+                  <tbody>
+                    {[
+                      [contract.equipmentLabel[lang], v.equipment[lang]],
+                      [contract.qtyLabel[lang], String(v.qty)],
+                      [contract.durationLabel[lang], v.duration[lang]],
+                      [contract.locationLabel[lang], v.location[lang]],
+                    ].map(([k, val], i) => (
+                      <tr key={i} className="border-b border-[#232023]/15">
+                        <td className="py-2.5 ps-3 pe-2 text-[#232023]/55 text-xs w-1/3 align-top">{k}</td>
+                        <td className="py-2.5 pe-3 text-[#1a1a1a] font-medium text-sm">{val}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Amounts */}
+              <div className="relative mb-6">
+                <div className="flex justify-between items-center py-1.5 text-sm">
+                  <span className="text-[#232023]/55">{contract.rateLabel[lang]}</span>
+                  <span className="font-mono font-bold text-[#1a1a1a]">{v.rate[lang]}</span>
+                </div>
+                <div className="flex justify-between items-center py-1.5 text-sm border-t-2 border-[#232023]/50">
+                  <span className="text-[#232023]/70 font-bold">{contract.totalLabel[lang]}</span>
+                  <span className="font-mono font-bold text-[#0A1A30]">{v.total[lang]}</span>
+                </div>
+              </div>
+
+              {/* Terms */}
+              <ol className="relative mb-7 space-y-2.5">
+                {contract.terms.map((t, i) => (
+                  <li key={i} className="flex gap-2.5 text-xs leading-relaxed text-[#232023]/70">
+                    <span className="font-mono font-bold text-[#0A1A30] flex-shrink-0">{ar ? ["١","٢"][i] : i + 1}.</span>
+                    <span>{t[lang]}</span>
+                  </li>
+                ))}
+              </ol>
+
+              {/* Signatures + notary stamp */}
+              <div className="relative grid grid-cols-2 gap-8 pt-10 mt-4">
+                {[
+                  contract.clientSign[lang],
+                  contract.providerSign[lang],
+                ].map((s, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-[#232023]/40 text-sm mb-1" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                      {ar ? "签字" : "signed"}
+                    </div>
+                    <div className="border-t border-[#232023]/70 mx-4" />
+                    <div className="text-[#232023]/55 text-[11px] mt-1.5">{s}</div>
+                  </div>
+                ))}
+
+                {/* circular notary stamp overlapping bottom */}
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 -bottom-3 w-20 h-20 rounded-full border-2 border-[#b91c1c]/70 flex flex-col items-center justify-center text-[#b91c1c] bg-[#f4ecd8]"
+                  style={{ transform: "translate(-50%, 10px) rotate(8deg)", boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }}
+                >
+                  <Stamp size={16} />
+                  <span className="text-[8px] font-bold tracking-[0.15em] mt-0.5">{contract.seal[lang]}</span>
+                  <span className="text-[7px] font-mono opacity-70">{contract.ref}</span>
+                </div>
+              </div>
+
+              {/* footer microprint */}
+              <div
+                className="relative mt-10 pt-3 border-t border-[#232023]/20 text-center text-[#232023]/30 text-[8px] tracking-widest font-mono"
+                style={{ letterSpacing: "0.15em" }}
+              >
+                {ar ? "هذه وثيقة موثّقة إلكترونياً · شيول · SHAYWAL" : "ELECTRONICALLY NOTARIZED INSTRUMENT · SHAYWAL"}
+              </div>
             </div>
-            <div>
-              <div className="text-white/30 text-[11px]">{contract.qtyLabel[lang]}</div>
-              <div className="text-white font-medium">{v.qty}</div>
-            </div>
-            <div>
-              <div className="text-white/30 text-[11px]">{contract.durationLabel[lang]}</div>
-              <div className="text-white font-medium">{v.duration[lang]}</div>
-            </div>
-            <div>
-              <div className="text-white/30 text-[11px]">{contract.locationLabel[lang]}</div>
-              <div className="text-white font-medium">{v.location[lang]}</div>
-            </div>
-          </div>
-        </div>
-
-        {/* price */}
-        <div className="relative border-t border-dashed border-white/10 pt-4 mb-5">
-          <div className="flex items-center justify-between text-sm mb-1">
-            <span className="text-white/40">{contract.rateLabel[lang]}</span>
-            <span className="text-white font-mono font-bold">{v.rate[lang]}</span>
-          </div>
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-white/40">{contract.totalLabel[lang]}</span>
-            <span className="text-[#009466] font-mono font-bold">{v.total[lang]}</span>
-          </div>
-        </div>
-
-        {/* terms */}
-        <ul className="relative border-t border-dashed border-white/10 pt-4 space-y-2 mb-5">
-          {contract.terms.map((t, i) => (
-            <li key={i} className="text-white/45 text-xs leading-relaxed flex gap-2">
-              <span className="text-[#0696B0]">•</span>
-              <span>{t[lang]}</span>
-            </li>
-          ))}
-        </ul>
-
-        {/* signatures */}
-        <div className="relative grid grid-cols-2 gap-4 border-t border-white/10 pt-5">
-          <div>
-            <div className="text-white/30 text-[11px] mb-6">{contract.clientSign[lang]}</div>
-            <div className="border-t border-white/30 w-3/4" />
-          </div>
-          <div>
-            <div className="text-white/30 text-[11px] mb-6">{contract.providerSign[lang]}</div>
-            <div className="border-t border-white/30 w-3/4" />
-          </div>
-        </div>
-
-        {/* notary seal */}
-        <div className="relative flex justify-end mt-5">
-          <div
-            className="w-16 h-16 rounded-full border-2 border-[#D4A537]/60 flex flex-col items-center justify-center text-[#D4A537]"
-            style={{ transform: "rotate(-8deg)" }}
-          >
-            <Stamp size={18} />
-            <span className="text-[8px] font-bold tracking-widest mt-1">{contract.seal[lang]}</span>
           </div>
         </div>
       </div>

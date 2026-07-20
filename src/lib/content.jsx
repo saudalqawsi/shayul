@@ -4,7 +4,7 @@
 export const navLinks = [
   { label: { ar: "المعدات", en: "Equipment" }, href: "#equipment" },
   { label: { ar: "كيف يعمل", en: "How It Works" }, href: "#how" },
-  { label: { ar: "للمزوّدين", en: "For Providers" }, href: "#providers" },
+  { label: { ar: "للمزوّدين", en: "For Providers" }, href: "/provider" },
   { label: { ar: "الأسعار", en: "Pricing" }, href: "#pricing" },
   { label: { ar: "تواصل معنا", en: "Contact" }, href: "#request" },
 ];
@@ -283,6 +283,10 @@ export const contract = {
   seal: { ar: "موثّق", en: "NOTARIZED" },
   title: { ar: "عقد تأجير معدة ثقيلة", en: "HEAVY EQUIPMENT RENTAL AGREEMENT" },
   ref: "SHYW-2026-0048",
+  serial: "SER · {EN}-4827",
+  issueDate: { ar: "٢٠ يوليو ٢٠٢٦", en: "20 July 2026" },
+  dateLabel: { ar: "تاريخ الإصدار", en: "Issue Date" },
+  logoText: { ar: "شيول", en: "SHAYWAL" },
   client: { ar: "صاحب المشروع (المستأجر)", en: "Project Owner (Lessee)" },
   provider: { ar: "صاحب المعدة (المؤجّر)", en: "Equipment Owner (Lessor)" },
   scopeLabel: { ar: "نطاق العمل", en: "Scope of Work" },
