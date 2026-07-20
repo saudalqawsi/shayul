@@ -10,7 +10,7 @@ function EquipCard({ eq }) {
 
   return (
     <div
-      className="relative flex-shrink-0 w-72 md:w-80 bg-[#0d2240] border border-white/10 rounded-sm overflow-hidden group cursor-pointer"
+      className="relative snap-start flex-shrink-0 w-72 md:w-80 bg-[#0d2240] border border-white/10 rounded-sm overflow-hidden group cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       dir={dir}
@@ -139,28 +139,39 @@ export default function EquipmentVault() {
         </div>
       </div>
 
-      {/* Horizontal Scroll */}
-      <div
-        ref={scrollRef}
-        className="flex gap-5 overflow-x-auto scrollbar-hide px-6 pb-4"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-      >
-        {equipment.map((eq) => (
-          <EquipCard key={eq.name.en} eq={eq} />
-        ))}
-        {/* CTA Card */}
-        <div className="flex-shrink-0 w-72 md:w-80 bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center">
-          <div className="w-14 h-14 bg-[#009466]/20 rounded-sm flex items-center justify-center mb-4">
-            <Shield size={28} className="text-[#009466]" />
+      {/* Horizontal Scroll — peek next/prev */}
+      <div className="relative">
+        {/* Edge fades to hint peeked cards */}
+        <div className="absolute top-0 bottom-4 left-0 w-20 bg-gradient-to-r from-[#081626] to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 bottom-4 right-0 w-20 bg-gradient-to-l from-[#081626] to-transparent pointer-events-none z-10" />
+
+        <div
+          ref={scrollRef}
+          className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            paddingLeft: "max(1.5rem, calc((100% - 80rem) / 2 + 1.5rem))",
+            paddingRight: "max(1.5rem, calc((100% - 80rem) / 2 + 1.5rem))",
+          }}
+        >
+          {equipment.map((eq) => (
+            <EquipCard key={eq.name.en} eq={eq} />
+          ))}
+          {/* CTA Card */}
+          <div className="snap-start flex-shrink-0 w-72 md:w-80 bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center">
+            <div className="w-14 h-14 bg-[#009466]/20 rounded-sm flex items-center justify-center mb-4">
+              <Shield size={28} className="text-[#009466]" />
+            </div>
+            <h3 className="text-white font-bold text-lg mb-2">{equipmentVault.ctaTitle[lang]}</h3>
+            <p className="text-white/40 text-sm mb-5 leading-relaxed">{equipmentVault.ctaDesc[lang]}</p>
+            <a
+              href="#request"
+              className="bg-[#009466] hover:bg-[#007a54] text-white px-6 py-2.5 rounded-sm text-sm font-bold transition-colors"
+            >
+              {equipmentVault.ctaBtn[lang]}
+            </a>
           </div>
-          <h3 className="text-white font-bold text-lg mb-2">{equipmentVault.ctaTitle[lang]}</h3>
-          <p className="text-white/40 text-sm mb-5 leading-relaxed">{equipmentVault.ctaDesc[lang]}</p>
-          <a
-            href="#request"
-            className="bg-[#009466] hover:bg-[#007a54] text-white px-6 py-2.5 rounded-sm text-sm font-bold transition-colors"
-          >
-            {equipmentVault.ctaBtn[lang]}
-          </a>
         </div>
       </div>
     </section>
