@@ -70,7 +70,7 @@ export default function FooterSection() {
             ))}
           </div>
           <p className="text-white/15 text-xs font-mono tracking-widest">
-            SHAYUL · {footer.tagline[lang]}
+            SHAYWAL · {footer.tagline[lang]}
           </p>
         </div>
       </div>

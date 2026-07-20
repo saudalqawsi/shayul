@@ -4,17 +4,18 @@
 export const navLinks = [
   { label: { ar: "المعدات", en: "Equipment" }, href: "#equipment" },
   { label: { ar: "كيف يعمل", en: "How It Works" }, href: "#how" },
+  { label: { ar: "للمزوّدين", en: "For Providers" }, href: "#providers" },
   { label: { ar: "الأسعار", en: "Pricing" }, href: "#pricing" },
   { label: { ar: "تواصل معنا", en: "Contact" }, href: "#request" },
 ];
 
 export const hero = {
-  badge: { ar: "التأمين الشامل — قريباً", en: "Full Insurance — Coming Soon" },
-  title1: { ar: "استأجر، أنجز،", en: "Rent, Build," },
+  badge: { ar: "عقد إلكتروني موثّق", en: "Notarized e-contracts" },
+  title1: { ar: "اطلب،", en: "Request," },
   title2: { ar: "واطمئن.", en: "Relax." },
   subtitle: {
-    ar: "سوق المعدات الثقيلة الأذكى في المملكة — عقد إلكتروني موثّق، تأمين شامل، ودفع مضمون في كل عملية تأجير.",
-    en: "The Kingdom's smartest heavy-equipment marketplace — digitally notarized contracts, full insurance, and guaranteed payment on every rental.",
+    ar: "سوق المعدات الثقيلة في المملكة — اطلب المعدة المناسبة لمشروعك، واحصل على عقد إلكتروني موثّق وتسليم خلال اليوم أو التالي.",
+    en: "The Kingdom's heavy-equipment marketplace — request the right unit for your project, and get a notarized e-contract with same- or next-day delivery.",
   },
   fields: {
     type: { ar: "نوع المعدة", en: "Equipment Type" },
@@ -25,8 +26,8 @@ export const hero = {
     durationPlaceholder: { ar: "اختر المدة", en: "Select duration" },
   },
   equipmentTypes: {
-    ar: ["شيول / لودر", "حفارة / باك لودر", "بلدوزر", "قريدر", "بوكلين", "رصاصة / دكاكة", "قالب / شاحنة", "فوركلفت", "كرين"],
-    en: ["Wheel Loader", "Backhoe Loader", "Bulldozer", "Motor Grader", "Forklift Truck", "Vibratory Roller", "Dump Truck", "Telehandler", "Crane"],
+    ar: ["شيول / لودر", "حفارة / باك لودر", "بوبكات", "بوكلين", "قريدر", "بلدوزر", "رصاصة / دكاكة", "قالب / شاحنة", "فوركلفت", "كرين"],
+    en: ["Wheel Loader", "Backhoe Loader", "Bobcat", "Forklift Truck", "Motor Grader", "Bulldozer", "Vibratory Roller", "Dump Truck", "Telehandler", "Crane"],
   },
   durations: [
     { value: "day", ar: "يومي (وردية واحدة)", en: "Daily (single shift)" },
@@ -36,24 +37,17 @@ export const hero = {
   ],
   cta: { ar: "ابحث عن المعدة المناسبة →", en: "Find the right unit →" },
   trust: [
-    { ar: "عقد إلكتروني موثّق", en: "Notarized e-contract" },
-    { ar: "بوليصة تأمين مع كل عقد", en: "Insurance with every contract" },
-    { ar: "تحصيل مضمون وسريع", en: "Guaranteed fast payouts" },
-    { ar: "تسليم خلال اليوم أو التالي", en: "Same or next-day delivery" },
+    { ar: "عقد إلكتروني موثّق قبل التسليم", en: "Notarized contract before delivery" },
+    { ar: "تسليم اليوم أو التالي", en: "Same or next-day delivery" },
+    { ar: "أسعار شفافة — بلا مفاجآت", en: "Transparent pricing — no surprises" },
+    { ar: "شركات معدات موثّقة", en: "Verified equipment firms" },
   ],
 };
 
 export const trust = {
-  eyebrow: { ar: "لماذا شيول", en: "Why Shayul" },
-  title1: { ar: "طبقة الثقة", en: "A Trust Layer" },
-  title2: { ar: "فوق الصفقة.", en: "above the deal." },
-  problemTitle: { ar: "المشكلة في السوق اليوم", en: "The Market Problem Today" },
-  problemStats: [
-    { num: { ar: "٨–٩", en: "8–9" }, label: { ar: "رسائل واتساب لإسناد طلب واحد", en: "WhatsApp messages to fill one order" } },
-    { num: { ar: "٤٥", en: "45" }, label: { ar: "يوماً قد تمتد آجال السداد", en: "days payment can drag on" } },
-    { num: { ar: "٠٪", en: "0%" }, label: { ar: "عقود موثّقة في الغالب", en: "notarized contracts in most deals" } },
-    { num: { ar: "X", en: "X" }, label: { ar: "معدات غير مؤمّنة تُستبعد من المشاريع الكبرى", en: "uninsured units shut out of major projects" } },
-  ],
+  eyebrow: { ar: "لماذا شيول", en: "Why Shaywal" },
+  title1: { ar: "ثقة في", en: "Trust on" },
+  title2: { ar: "كل تأجير.", en: "every rental." },
   pillars: [
     {
       icon: "FileText",
@@ -61,44 +55,34 @@ export const trust = {
       num: "01",
       title: { ar: "العقد الموثّق قانونياً", en: "Legally-Notarized Contract" },
       desc: {
-        ar: "كل اتفاق شفهي يتحوّل إلى عقد إلكتروني موثّق يحدد نطاق العمل، الأسعار، وجدول السداد — سند قانوني يحمي حق المعدة قبل التسليم.",
-        en: "Every verbal agreement becomes a digitally notarized contract defining scope, pricing, and payment schedule — a legal safeguard protecting the owner's right before delivery.",
+        ar: "كل اتفاق يتحوّل إلى عقد إلكتروني موثّق يحدد نطاق العمل والتواريخ والسعر — سند قانوني يحفظ حقك قبل بدء التشغيل.",
+        en: "Every agreement becomes a notarized e-contract defining scope, dates, and price — a legal safeguard that protects you before operation begins.",
       },
     },
     {
-      icon: "Shield",
+      icon: "Zap",
       color: "#0696B0",
       num: "02",
-      title: { ar: "التأمين المدمج — قريباً", en: "Embedded Insurance — Coming Soon" },
+      title: { ar: "تسليم اليوم أو التالي", en: "Same or Next-Day Delivery" },
       desc: {
-        ar: "بوليصة تأمين تصدر من بيانات العقد ذاتها مع كل عقد — تغطّي المعدة والأضرار الناتجة في الموقع، وتتيح الوصول للمشاريع الكبرى والحكومية.",
-        en: "An insurance policy is issued from the contract's own data on every deal — covering the unit and on-site damages, and unlocking access to major and government projects.",
+        ar: "يوزَّع طلبك فوراً على الشركات المطابقة قرب موقعك. غالبية الطلبات تُلبّى في اليوم نفسه أو اليوم التالي.",
+        en: "Your request is instantly routed to matched firms near your site. Most orders are fulfilled same or next day.",
       },
     },
     {
       icon: "Banknote",
       color: "#009466",
       num: "03",
-      title: { ar: "تحصيل مضمون وسريع", en: "Guaranteed Fast Collection" },
+      title: { ar: "أسعار شفافة", en: "Transparent Pricing" },
       desc: {
-        ar: "المدفوعات تمر عبر طرف محايد مرخّص. صاحب المعدة يستلم مستحقاته خلال يوم إلى يومين من تأكيد التسليم — بدون انتظار صاحب المشروع.",
-        en: "Payments flow through a SAMA-licensed neutral party. Owners receive dues within one to two days of delivery confirmation — no waiting on the project owner.",
-      },
-    },
-    {
-      icon: "Zap",
-      color: "#0696B0",
-      num: "04",
-      title: { ar: "تسليم اليوم أو التالي", en: "Same or Next-Day Delivery" },
-      desc: {
-        ar: "الطلب يوزَّع فوراً على شركات المعدات المطابقة جغرافياً. غالبية الطلبات تُلبّى في اليوم نفسه أو اليوم التالي — كما تعوّد السوق.",
-        en: "Requests are instantly routed to geographically-matched equipment firms. Most orders are fulfilled same-day or next-day — as the market expects.",
+        ar: "أسعار استرشادية واضحة لكل معدة — لا وسيط، لا رسوم خفية. ما تراه هو ما تتوقعه.",
+        en: "Clear indicative rates per unit — no middleman, no hidden fees. What you see is what to expect.",
       },
     },
   ],
   quote: {
-    ar: "شيول لا تنافس على سرعة إيجاد المعدة — بل تعيد بناء الطبقة الغائبة:",
-    en: "Shayul does not compete on the speed of finding a unit — it rebuilds the missing layer:",
+    ar: "شيول تعيد بناء الطبقة الغائبة في السوق:",
+    en: "Shaywal rebuilds the missing layer in the market:",
   },
   quoteAccent: { ar: "الثقة.", en: "Trust." },
 };
@@ -240,7 +224,7 @@ export const equipmentVault = {
   eyebrow: { ar: "معرض المعدات", en: "Equipment Vault" },
   title1: { ar: "الخزينة الحديدية —", en: "The Iron Vault —" },
   title2: { ar: "كل معدة جاهزة للتسليم.", en: "every unit ready for delivery." },
-  coverage: { ar: "تأمين — قريباً", en: "Insurance — Soon" },
+  ready: { ar: "جاهز للتسليم", en: "Ready to deliver" },
   specLabels: {
     weight: { ar: "الوزن", en: "Weight" },
     hp: { ar: "القدرة", en: "Power" },
@@ -256,43 +240,99 @@ export const equipmentVault = {
 
 export const how = {
   eyebrow: { ar: "كيف يعمل", en: "How It Works" },
-  title1: { ar: "أربعة أطراف،", en: "Four parties," },
-  title2: { ar: "معاملة واحدة.", en: "one transaction." },
+  title1: { ar: "من الطلب", en: "From request" },
+  title2: { ar: "إلى الموقع.", en: "to site." },
   steps: [
     {
       num: "01",
       color: "#009466",
-      title: { ar: "صاحب المشروع يرسل الطلب", en: "Project owner submits the request" },
-      desc: { ar: "طلب حزمة معدات: النوع، العدد، المدة أو نطاق مقطوعة — عبر المنصة مباشرة.", en: "A bundled equipment request — type, quantity, duration or lump-sum scope — submitted directly on the platform." },
+      title: { ar: "أرسل طلبك", en: "Submit your request" },
+      desc: { ar: "اختر نوع المعدة والعدد والمدة والموقع — في دقائق على المنصة.", en: "Pick the unit type, quantity, duration, and location — in minutes on the platform." },
       party: { ar: "صاحب المشروع", en: "Project Owner" },
     },
     {
       num: "02",
       color: "#0696B0",
-      title: { ar: "شيول توزّع ويوثّق", en: "Shayul routes and notarizes" },
-      desc: { ar: "توزيع الطلب على الشركات المطابقة جغرافياً، وتوثيق الاتفاق بعقد إلكتروني يحدد النطاق والأسعار وجدول السداد. البوليصة تصدر تلقائياً من بيانات العقد.", en: "The request is routed to geographically-matched firms, and the agreement becomes an e-contract defining scope, pricing, and payment schedule. The policy is auto-issued from the contract's data." },
-      party: { ar: "منصة شيول", en: "Shayul Platform" },
+      title: { ar: "مطابقة فورية", en: "Instant matching" },
+      desc: { ar: "نوزّع طلبك على شركات معدات موثّقة قرب موقعك، ونرسل لك العروض المطابقة لتختار منها.", en: "We route your request to verified firms near your site and send you matched offers to choose from." },
+      party: { ar: "منصة شيول", en: "Shaywal Platform" },
     },
     {
       num: "03",
       color: "#009466",
-      title: { ar: "شريك الدفع يصدر البوليصة", en: "Payment partner issues the policy" },
-      desc: { ar: "إصدار بوليصة التأمين من بيانات العقد ذاتها. تأكيد العقد والبوليصة لصاحب المشروع — الغطاء يبدأ فور التوقيع.", en: "The insurance policy is issued from the same contract data. The contract and policy are confirmed to the project owner — coverage begins the moment it's signed." },
-      party: { ar: "شريك الدفع", en: "Payment Partner" },
+      title: { ar: "عقد إلكتروني موثّق", en: "Notarized e-contract" },
+      desc: { ar: "عند الاتفاق يصدر عقد إلكتروني يحدد النطاق والتواريخ والسعر — سند يحفظ حقك.", en: "Once agreed, an e-contract is issued defining scope, dates, and price — a safeguard that protects your right." },
+      party: { ar: "عقد موثّق", en: "Notarized contract" },
     },
     {
       num: "04",
       color: "#009466",
-      title: { ar: "صاحب المعدات ينفّذ ويستلم", en: "Equipment owner executes and gets paid" },
-      desc: { ar: "تنفيذ العمل في الموقع. تحويل المستحقات خلال يوم إلى يومين من تأكيد التسليم — بدون انتظار السداد من صاحب المشروع.", en: "Work is executed on site. Dues are transferred within one to two days of delivery confirmation — no waiting on the project owner for payment." },
-      party: { ar: "صاحب المعدات", en: "Equipment Owner" },
+      title: { ar: "تسليم وتشغيل", en: "Delivery & operation" },
+      desc: { ar: "تصل المعدة إلى موقعك خلال اليوم أو التالي. تؤكّد الاستلام ويبدأ التشغيل.", en: "The unit arrives on site same or next day. You confirm receipt and operation begins." },
+      party: { ar: "تسليم", en: "Delivery" },
     },
   ],
   stats: [
-    { val: { ar: "٢–٣٪", en: "2–3%" }, label: { ar: "عمولة شيول فقط", en: "Shayul fee only" } },
-    { val: { ar: "٢٤ س", en: "24h" }, label: { ar: "أقصى وقت استجابة", en: "max response time" } },
-    { val: { ar: "١٠٠٪", en: "100%" }, label: { ar: "تغطية تأمينية", en: "insurance coverage" } },
+    { val: { ar: "٢٤س", en: "24h" }, label: { ar: "أقصى وقت استجابة", en: "max response time" } },
+    { val: { ar: "اليوم/التالي", en: "same/next" }, label: { ar: "تسليم المعدة", en: "unit delivery" } },
+    { val: { ar: "موثّق", en: "notarized" }, label: { ar: "كل عقد", en: "every contract" } },
   ],
+};
+
+export const contract = {
+  seal: { ar: "موثّق", en: "NOTARIZED" },
+  title: { ar: "عقد تأجير معدة ثقيلة", en: "HEAVY EQUIPMENT RENTAL AGREEMENT" },
+  ref: "SHYW-2026-0048",
+  client: { ar: "صاحب المشروع (المستأجر)", en: "Project Owner (Lessee)" },
+  provider: { ar: "صاحب المعدة (المؤجّر)", en: "Equipment Owner (Lessor)" },
+  scopeLabel: { ar: "نطاق العمل", en: "Scope of Work" },
+  equipmentLabel: { ar: "المعدة", en: "Equipment" },
+  qtyLabel: { ar: "العدد", en: "Qty" },
+  durationLabel: { ar: "المدة", en: "Duration" },
+  locationLabel: { ar: "الموقع", en: "Location" },
+  scopeValues: {
+    equipment: { ar: "شيول مقاس ٦٦", en: "Wheel Loader · Size 66" },
+    qty: "2",
+    duration: { ar: "أسبوعان", en: "2 weeks" },
+    location: { ar: "حي النرجس، الرياض", en: "Al Narjis, Riyadh" },
+    rate: { ar: "١,٦٠٠ ر.س / يوم", en: "1,600 SAR / day" },
+    total: { ar: "٢٢,٤٠٠ ر.س", en: "22,400 SAR" },
+  },
+  rateLabel: { ar: "السعر اليومي", en: "Daily rate" },
+  totalLabel: { ar: "الإجمالي", en: "Total" },
+  terms: [
+    { ar: "يلتزم المؤجّر بتسليم المعدة بحالة تشغيلية في التاريخ المتفق عليه.", en: "Lessor commits to delivering the unit in operating condition on the agreed date." },
+    { ar: "هذا العقد موثّق إلكترونياً ويشكّل سنداً قانونياً للأطراف.", en: "This contract is electronically notarized and constitutes a legal instrument for both parties." },
+  ],
+  clientSign: { ar: "توقيع صاحب المشروع", en: "Project Owner" },
+  providerSign: { ar: "توقيع صاحب المعدة", en: "Equipment Owner" },
+  watermark: { ar: "موثّق", en: "NOTARIZED" },
+};
+
+export const provider = {
+  eyebrow: { ar: "لمزوّدي المعدات", en: "For Equipment Providers" },
+  title1: { ar: "أدر أسطولك،", en: "List your fleet," },
+  title2: { ar: "ووردك أسرع.", en: "faster orders." },
+  intro: {
+    ar: "انضم إلى شبكة شيول من شركات المعدات الموثّقة. أعدّ عناصر أسطولك وأسعارك، واستلم طلبات مؤهّلة قرب منطقتك — بعقد إلكتروني موثّق يحفظ حقك.",
+    en: "Join Shaywal's network of verified equipment firms. Set up your fleet and rates, receive qualified leads near your area — backed by a notarized e-contract that protects your rights.",
+  },
+  reqTitle: { ar: "متطلبات التسجيل", en: "Onboarding Requirements" },
+  requirements: [
+    { ar: "سجل تجاري ووثائق رسمية للمنشأة", en: "Commercial registration and official entity documents" },
+    { ar: "تفاصيل الأسطول — نوع وعدد ومواصفات كل معدة", en: "Fleet details — type, quantity, and specs per unit" },
+    { ar: "أسعار واضحة (يومي / شهري / مقطوعة)", en: "Clear rates (daily / monthly / lump-sum)" },
+    { ar: "نطاق تغطية جغرافي محدد", en: "A defined geographic coverage area" },
+    { ar: "التزام بجاهزية المعدة قبل التسليم", en: "Commitment to unit readiness before delivery" },
+  ],
+  benefitsTitle: { ar: "لماذا تنضم؟", en: "Why join?" },
+  benefits: [
+    { ar: "طلبات مطابقة جغرافياً", en: "Geographically-matched leads" },
+    { ar: "عقد موثّق يحمي حقك", en: "Notarized contract protects your rights" },
+    { ar: "مواعيد تسليم أوضح", en: "Clearer delivery scheduling" },
+    { ar: "سجل سمعة مبني على إنجازك", en: "A reputation log built on your deliveries" },
+  ],
+  cta: { ar: "سجّل أسطولك الآن", en: "List your fleet" },
 };
 
 export const pricing = {
@@ -374,9 +414,9 @@ export const requestForm = {
   },
   guarantees: [
     { title: { ar: "عقد إلكتروني موثّق", en: "Notarized e-contract" }, desc: { ar: "يصدر فور الاتفاق على الشروط", en: "Issued the moment terms are agreed" } },
-    { title: { ar: "بوليصة تأمين شاملة — قريباً", en: "Full insurance policy — coming soon" }, desc: { ar: "تغطي المعدة والأضرار في الموقع (قيد الإطلاق)", en: "Covers the unit and on-site damages (launching soon)" } },
     { title: { ar: "تسليم سريع", en: "Fast delivery" }, desc: { ar: "اليوم نفسه أو اليوم التالي للطلب", en: "Same or next day from request" } },
-    { title: { ar: "تحصيل مضمون", en: "Guaranteed collection" }, desc: { ar: "عبر طرف محايد مرخّص من ساما", en: "via a SAMA-licensed neutral party" } },
+    { title: { ar: "أسعار شفافة", en: "Transparent pricing" }, desc: { ar: "بلا وسيط أو رسوم خفية", en: "No middleman, no hidden fees" } },
+    { title: { ar: "شركات موثّقة", en: "Verified firms" }, desc: { ar: "شبكة شركات معدات معتمدة", en: "A network of approved equipment firms" } },
   ],
   fields: {
     name: { ar: "الاسم الكامل *", en: "Full Name *" },
@@ -410,23 +450,23 @@ export const requestForm = {
 };
 
 export const footer = {
-  brand: { ar: "شيول", en: "Shayul" },
-  brandEn: { ar: "SHAYUL", en: "شيول" },
+  brand: { ar: "شيول", en: "Shaywal" },
+  brandEn: { ar: "SHAYWAL", en: "شيول" },
   desc: {
-    ar: "سوق المعدات الثقيلة الأذكى في المملكة — مع تغطية تأمينية شاملة وعقد إلكتروني موثّق على كل عملية تأجير.",
-    en: "The Kingdom's smartest heavy-equipment marketplace — with full insurance coverage and a notarized e-contract on every rental.",
+    ar: "سوق المعدات الثقيلة في المملكة — عقد إلكتروني موثّق وتسليم سريع على كل طلب.",
+    en: "The Kingdom's heavy-equipment marketplace — a notarized e-contract and fast delivery on every request.",
   },
-  badge: { ar: "كل معدة... مغطّاة.", en: "Every unit... covered." },
+  badge: { ar: "ثقة في كل تأجير", en: "Trust on every rental" },
   platformTitle: { ar: "المنصة", en: "Platform" },
   platformLinks: {
-    ar: ["المعدات", "كيف يعمل", "الأسعار", "احجز المعدة"],
-    en: ["Equipment", "How It Works", "Pricing", "Book a Unit"],
+    ar: ["المعدات", "كيف يعمل", "للمزوّدين", "الأسعار", "اطلب المعدة"],
+    en: ["Equipment", "How It Works", "For Providers", "Pricing", "Request a Unit"],
   },
   contactTitle: { ar: "تواصل معنا", en: "Contact" },
   location: { ar: "الرياض، المملكة العربية السعودية", en: "Riyadh, Saudi Arabia" },
-  copyright: { ar: "© ٢٠٢٦ شيول · جميع الحقوق محفوظة · v1.1", en: "© 2026 Shayul · All rights reserved · v1.1" },
+  copyright: { ar: "© ٢٠٢٦ شيول · جميع الحقوق محفوظة · v2.0", en: "© 2026 Shaywal · All rights reserved · v2.0" },
   legal: { ar: ["سياسة الخصوصية", "شروط الاستخدام", "اتفاقية الخدمة"], en: ["Privacy Policy", "Terms of Use", "Service Agreement"] },
-  tagline: { ar: "استأجر، أنجز، واطمئن", en: "Rent, Build, Relax" },
+  tagline: { ar: "ثقة في كل تأجير", en: "Trust on every rental" },
 };
 
 export const journey = {
@@ -434,15 +474,13 @@ export const journey = {
   title1: { ar: "خريطة الطريق", en: "The Roadmap" },
   title2: { ar: "من الطلب إلى التسليم.", en: "from request to delivery." },
   intro: {
-    ar: "منصّة شيول مدفوعة بقاعدة بيانات مركزية يصل إليها طرفان: صاحب المشروع وصاحب المعدات. كل خطوة تُسجَّل وتُوثَّق في القاعدة — لكل طرف مسار وصول مخصّص.",
-    en: "Shayul runs on a single shared database with access for two sides — the project owner and the equipment owner. Every step is recorded and notarized, with a dedicated access path for each party.",
+    ar: "تتبّع طلبك خطوة بخطوة — من لحظة إرساله حتى وصول المعدة إلى موقعك وتأكيد الإنجاز.",
+    en: "Track your request step by step — from the moment you submit it to the unit arriving on site and completion confirmed.",
   },
   roles: [
-    { key: "client", icon: "User", color: "#009466", label: { ar: "صاحب المشروع (عميل)", en: "Project Owner (Client)" } },
-    { key: "provider", icon: "HardHat", color: "#0696B0", label: { ar: "صاحب المعدات (مزوّد)", en: "Equipment Owner (Provider)" } },
-    { key: "platform", icon: "Database", color: "#D4A537", label: { ar: "قاعدة بيانات شيول", en: "Shayul Database" } },
+    { key: "client", icon: "User", color: "#009466", label: { ar: "صاحب المشروع", en: "Project Owner" } },
+    { key: "platform", icon: "Database", color: "#0696B0", label: { ar: "منصة شيول", en: "Shaywal Platform" } },
   ],
-  insuranceSoon: { ar: "التأمين الشامل — قريباً", en: "Full insurance coverage — coming soon" },
   stages: [
     {
       num: "01",
@@ -470,44 +508,32 @@ export const journey = {
     },
     {
       num: "04",
-      phase: { ar: "عقد وتأمين", en: "Contract & Insure" },
-      title: { ar: "العقد والتأمين", en: "Contract & Insurance" },
-      client: { ar: "يوقّع العقد الإلكتروني الموثّق", en: "Signs the notarized e-contract" },
-      provider: { ar: "يؤكّد الجاهزية ويرتب التسليم", en: "Confirms readiness and schedules dispatch" },
-      platform: { ar: "تصدر العقد؛ بوليصة التأمين تُطلق قريباً", en: "Issues the contract; insurance policy launching soon" },
-      insuranceSoon: true,
+      phase: { ar: "عقد", en: "Contract" },
+      title: { ar: "توقيع العقد", en: "Sign the Contract" },
+      client: { ar: "يراجع ويوقّع العقد الإلكتروني الموثّق", en: "Reviews and signs the notarized e-contract" },
+      platform: { ar: "تصدر العقد الإلكتروني الموثّق", en: "Issues the notarized e-contract" },
     },
     {
       num: "05",
       phase: { ar: "تنفيذ", en: "Execute" },
-      title: { ar: "الإرسال والتنفيذ", en: "Dispatch & Execute" },
+      title: { ar: "وصول المعدة", en: "Delivery" },
       client: { ar: "يؤكّد وصول المعدة إلى الموقع", en: "Confirms unit arrival on site" },
-      provider: { ar: "يسلّم المعدة ويبدأ التشغيل", en: "Delivers the unit and starts operation" },
-      platform: { ar: "تسجّل وقت التسليم في القاعدة", en: "Logs delivery time into the database" },
+      platform: { ar: "تسجّل وقت التسليم وتحفظه في السجل", en: "Logs the delivery time and stores it to the record" },
     },
     {
       num: "06",
-      phase: { ar: "تسوية", en: "Settle" },
-      title: { ar: "التحقق والتسوية", en: "Verify & Settle" },
-      client: { ar: "يؤكّد إكمال العمل", en: "Confirms work completion" },
-      provider: { ar: "يستلم مستحقاته خلال يوم إلى يومين", en: "Receives payout within one to two days" },
-      platform: { ar: "تحرّر السداد عبر طرف محايد مرخّص من ساما", en: "Releases payment via a SAMA-licensed neutral party" },
-    },
-    {
-      num: "07",
       phase: { ar: "إغلاق", en: "Close" },
-      title: { ar: "التقييم والتكرار", en: "Rate & Repeat" },
-      client: { ar: "يق ييّم التجربة ويُحفظ سجلّه", en: "Rates the experience; history saved" },
-      provider: { ar: "يبني سمعته ويصل لشريك مفضّل", en: "Builds reputation; reaches preferred-partner status" },
-      platform: { ar: "تخزّن السجل للطلبات المستقبلية الأسرع", en: "Stores the record for faster future requests" },
+      title: { ar: "الإنجاز والتقييم", en: "Complete & Rate" },
+      client: { ar: "يؤكّد إكمال العمل ويقيّم التجربة", en: "Confirms completion and rates the experience" },
+      platform: { ar: "تحفظ السجل لطلبات أسرع مستقبلاً", en: "Saves the record for faster future requests" },
     },
   ],
 };
 
 export const logo = {
   ar: "شيول",
-  en: "Shayul",
+  en: "Shaywal",
 };
 
-export const navCta = { ar: "احجز المعدة", en: "Book a Unit" };
+export const navCta = { ar: "اطلب المعدة", en: "Request a Unit" };
 export const langToggle = { ar: "EN", en: "ع" };

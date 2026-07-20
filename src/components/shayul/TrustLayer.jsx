@@ -29,7 +29,7 @@ export default function TrustLayer() {
         </div>
 
         {/* Pillars — single horizontal line, content reveals below on hover */}
-        <div className="grid grid-cols-4 gap-2 sm:gap-3 items-start">
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 items-start">
           {trust.pillars.map((p) => {
             const Icon = icons[p.icon];
             return (

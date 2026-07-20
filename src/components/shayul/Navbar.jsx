@@ -25,8 +25,8 @@ export default function Navbar({ scrolled }) {
           <span className="font-bold text-white text-xl tracking-wide">{logo[lang]}</span>
         </a>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Nav — links + inline language toggle */}
+        <div className="hidden md:flex items-center gap-6">
           {navLinks.map((l) => (
             <a
               key={l.href}
@@ -36,17 +36,17 @@ export default function Navbar({ scrolled }) {
               {l.label[lang]}
             </a>
           ))}
-        </div>
-
-        {/* CTA + Language Toggle */}
-        <div className="flex items-center gap-3">
           <button
             onClick={toggle}
-            className="w-9 h-9 md:w-auto md:h-auto md:px-3 md:py-1.5 rounded-sm border border-white/20 text-white/80 hover:text-white hover:border-white/40 text-sm font-bold transition-colors flex items-center justify-center"
+            className="text-white/60 hover:text-white text-xs font-bold transition-colors border-s border-white/10 ps-4 flex items-center"
             aria-label="Toggle language"
           >
             <span className="font-mono">{langToggle[lang]}</span>
           </button>
+        </div>
+
+        {/* CTA */}
+        <div className="flex items-center gap-3">
           <a
             href="#request"
             className="hidden md:flex items-center gap-2 bg-[#009466] hover:bg-[#007a54] text-white px-5 py-2.5 rounded-sm text-sm font-bold transition-colors duration-200"
@@ -67,6 +67,13 @@ export default function Navbar({ scrolled }) {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-[#0A1A30] border-t border-white/10 px-6 py-4 flex flex-col gap-4">
+          <button
+            onClick={toggle}
+            className="self-start text-white/80 hover:text-white text-xs font-bold border border-white/20 rounded-sm px-3 py-1.5"
+            aria-label="Toggle language"
+          >
+            <span className="font-mono">{langToggle[lang]}</span>
+          </button>
           {navLinks.map((l) => (
             <a
               key={l.href}

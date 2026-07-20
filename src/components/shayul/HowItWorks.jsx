@@ -1,7 +1,7 @@
 import React from "react";
-import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
 import { how } from "@/lib/content";
+import ContractPreview from "@/components/shayul/ContractPreview";
 
 export default function HowItWorks() {
   const { lang, dir } = useI18n();
@@ -54,31 +54,19 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          {/* Right: Visual */}
-          <div className="relative">
-            <div className="relative rounded-sm overflow-hidden border border-white/10">
-              <Image
-                src="https://media.base44.com/images/public/6a5e151f76837cda81644b8e/1987240b3_generated_56612238.png"
-                alt="Heavy equipment hydraulics detail"
-                className="w-full h-96 object-cover"
-                fittingType="fill"
-                focalPointX={0.5}
-                focalPointY={0.5}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1A30]/80 via-transparent to-transparent" />
-
-              {/* Floating Stats */}
-              <div className="absolute bottom-6 right-6 left-6 grid grid-cols-3 gap-3">
-                {how.stats.map((s) => (
-                  <div
-                    key={s.val.en}
-                    className="bg-[#0A1A30]/80 backdrop-blur-sm border border-white/15 rounded-sm p-3 text-center"
-                  >
-                    <div className="text-[#009466] font-bold text-lg font-mono">{s.val[lang]}</div>
-                    <div className="text-white/50 text-xs mt-0.5">{s.label[lang]}</div>
-                  </div>
-                ))}
-              </div>
+          {/* Right: Notarized contract template preview */}
+          <div className="relative flex flex-col gap-6">
+            <ContractPreview />
+            <div className="grid grid-cols-3 gap-3">
+              {how.stats.map((s) => (
+                <div
+                  key={s.val.en}
+                  className="bg-[#0A1A30]/80 backdrop-blur-sm border border-white/15 rounded-sm p-3 text-center"
+                >
+                  <div className="text-[#009466] font-bold text-sm font-mono">{s.val[lang]}</div>
+                  <div className="text-white/50 text-xs mt-0.5">{s.label[lang]}</div>
+                </div>
+              ))}
             </div>
 
             {/* Blueprint decoration */}

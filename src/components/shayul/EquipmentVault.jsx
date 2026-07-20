@@ -33,10 +33,10 @@ function EquipCard({ eq }) {
           {eq.tag[lang]}
         </div>
 
-        {/* Coverage Halo */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-[#009466]/90 px-2.5 py-1 rounded-full">
-          <Shield size={10} className="text-white" />
-          <span className="text-white text-xs font-bold">{equipmentVault.coverage[lang]}</span>
+        {/* Ready badge */}
+        <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-[#0A1A30]/80 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#009466]" />
+          <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
         </div>
 
         {/* Dimension lines on hover */}
