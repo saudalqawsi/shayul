@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { navLinks, logo, navCta, langToggle } from "@/lib/content";
 
 export default function Navbar({ scrolled }) {
+  const { lang, toggle, dir } = useI18n();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const links = [
-    { label: "المعدات", href: "#equipment" },
-    { label: "كيف يعمل", href: "#how" },
-    { label: "الأسعار", href: "#pricing" },
-    { label: "تواصل معنا", href: "#request" },
-  ];
 
   return (
     <nav
@@ -18,6 +14,7 @@ export default function Navbar({ scrolled }) {
           ? "bg-[#0A1A30]/95 backdrop-blur-md border-b border-white/10 py-3"
           : "bg-transparent py-6"
       }`}
+      dir={dir}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
@@ -25,29 +22,38 @@ export default function Navbar({ scrolled }) {
           <div className="w-9 h-9 bg-[#009466] rounded-sm flex items-center justify-center font-bold text-white text-xl leading-none">
             S
           </div>
-          <span className="font-bold text-white text-xl tracking-wide">شيول</span>
+          <span className="font-bold text-white text-xl tracking-wide">{logo[lang]}</span>
         </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
+          {navLinks.map((l) => (
             <a
               key={l.href}
               href={l.href}
               className="text-white/70 hover:text-white text-sm font-medium transition-colors duration-200 tracking-wide"
             >
-              {l.label}
+              {l.label[lang]}
             </a>
           ))}
         </div>
 
-        {/* CTA */}
-        <a
-          href="#request"
-          className="hidden md:flex items-center gap-2 bg-[#009466] hover:bg-[#007a54] text-white px-5 py-2.5 rounded-sm text-sm font-bold transition-colors duration-200"
-        >
-          <span>احجز المعدة</span>
-        </a>
+        {/* CTA + Language Toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={toggle}
+            className="w-9 h-9 md:w-auto md:h-auto md:px-3 md:py-1.5 rounded-sm border border-white/20 text-white/80 hover:text-white hover:border-white/40 text-sm font-bold transition-colors flex items-center justify-center"
+            aria-label="Toggle language"
+          >
+            <span className="font-mono">{langToggle[lang]}</span>
+          </button>
+          <a
+            href="#request"
+            className="hidden md:flex items-center gap-2 bg-[#009466] hover:bg-[#007a54] text-white px-5 py-2.5 rounded-sm text-sm font-bold transition-colors duration-200"
+          >
+            <span>{navCta[lang]}</span>
+          </a>
+        </div>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -61,14 +67,14 @@ export default function Navbar({ scrolled }) {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-[#0A1A30] border-t border-white/10 px-6 py-4 flex flex-col gap-4">
-          {links.map((l) => (
+          {navLinks.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
               className="text-white/80 hover:text-white text-base py-1 border-b border-white/5"
             >
-              {l.label}
+              {l.label[lang]}
             </a>
           ))}
           <a
@@ -76,7 +82,7 @@ export default function Navbar({ scrolled }) {
             onClick={() => setMenuOpen(false)}
             className="bg-[#009466] text-white py-3 text-center rounded-sm font-bold mt-2"
           >
-            احجز المعدة
+            {navCta[lang]}
           </a>
         </div>
       )}

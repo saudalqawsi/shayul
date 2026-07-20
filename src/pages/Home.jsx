@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/shayul/Navbar";
 import HeroSection from "@/components/shayul/HeroSection";
 import TrustLayer from "@/components/shayul/TrustLayer";
@@ -7,8 +7,10 @@ import HowItWorks from "@/components/shayul/HowItWorks";
 import PricingSection from "@/components/shayul/PricingSection";
 import RequestForm from "@/components/shayul/RequestForm";
 import FooterSection from "@/components/shayul/FooterSection";
+import { LanguageProvider, useI18n } from "@/lib/i18n";
 
-export default function Home() {
+function HomeContent() {
+  const { dir } = useI18n();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-[#0A1A30] text-white min-h-screen overflow-x-hidden" dir="rtl">
+    <div className="bg-[#0A1A30] text-white min-h-screen overflow-x-hidden" dir={dir}>
       <Navbar scrolled={scrolled} />
       <HeroSection />
       <TrustLayer />
@@ -28,5 +30,13 @@ export default function Home() {
       <RequestForm />
       <FooterSection />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <LanguageProvider>
+      <HomeContent />
+    </LanguageProvider>
   );
 }
