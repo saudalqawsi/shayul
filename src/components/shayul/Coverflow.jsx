@@ -4,7 +4,6 @@ import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
 import { equipmentVault } from "@/lib/content";
 import Riyal from "@/components/shayul/Riyal";
-import EquipmentIcon from "@/components/shayul/EquipmentIcon";
 import { motion } from "framer-motion";
 
 // Calibration reference (3-card carousel = "bobcat" ratio/size, looks perfect).
@@ -160,9 +159,6 @@ export default function Coverflow({ items }) {
                       </span>
                     </div>
                   )}
-                  <div className="absolute top-3 start-3">
-                    <EquipmentIcon name={it.name.en} size={32} theme="dark" />
-                  </div>
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <p className="text-[10px] tracking-[0.18em] uppercase mb-1 text-[#FCD34D] font-medium">{it.nameAlt[lang]}</p>
                     <h3 className="text-white font-bold text-lg leading-tight">{it.name[lang]}</h3>

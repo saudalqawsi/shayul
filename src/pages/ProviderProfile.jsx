@@ -15,8 +15,6 @@ import {
 } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import StarBadge from "@/components/StarBadge";
-import EquipmentIcon, { EquipmentIconRow } from "@/components/shayul/EquipmentIcon";
-import { equipmentToIconKeys } from "@/components/shayul/equipmentIcons";
 
 const STATUS_AR = {
   available: { label: "متاحة", cls: "bg-[#D97706]/10 text-[#D97706] border-[#D97706]/30" },
@@ -52,9 +50,6 @@ function FleetCard({ eq }) {
         <span className={`absolute top-3 end-3 text-xs font-bold px-2.5 py-1 rounded-full border ${st.cls}`}>
           {st.label}
         </span>
-        <div className="absolute top-3 start-3">
-          <EquipmentIcon type={eq.type} size={32} theme="dark" />
-        </div>
       </div>
       <div className="p-4">
         <h4 className="text-white font-bold leading-snug">{eq.name}</h4>
@@ -160,14 +155,6 @@ export default function ProviderProfile() {
               <div className="text-white/40 text-xs mt-3 inline-flex items-center gap-1.5">
                 <MapPin size={13} /> نطاق التغطية: {provider.coverage || "—"}
               </div>
-              {fleet.length > 0 && (
-                <EquipmentIconRow
-                  iconKeys={equipmentToIconKeys(fleet)}
-                  size={28}
-                  theme="dark"
-                  className="mt-4"
-                />
-              )}
             </div>
 
             {/* rating highlight */}

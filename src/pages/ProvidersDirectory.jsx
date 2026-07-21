@@ -4,8 +4,6 @@ import { base44 } from "@/api/base44Client";
 import { Building2, MapPin, Truck, ArrowLeft, Inbox, ShieldCheck } from "lucide-react";
 import StarBadge from "@/components/StarBadge";
 import ProviderJoinSection from "@/components/shayul/ProviderJoinSection";
-import { EquipmentIconRow } from "@/components/shayul/EquipmentIcon";
-import { equipmentToIconKeys } from "@/components/shayul/equipmentIcons";
 
 export default function ProvidersDirectory() {
   const [providers, setProviders] = useState([]);
@@ -113,15 +111,6 @@ export default function ProvidersDirectory() {
                       <Truck size={13} /> {fleet.available}/{fleet.total} متاحة
                     </span>
                   </div>
-
-                  {fleet.items?.length > 0 && (
-                    <EquipmentIconRow
-                      iconKeys={equipmentToIconKeys(fleet.items)}
-                      size={24}
-                      theme="dark"
-                      className="mb-4"
-                    />
-                  )}
 
                   <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/10">
                     <span className="inline-flex items-center gap-1 text-[10px] text-[#FCD34D] font-bold">
