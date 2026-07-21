@@ -14,16 +14,16 @@ const GROUPS = [
     order: ["Loader Size 36", "Loader Size 50", "Loader Size 66", "Loader Size 80", "Loader 920"],
   },
   {
-    key: "bobcats",
-    title: { ar: "بوبكات", en: "Bobcats" },
-    subtitle: { ar: "معدّات صغيرة متعدّدة الاستخدامات", en: "Compact multi-purpose units" },
-    order: ["Bobcat Trencher", "Bobcat Sweeper", "Bobcat Cutter"],
+    key: "forklifts",
+    title: { ar: "فوركلفت", en: "Forklifts" },
+    subtitle: { ar: "للرفع والمناولة", en: "For lifting and handling" },
+    order: ["JCB — Forklift", "Telehandler"],
   },
   {
     key: "other",
     title: { ar: "معدات أخرى", en: "Other Equipment" },
-    subtitle: { ar: "JCB وحفّارات ومعدات متخصصة", en: "JCB, excavators, and specialized units" },
-    order: ["JCB — Forklift", "Telehandler", "JCB — Backhoe", "Excavator", "Crusher Excavator", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller"],
+    subtitle: { ar: "حفّارات ومعدات متخصصة", en: "Excavators and specialized units" },
+    order: ["Excavator", "Crusher Excavator", "Bobcat Trencher", "Bobcat Sweeper", "Bobcat Cutter", "JCB — Backhoe", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller"],
   },
 ];
 
