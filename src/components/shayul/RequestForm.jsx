@@ -79,20 +79,20 @@ export default function RequestForm() {
               <br />
               <span className="text-white/40">{requestForm.title2[lang]}</span>
             </h2>
-            <p className="text-white/50 text-base leading-relaxed mb-10 hidden">{requestForm.intro[lang]}</p>
+            
 
             {/* Guarantees */}
-            <div className="space-y-4 hidden">
-              {requestForm.guarantees.map((g) =>
-              <div key={g.title.en} className="flex items-start gap-3">
-                  <Shield size={16} className="text-[#009466] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-white font-semibold text-sm">{g.title[lang]}</div>
-                    <div className="text-white/40 text-xs">{g.desc[lang]}</div>
-                  </div>
-                </div>
-              )}
-            </div>
+            
+
+
+
+
+
+
+
+
+
+            
           </div>
 
           {/* Right: Form */}
