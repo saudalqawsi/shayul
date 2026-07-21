@@ -268,6 +268,18 @@ export const equipment = [
     img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/81855727f_generated_image.png",
     tag: { ar: "للمشاريع الكبرى", en: "For Major Projects" },
   },
+  {
+    name: { ar: "رصاصة / دكاكة", en: "Vibratory Roller" },
+    nameAlt: { ar: "Vibratory Roller", en: "رصاصة / دكاكة" },
+    specs: {
+      weight: { ar: "١٢ طن", en: "12 T" },
+      size: { ar: "دكاكة", en: "Roller" },
+    },
+    daily: 700,
+    monthly: 16000,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/f7330eb3d_generated_image.png",
+    tag: { ar: "متوفر الآن", en: "Available Now" },
+  },
 ];
 
 export const equipmentVault = {
@@ -446,6 +458,7 @@ export const pricing = {
         { name: { ar: "قريدر G14", en: "Motor Grader G14" }, daily: 1500, monthly: 28000, note: null },
         { name: { ar: "بلدوزر 800-D9", en: "Bulldozer 800-D9" }, daily: 3000, monthly: null, note: { ar: "يُشترط الدفع المقدّم", en: "Prepayment required" } },
         { name: { ar: "تليهاندلر", en: "Telehandler" }, daily: 1000, monthly: null, note: null },
+        { name: { ar: "رصاصة / دكاكة", en: "Vibratory Roller" }, daily: 700, monthly: 16000, note: null },
       ],
     },
   ],
