@@ -1,20 +1,64 @@
-import React from "react";
-import { FileText, Shield, Banknote, Zap } from "lucide-react";
+import React, { useState } from "react";
+import { FileText, Shield, Wallet, Zap } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { trust } from "@/lib/content";
 
-const icons = { FileText, Shield, Banknote, Zap };
+const icons = { FileText, Shield, Wallet, Zap };
+
+// A single pillar: collapsed by default (icon + title only), expands to reveal
+// the detail text on hover (desktop) or click/tap (mobile). The header region
+// is always vertically centered so it never shifts regardless of locale.
+function Pillar({ pillar, dir, lang }) {
+  const [open, setOpen] = useState(false);
+  const Icon = icons[pillar.icon] || FileText;
+  return (
+    <div
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onClick={() => setOpen((o) => !o)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          setOpen((o) => !o);
+          e.preventDefault();
+        }
+      }}
+      className="group bg-[#0b1623] border rounded-md p-6 pt-8 flex flex-col items-center cursor-pointer transition-all duration-400"
+      style={{ borderColor: open ? "rgba(0,168,132,0.5)" : "#1a3449" }}
+    >
+      <div className="w-14 h-14 rounded-md bg-[#162738] flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110">
+        <Icon size={26} style={{ color: pillar.color }} />
+      </div>
+      <h3 className="text-white font-bold text-base sm:text-lg text-center leading-tight" dir={dir}>
+        {pillar.title[lang]}
+      </h3>
+      <div
+        className="overflow-hidden transition-all duration-500 ease-out"
+        style={{
+          maxHeight: open ? "12rem" : "0",
+          opacity: open ? 1 : 0,
+          marginTop: open ? "1rem" : 0,
+        }}
+      >
+        <p className="text-[#a3b3c2] text-sm leading-relaxed text-center" dir={dir}>
+          {pillar.desc[lang]}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default function TrustLayer() {
   const { lang, dir } = useI18n();
 
   return (
-    <section className="py-24 bg-[#0A1A30] relative" dir={dir}>
+    <section className="py-24 bg-[#0b1623] relative" dir={dir}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="mb-16 max-w-2xl">
+        <div className="mb-16 max-w-2xl" dir="ltr">
           <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
             {trust.eyebrow[lang]}
           </p>
@@ -28,28 +72,11 @@ export default function TrustLayer() {
           </h2>
         </div>
 
-        {/* Pillars — single horizontal line, content reveals below on hover */}
-        <div className="grid grid-cols-3 gap-3 sm:gap-4 items-start">
-          {trust.pillars.map((p) => {
-            const Icon = icons[p.icon];
-            return (
-              <div
-                key={p.num}
-                className="bg-white/4 border border-white/10 hover:border-[#009466]/40 rounded-sm p-3 sm:p-4 group transition-all duration-300 hover:bg-white/7 text-center"
-              >
-                <div
-                  className="w-10 h-10 sm:w-12 sm:h-12 mx-auto rounded-sm flex items-center justify-center mb-3 sm:mb-4 transition-transform duration-300 group-hover:scale-110"
-                  style={{ backgroundColor: `${p.color}20` }}
-                >
-                  <Icon size={22} style={{ color: p.color }} />
-                </div>
-                <h3 className="text-white font-bold text-xs sm:text-sm leading-snug">{p.title[lang]}</h3>
-                <div className="max-h-56 opacity-100 mt-3 sm:max-h-0 sm:opacity-0 sm:mt-0 group-hover:sm:max-h-56 group-hover:sm:mt-3 group-hover:sm:opacity-100 overflow-hidden transition-all duration-300">
-                  <p className="text-white/55 text-xs sm:text-sm leading-relaxed">{p.desc[lang]}</p>
-                </div>
-              </div>
-            );
-          })}
+        {/* Pillars — fixed LTR order; hover/click to expand detail */}
+        <div dir="ltr" className="grid grid-cols-3 gap-4 sm:gap-5 items-stretch">
+          {trust.pillars.map((p) => (
+            <Pillar key={p.num} pillar={p} dir={dir} lang={lang} />
+          ))}
         </div>
 
         {/* Quote */}

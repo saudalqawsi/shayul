@@ -51,18 +51,18 @@ export const trust = {
   title2: { ar: "كل تأجير.", en: "every rental." },
   pillars: [
     {
-      icon: "FileText",
-      color: "#009466",
+      icon: "Wallet",
+      color: "#00a884",
       num: "01",
-      title: { ar: "العقد الموثّق قانونياً", en: "Legally-Notarized Contract" },
+      title: { ar: "أسعار شفافة", en: "Transparent Pricing" },
       desc: {
-        ar: "كل اتفاق يتحوّل إلى عقد إلكتروني موثّق يحدد نطاق العمل والتواريخ والسعر — سند قانوني يحفظ حقك قبل بدء التشغيل.",
-        en: "Every agreement becomes a notarized e-contract defining scope, dates, and price — a legal safeguard that protects you before operation begins.",
+        ar: "أسعار استرشادية واضحة لكل معدة — لا وسيط، لا رسوم خفية. ما تراه هو ما تتوقعه.",
+        en: "Clear indicative rates per unit — no middleman, no hidden fees. What you see is what to expect.",
       },
     },
     {
       icon: "Zap",
-      color: "#0696B0",
+      color: "#3b82f6",
       num: "02",
       title: { ar: "تسليم اليوم أو التالي", en: "Same or Next-Day Delivery" },
       desc: {
@@ -71,13 +71,13 @@ export const trust = {
       },
     },
     {
-      icon: "Banknote",
-      color: "#009466",
+      icon: "FileText",
+      color: "#00a884",
       num: "03",
-      title: { ar: "أسعار شفافة", en: "Transparent Pricing" },
+      title: { ar: "العقد الموثّق قانونياً", en: "Legally-Notarized Contract" },
       desc: {
-        ar: "أسعار استرشادية واضحة لكل معدة — لا وسيط، لا رسوم خفية. ما تراه هو ما تتوقعه.",
-        en: "Clear indicative rates per unit — no middleman, no hidden fees. What you see is what to expect.",
+        ar: "كل اتفاق يتحوّل إلى عقد إلكتروني موثّق يحدد نطاق العمل والتواريخ والسعر — سند قانوني يحفظ حقك قبل بدء التشغيل.",
+        en: "Every agreement becomes a notarized e-contract defining scope, dates, and price — a legal safeguard that protects you before operation begins.",
       },
     },
   ],
