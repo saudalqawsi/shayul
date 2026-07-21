@@ -224,7 +224,7 @@ export const equipment = [
 
 export const equipmentVault = {
   eyebrow: { ar: "معرض المعدات", en: "Equipment Vault" },
-  title1: { ar: "الخزينة الحديدية —", en: "The Iron Vault —" },
+  title1: { ar: "كتالوج المعدات —", en: "Equipment Catalogue —" },
   title2: { ar: "كل معدة جاهزة للتسليم.", en: "every unit ready for delivery." },
   ready: { ar: "جاهز للتسليم", en: "Ready to deliver" },
   specLabels: {
