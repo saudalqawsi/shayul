@@ -4,6 +4,7 @@ import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
 import { equipmentVault } from "@/lib/content";
 import Riyal from "@/components/shayul/Riyal";
+import { motion } from "framer-motion";
 
 const CARD_W = 260;
 const CARD_H = 320;
@@ -53,7 +54,13 @@ export default function Coverflow({ items }) {
   const weekly = Math.round(eq.daily * 6);
 
   return (
-    <div className="relative">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-12%" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="relative"
+    >
       {/* stage */}
       <div
         dir="ltr"
@@ -101,7 +108,7 @@ export default function Coverflow({ items }) {
                   pointerEvents: visible || isActive ? "auto" : "none",
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
-                  transition: "opacity 0.5s ease",
+                  transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1)",
                   transformStyle: "preserve-3d",
                   cursor: clickable ? "pointer" : "default",
                 }}
@@ -238,6 +245,6 @@ export default function Coverflow({ items }) {
           </a>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
