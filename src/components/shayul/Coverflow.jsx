@@ -39,6 +39,10 @@ export default function Coverflow({ items }) {
       : 0;
 
   const activeIdx = ((active % total) + total) % total;
+  const stageHeight = Math.max(
+    440,
+    Math.ceil(CARD_H * 1.06 * (1500 / (1500 - R)) + 30)
+  );
 
   const go = (d) => setActive((a) => a + d);
   const goToCard = (i) => {
@@ -60,7 +64,8 @@ export default function Coverflow({ items }) {
       {/* stage */}
       <div
         dir="ltr"
-        className="relative h-[440px] [perspective:1500px] overflow-hidden touch-pan-y"
+        className="relative [perspective:1500px] overflow-hidden touch-pan-y"
+        style={{ height: `${stageHeight}px` }}
         onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchX.current == null) return;
@@ -166,7 +171,8 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(-1)}
         aria-label="Previous"
-        className="flex absolute top-[220px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
+        className="flex absolute -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
+        style={{ top: `${stageHeight / 2}px` }}
       >
         <ChevronLeft size={18} />
       </button>
@@ -174,7 +180,8 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(1)}
         aria-label="Next"
-        className="flex absolute top-[220px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
+        className="flex absolute -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
+        style={{ top: `${stageHeight / 2}px` }}
       >
         <ChevronRight size={18} />
       </button>
