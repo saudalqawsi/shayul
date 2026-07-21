@@ -210,8 +210,8 @@ export const equipment = [
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
-    name: { ar: "بوكلين", en: "Forklift" },
-    nameAlt: { ar: "Forklift", en: "بوكلين" },
+    name: { ar: "بوكلين", en: "Excavator" },
+    nameAlt: { ar: "Excavator", en: "بوكلين" },
     specs: {
       weight: { ar: "٨ طن", en: "8 T" },
       size: { ar: "٥ طن", en: "5 T" },
@@ -222,8 +222,8 @@ export const equipment = [
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
-    name: { ar: "بوكلين كسّارة", en: "Crusher Forklift" },
-    nameAlt: { ar: "Crusher Forklift", en: "بوكلين كسّارة" },
+    name: { ar: "بوكلين كسّارة", en: "Crusher Excavator" },
+    nameAlt: { ar: "Crusher Excavator", en: "بوكلين كسّارة" },
     specs: {
       weight: { ar: "١٠ طن", en: "10 T" },
       size: { ar: "كسّارة", en: "Crusher" },
@@ -436,8 +436,8 @@ export const pricing = {
     {
       name: { ar: "بوكلين", en: "Forklift Trucks" },
       items: [
-        { name: { ar: "بوكلين", en: "Forklift" }, daily: 800, monthly: 20000, note: null },
-        { name: { ar: "بوكلين كسّارة", en: "Crusher Forklift" }, daily: 1800, monthly: 45000, note: null },
+        { name: { ar: "بوكلين", en: "Excavator" }, daily: 800, monthly: 20000, note: null },
+        { name: { ar: "بوكلين كسّارة", en: "Crusher Excavator" }, daily: 1800, monthly: 45000, note: null },
       ],
     },
     {
