@@ -16,7 +16,7 @@ export default function FAQ() {
             <HelpCircle size={14} />
             {faq.eyebrow[lang]}
           </div>
-          <h2 className="text-white font-extrabold" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}>
+          <h2 className="text-white font-extrabold" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.12 }}>
             {faq.title1[lang]}
             <br />
             <span className="text-white/40">{faq.title2[lang]}</span>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
@@ -14,6 +14,7 @@ const CARD_W = 260;
 export default function Coverflow({ items }) {
   const { lang, num } = useI18n();
   const [active, setActive] = useState(0);
+  const touchX = useRef(null);
   const total = items.length;
 
   if (!total) return null;
@@ -29,7 +30,14 @@ export default function Coverflow({ items }) {
       {/* stage */}
       <div
         dir="ltr"
-        className="relative h-[340px] [perspective:1400px] overflow-hidden"
+        className="relative h-[340px] [perspective:1400px] overflow-hidden touch-pan-y"
+        onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
+        onTouchEnd={(e) => {
+          if (touchX.current == null) return;
+          const delta = e.changedTouches[0].clientX - touchX.current;
+          if (Math.abs(delta) > 40) go(delta < 0 ? 1 : -1);
+          touchX.current = null;
+        }}
       >
         {items.map((it, i) => {
           const offset = i - active;

@@ -44,7 +44,7 @@ export default function EquipmentVault() {
           <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
             {equipmentVault.eyebrow[lang]}
           </p>
-          <h2 className="text-white font-bold" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}>
+          <h2 className="text-white font-bold" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.12 }}>
             {equipmentVault.title1[lang]}
             <br />
             <span className="text-white/40">{equipmentVault.title2[lang]}</span>
