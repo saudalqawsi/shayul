@@ -6,6 +6,7 @@ import EquipmentVault from "@/components/shayul/EquipmentVault";
 import HowItWorks from "@/components/shayul/HowItWorks";
 import PricingSection from "@/components/shayul/PricingSection";
 import RequestForm from "@/components/shayul/RequestForm";
+import FAQ from "@/components/shayul/FAQ";
 import FooterSection from "@/components/shayul/FooterSection";
 import { LanguageProvider, useI18n } from "@/lib/i18n";
 
@@ -28,6 +29,7 @@ function HomeContent() {
       <HowItWorks />
       <PricingSection />
       <RequestForm />
+      <FAQ />
       <FooterSection />
     </div>
   );

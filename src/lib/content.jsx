@@ -497,6 +497,58 @@ export const requestForm = {
   newRequest: { ar: "إرسال طلب جديد", en: "Submit a new request" },
 };
 
+export const faq = {
+  eyebrow: { ar: "أسئلة شائعة", en: "FAQ" },
+  title1: { ar: "أسئلة قد", en: "Questions you" },
+  title2: { ar: "تطرحها قبل الطلب.", en: "ask before ordering." },
+  stillQues: { ar: "لم تجد إجابتك؟", en: "Didn't find your answer?" },
+  cta: { ar: "تواصل مع فريق شيول →", en: "Contact our team →" },
+  items: [
+    {
+      q: { ar: "كيف أطلب المعدة المناسبة لمشروعي؟", en: "How do I request the right unit for my project?" },
+      a: {
+        ar: "اختر نوع المعدة والعدد والمدة والموقع من نموذج الطلب، وسنوزّع طلبك فوراً على شركات معدات موثّقة قرب موقعك. تصلك العروض المطابقة لتختار منها.",
+        en: "Pick the unit type, quantity, duration, and location from the request form. We instantly route it to verified firms near your site and send you matched offers to choose from.",
+      },
+    },
+    {
+      q: { ar: "كم تستغرق المطابقة والتسليم؟", en: "How long do matching and delivery take?" },
+      a: {
+        ar: "غالبية الطلبات تُلبّى في اليوم نفسه أو اليوم التالي. أقصى وقت استجابة من الشركات المتعاقدة هو ٢٤ ساعة.",
+        en: "Most requests are fulfilled same or next day. The max response time from contracted firms is 24 hours.",
+      },
+    },
+    {
+      q: { ar: "ما هو العقد الإلكتروني الموثّق؟", en: "What is the notarized e-contract?" },
+      a: {
+        ar: "عند الاتفاق يصدر عقد إلكتروني يحدد نطاق العمل والتواريخ والسعر ويتحول إلى سند قانوني يحفظ حق الطرفين قبل بدء التشغيل.",
+        en: "Once agreed, an e-contract is issued defining scope, dates, and price — it becomes a legal instrument protecting both parties before operation begins.",
+      },
+    },
+    {
+      q: { ar: "هل الأسعار المعروضة نهائية؟", en: "Are the displayed prices final?" },
+      a: {
+        ar: "الأسعار المعروضة استرشادية من السوق، والسعر النهائي يحدده العقد الموثّق بناءً على نوع المعدة والمدة والموقع.",
+        en: "Displayed rates are indicative market prices. The final price is set by the notarized contract based on unit type, duration, and location.",
+      },
+    },
+    {
+      q: { ar: "ماذا يشمل سعر الإيجار؟", en: "What does the rental price include?" },
+      a: {
+        ar: "السعر يشمل السائق والديزل والإعاشة لوردية عمل معتادة. ما زاد عن الوردية يُحتسب إضافياً وفق العقد.",
+        en: "The price includes the operator, diesel, and provisions for a standard shift. Anything beyond a standard shift is billed extra per the contract.",
+      },
+    },
+    {
+      q: { ar: "كيف أصبح مزوّداً على منصة شيول؟", en: "How do I become a provider on Shaywal?" },
+      a: {
+        ar: "انضم من بوابة المزوّدين — أرفع سجلك التجاري وتفاصيل أسطولك وأسعارك ونطاق تغطيتك، وبعد التحقق تستقبل طلبات مؤهّلة قرب منطقتك.",
+        en: "Join via the Provider portal — upload your commercial registration, fleet details, rates, and coverage area. After verification you'll receive qualified leads near your area.",
+      },
+    },
+  ],
+};
+
 export const footer = {
   brand: { ar: "شيول", en: "Shaywal" },
   brandEn: { ar: "SHAYWAL", en: "شيول" },
