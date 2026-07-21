@@ -108,7 +108,7 @@ export function equipmentToIconKeys(items) {
 // The sprite's icons live on the top half of each cell row, so we treat the
 // vertical axis as 8 half-cells (4 icons + 4 labels) and target the icon
 // half-row at index `2 * row`.
-export function getEquipmentIconStyle(iconKey, size = 28, theme = "dark") {
+export function getEquipmentIconStyle(iconKey, size = 28, theme = "dark", urlOverride = null) {
   const key = EQUIPMENT_ICONS[iconKey] ? iconKey : "truck";
   const pos = EQUIPMENT_ICONS[key];
   const { cols, rows } = ICON_GRID;
@@ -117,12 +117,10 @@ export function getEquipmentIconStyle(iconKey, size = 28, theme = "dark") {
   const style = {
     width: `${size}px`,
     height: `${size}px`,
-    backgroundImage: `url('${ICON_SHEET_URL}')`,
+    backgroundImage: `url('${urlOverride || ICON_SHEET_URL}')`,
     backgroundSize: `${cols * 100}% ${rows * 2 * 100}%`,
     backgroundPosition: `${xPct}% ${yPct}%`,
     backgroundRepeat: "no-repeat",
-    borderRadius: "4px",
-    overflow: "hidden",
   };
   if (theme === "dark") {
     // Source is black-on-white. Invert to get white-on-black so the line work
