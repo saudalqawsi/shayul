@@ -73,7 +73,7 @@ export default function RequestForm() {
             </p>
             <h2
               className="text-white font-bold leading-tight mb-6"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}>
+              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.15 }}>
               
               {requestForm.title1[lang]}
               <br />

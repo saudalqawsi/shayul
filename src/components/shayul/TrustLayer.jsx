@@ -20,7 +20,7 @@ export default function TrustLayer() {
           </p>
           <h2
             className="text-white font-bold leading-tight"
-            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.15 }}
           >
             {trust.title1[lang]}
             <br />
@@ -43,8 +43,8 @@ export default function TrustLayer() {
                 >
                   <Icon size={22} style={{ color: p.color }} />
                 </div>
-                <h3 className="text-white font-bold text-xs sm:text-sm leading-tight">{p.title[lang]}</h3>
-                <div className="max-h-0 opacity-0 group-hover:max-h-56 group-hover:mt-3 group-hover:opacity-100 overflow-hidden transition-all duration-300">
+                <h3 className="text-white font-bold text-xs sm:text-sm leading-snug">{p.title[lang]}</h3>
+                <div className="max-h-56 opacity-100 mt-3 sm:max-h-0 sm:opacity-0 sm:mt-0 group-hover:sm:max-h-56 group-hover:sm:mt-3 group-hover:sm:opacity-100 overflow-hidden transition-all duration-300">
                   <p className="text-white/55 text-xs sm:text-sm leading-relaxed">{p.desc[lang]}</p>
                 </div>
               </div>

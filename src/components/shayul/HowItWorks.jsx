@@ -62,16 +62,16 @@ export default function HowItWorks() {
           </p>
           <h2
             className="text-white font-bold leading-tight mb-4"
-            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.15 }}
           >
             {how.title1[lang]}
             <br />
             <span className="text-white/40">{how.title2[lang]}</span>
           </h2>
-          <div className="flex items-center justify-center gap-3 text-white/40 text-sm">
-            <span className="inline-flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[#009466]" /> {how.startTag[lang]}</span>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-white/40 text-sm">
+            <span className="inline-flex items-center gap-1.5 whitespace-nowrap"><span className="w-2 h-2 rounded-full bg-[#009466]" /> {how.startTag[lang]}</span>
             <ArrowLeft size={14} className="opacity-50 rotate-180" />
-            <span className="inline-flex items-center gap-1.5"><ShieldCheck size={13} className="text-[#D4A537]" /> {how.endTag[lang]}</span>
+            <span className="inline-flex items-center gap-1.5 whitespace-nowrap"><ShieldCheck size={13} className="text-[#D4A537]" /> {how.endTag[lang]}</span>
           </div>
         </div>
 

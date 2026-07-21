@@ -48,14 +48,14 @@ export default function HeroSection() {
         {/* Headline */}
         <h1
           className="text-white font-bold leading-tight mb-6"
-          style={{ fontSize: "clamp(2.8rem, 7vw, 5.5rem)", lineHeight: 0.95, letterSpacing: "-0.02em" }}>
+          style={{ fontSize: "clamp(2.2rem, 7vw, 5.5rem)", lineHeight: 1.1, letterSpacing: "-0.01em" }}>
           
           {hero.title1[lang]}
           <br />
           <span className="text-[#009466]">{hero.title2[lang]}</span>
         </h1>
 
-        <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+        <p className="text-white/60 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
           {hero.subtitle[lang]}
         </p>
 

@@ -51,7 +51,7 @@ export default function RentalCalculator() {
       {/* header */}
       <div className="mb-8">
         <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-3">{t.eyebrow[lang]}</p>
-        <h3 className="text-white font-bold leading-tight" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", lineHeight: 1.05 }}>
+        <h3 className="text-white font-bold leading-snug" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", lineHeight: 1.15 }}>
           {t.title1[lang]} <span className="text-white/40">{t.title2[lang]}</span>
         </h3>
       </div>
