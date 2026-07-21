@@ -95,7 +95,6 @@ export const equipment = [
     nameAlt: { ar: "Wheel Loader", en: "شيول / لودر" },
     specs: {
       weight: { ar: "١٨ طن", en: "18 T" },
-      hp: { ar: "٢٥٠ حصان", en: "250 HP" },
       size: { ar: "مقاس ٦٦", en: "Size 66" },
     },
     daily: 800,
@@ -108,7 +107,6 @@ export const equipment = [
     nameAlt: { ar: "Backhoe Loader", en: "حفارة / باك لودر" },
     specs: {
       weight: { ar: "٨ طن", en: "8 T" },
-      hp: { ar: "٩٢ حصان", en: "92 HP" },
       size: { ar: "باك لودر", en: "Backhoe" },
     },
     daily: 600,
@@ -121,7 +119,6 @@ export const equipment = [
     nameAlt: { ar: "Bobcat", en: "بوبكات" },
     specs: {
       weight: { ar: "٣ طن", en: "3 T" },
-      hp: { ar: "٧٥ حصان", en: "75 HP" },
       size: { ar: "S175", en: "S175" },
     },
     daily: 900,
@@ -134,7 +131,6 @@ export const equipment = [
     nameAlt: { ar: "Forklift Truck", en: "بوكلين" },
     specs: {
       weight: { ar: "٨ طن", en: "8 T" },
-      hp: { ar: "٨٥ حصان", en: "85 HP" },
       size: { ar: "٥ طن", en: "5 T" },
     },
     daily: 800,
@@ -147,7 +143,6 @@ export const equipment = [
     nameAlt: { ar: "Motor Grader", en: "قريدر" },
     specs: {
       weight: { ar: "١٤ طن", en: "14 T" },
-      hp: { ar: "٢٠٠ حصان", en: "200 HP" },
       size: { ar: "G14", en: "G14" },
     },
     daily: 1500,
@@ -160,7 +155,6 @@ export const equipment = [
     nameAlt: { ar: "Bulldozer", en: "بلدوزر" },
     specs: {
       weight: { ar: "٤٩ طن", en: "49 T" },
-      hp: { ar: "٤١٠ حصان", en: "410 HP" },
       size: { ar: "800-D9", en: "800-D9" },
     },
     daily: 3000,
@@ -173,7 +167,6 @@ export const equipment = [
     nameAlt: { ar: "Vibratory Roller", en: "رصاصة / دكاكة" },
     specs: {
       weight: { ar: "١٢ طن", en: "12 T" },
-      hp: { ar: "١٣٠ حصان", en: "130 HP" },
       size: { ar: "١٤ طن", en: "14 T" },
     },
     daily: 700,
@@ -186,7 +179,6 @@ export const equipment = [
     nameAlt: { ar: "Dump Truck", en: "قالب / شاحنة" },
     specs: {
       weight: { ar: "٢٥ طن", en: "25 T" },
-      hp: { ar: "٤٠٠ حصان", en: "400 HP" },
       size: { ar: "٦ محاور", en: "6-Axle" },
     },
     daily: 650,
@@ -199,7 +191,6 @@ export const equipment = [
     nameAlt: { ar: "Telehandler", en: "فوركلفت" },
     specs: {
       weight: { ar: "١٨ طن", en: "18 T" },
-      hp: { ar: "١٣٠ حصان", en: "130 HP" },
       size: { ar: "R90", en: "R90" },
     },
     daily: 1000,
@@ -212,7 +203,6 @@ export const equipment = [
     nameAlt: { ar: "Crane", en: "كرين" },
     specs: {
       weight: { ar: "٤٠ طن", en: "40 T" },
-      hp: { ar: "٣٥٠ حصان", en: "350 HP" },
       size: { ar: "٢٥ طن", en: "25 T" },
     },
     daily: 2500,
@@ -229,7 +219,6 @@ export const equipmentVault = {
   ready: { ar: "جاهز للتسليم", en: "Ready to deliver" },
   specLabels: {
     weight: { ar: "الوزن", en: "Weight" },
-    hp: { ar: "القدرة", en: "Power" },
     size: { ar: "المقاس", en: "Size" },
   },
   addToRequest: { ar: "أضف للطلب", en: "Add to Request" },

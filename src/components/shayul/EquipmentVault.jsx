@@ -17,12 +17,7 @@ const WEIGHT_BUCKETS = [
   { value: "m", ar: "١٠ – ٢٥ طن", en: "10 – 25 T" },
   { value: "l", ar: "فوق ٢٥ طن", en: "Over 25 T" },
 ];
-const POWER_BUCKETS = [
-  { value: "", ar: "الكل", en: "All" },
-  { value: "s", ar: "حتى ١٠٠ حصان", en: "Up to 100 HP" },
-  { value: "m", ar: "١٠٠ – ٢٥٠ حصان", en: "100 – 250 HP" },
-  { value: "l", ar: "فوق ٢٥٠ حصان", en: "Over 250 HP" },
-];
+
 
 function weightOk(n, b) {
   if (!b) return true;
@@ -32,14 +27,7 @@ function weightOk(n, b) {
   if (b === "l") return n > 25;
   return true;
 }
-function powerOk(n, b) {
-  if (!b) return true;
-  if (n === null) return false;
-  if (b === "s") return n <= 100;
-  if (b === "m") return n > 100 && n <= 250;
-  if (b === "l") return n > 250;
-  return true;
-}
+
 
 function EquipCard({ eq }) {
   const { lang, num, dir } = useI18n();
@@ -76,7 +64,7 @@ function EquipCard({ eq }) {
         className={`absolute bottom-0 start-0 end-0 bg-[#009466] transition-all duration-300 ${hovered ? "h-28" : "h-0"} overflow-hidden`}
       >
         <div className="p-4">
-          <div className="grid grid-cols-3 gap-2 mb-3">
+          <div className="grid grid-cols-2 gap-2 mb-3">
             {Object.entries(eq.specs).map(([k, v]) => (
               <div key={k} className="text-center">
                 <div className="text-white font-bold text-sm font-mono">{v[lang]}</div>
@@ -154,7 +142,6 @@ function Chips({ options, value, onChange, lang }) {
 export default function EquipmentVault() {
   const { lang, dir } = useI18n();
   const [weight, setWeight] = useState("");
-  const [power, setPower] = useState("");
   const [size, setSize] = useState("");
   const [openMobile, setOpenMobile] = useState(false);
 
@@ -170,23 +157,17 @@ export default function EquipmentVault() {
   const filtered = useMemo(() => {
     return equipment.filter((eq) => {
       const tons = numFrom(eq.specs.weight.en);
-      const hp = numFrom(eq.specs.hp.en);
-      return (
-        weightOk(tons, weight) &&
-        powerOk(hp, power) &&
-        (!size || eq.specs.size.en === size)
-      );
+      return weightOk(tons, weight) && (!size || eq.specs.size.en === size);
     });
-  }, [weight, power, size]);
+  }, [weight, size]);
 
-  const activeCount = [weight, power, size].filter(Boolean).length;
-  const reset = () => { setWeight(""); setPower(""); setSize(""); };
+  const activeCount = [weight, size].filter(Boolean).length;
+  const reset = () => { setWeight(""); setSize(""); };
 
   const labels = {
     filters: { ar: "تصفية النتائج", en: "Filter Results" },
     clear: { ar: "مسح", en: "Clear" },
     weight: { ar: "الوزن (طن)", en: "Weight (T)" },
-    power: { ar: "القدرة (حصان)", en: "Power (HP)" },
     size: { ar: "المقاس", en: "Size" },
     sizeAll: { ar: "كل المقاسات", en: "All sizes" },
     results: (n) => ({ ar: `${n} معدة`, en: `${n} units` }),
@@ -220,11 +201,6 @@ export default function EquipmentVault() {
       <div className="mb-6">
         <div className="text-white/50 text-xs font-bold tracking-wide uppercase mb-2.5">{labels.weight[lang]}</div>
         <Chips options={WEIGHT_BUCKETS} value={weight} onChange={setWeight} lang={lang} />
-      </div>
-      {/* Power */}
-      <div className="mb-6">
-        <div className="text-white/50 text-xs font-bold tracking-wide uppercase mb-2.5">{labels.power[lang]}</div>
-        <Chips options={POWER_BUCKETS} value={power} onChange={setPower} lang={lang} />
       </div>
       {/* Size */}
       <div>
