@@ -14,10 +14,16 @@ const GROUPS = [
     order: ["Loader Size 36", "Loader Size 50", "Loader Size 66", "Loader Size 80", "Loader 920"],
   },
   {
+    key: "excavators",
+    title: { ar: "حفّارات (بوكلين)", en: "Excavators" },
+    subtitle: { ar: "بوكلين بمختلف الأدوات", en: "Boklin with various attachments" },
+    order: ["Excavator", "Crusher Excavator"],
+  },
+  {
     key: "forklifts",
     title: { ar: "فوركلفت", en: "Forklifts" },
-    subtitle: { ar: "بأشكال وأحجام متنوّعة", en: "In multiple forms and sizes" },
-    order: ["JCB — Forklift", "Excavator", "Crusher Excavator", "Telehandler"],
+    subtitle: { ar: "للرفع والمناولة", en: "For lifting and handling" },
+    order: ["JCB — Forklift", "Telehandler"],
   },
   {
     key: "other",
