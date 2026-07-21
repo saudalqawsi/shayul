@@ -55,25 +55,28 @@ export default function Navbar({ scrolled }) {
           </a>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile Lang Toggle + Menu Button */}
+        <div className="md:hidden flex items-center gap-3">
+          <button
+            onClick={toggle}
+            className="text-white/70 hover:text-white text-xs font-bold transition-colors border border-white/15 rounded-sm px-2.5 py-1.5 flex items-center"
+            aria-label="Toggle language"
+          >
+            <span className="font-mono">{langToggle[lang]}</span>
+          </button>
+          <button
+            className="text-white"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-[#0A1A30] border-t border-white/10 px-6 py-4 flex flex-col gap-4">
-          <button
-            onClick={toggle}
-            className="self-start text-white/80 hover:text-white text-xs font-bold border border-white/20 rounded-sm px-3 py-1.5"
-            aria-label="Toggle language"
-          >
-            <span className="font-mono">{langToggle[lang]}</span>
-          </button>
           {navLinks.map((l) => (
             <a
               key={l.href}
