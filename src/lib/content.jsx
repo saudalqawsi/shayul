@@ -319,7 +319,7 @@ export const equipmentVault = {
   },
   addToRequest: { ar: "أضف للطلب", en: "Add to Request" },
   perDay: { ar: "ر.س / يوم", en: "SAR / day" },
-  monthlyShort: { ar: "شهري", en: "mo" },
+  weeklyShort: { ar: "أسبوعي", en: "wk" },
   ctaTitle: { ar: "لا تجد ما تحتاجه؟", en: "Can't find what you need?" },
   ctaDesc: { ar: "أرسل طلبك وسنبحث لك عن المعدة المناسبة من شبكتنا", en: "Send your request and we'll source the right unit from our network." },
   ctaBtn: { ar: "أرسل طلبك", en: "Send your request" },

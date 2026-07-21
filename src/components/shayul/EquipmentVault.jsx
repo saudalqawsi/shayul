@@ -32,6 +32,7 @@ function weightOk(n, b) {
 function EquipCard({ eq }) {
   const { lang, num, dir } = useI18n();
   const [hovered, setHovered] = useState(false);
+  const weekly = Math.round(eq.daily * 6);
 
   return (
     <div
@@ -88,12 +89,10 @@ function EquipCard({ eq }) {
             <span className="text-[#009466] font-bold text-2xl font-mono">{num(eq.daily)}</span>
             <span className="text-white/40 text-sm ms-1">{equipmentVault.perDay[lang]}</span>
           </div>
-          {eq.monthly !== null && (
-            <div className="text-white/30 text-sm">
-              <span className="font-mono">{num(eq.monthly)}</span>
-              <span className="ms-1 text-xs">{equipmentVault.monthlyShort[lang]}</span>
-            </div>
-          )}
+          <div className="text-white/30 text-sm">
+            <span className="font-mono">{num(weekly)}</span>
+            <span className="ms-1 text-xs">{equipmentVault.weeklyShort[lang]}</span>
+          </div>
         </div>
       </div>
     </div>
