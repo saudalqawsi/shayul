@@ -3,6 +3,7 @@ import { Shield, SlidersHorizontal, X, RotateCcw } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
 import { equipment, equipmentVault } from "@/lib/content";
+import RentalCalculator from "@/components/shayul/RentalCalculator";
 
 // Pull the first number out of a localized spec string ("18 T", "250 HP", ...)
 const numFrom = (s) => {
@@ -306,6 +307,8 @@ export default function EquipmentVault() {
             )}
           </div>
         </div>
+
+        <RentalCalculator />
       </div>
     </section>
   );
