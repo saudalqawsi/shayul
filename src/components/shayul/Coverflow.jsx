@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
@@ -6,11 +6,21 @@ import { equipmentVault } from "@/lib/content";
 import Riyal from "@/components/shayul/Riyal";
 
 const CARD_W = 260;
+const CARD_H = 320;
+
+// Normalise an angle (degrees) to the shortest representation in [-180, 180].
+function norm(a) {
+  let r = a % 360;
+  if (r > 180) r -= 360;
+  if (r < -180) r += 360;
+  return r;
+}
 
 /**
- * Coverflow carousel — a central, highlighted active card flanked by smaller,
- * dimmed neighbour cards that shrink and fade with distance. The detail panel
- * below updates as you step between cards (arrows / clicking a side card).
+ * Coverflow carousel — a true circular ring. Cards are evenly placed around
+ * a vertical axis and the whole ring rotates as one; there is no "first" or
+ * "last" card, so scrolling loops endlessly and smoothly in both directions.
+ * `active` is an unbounded rotation index; the visible card is `active % N`.
  */
 export default function Coverflow({ items }) {
   const { lang, num } = useI18n();
@@ -19,9 +29,25 @@ export default function Coverflow({ items }) {
   const total = items.length;
 
   if (!total) return null;
-  const eq = items[active];
 
-  const go = (d) => setActive((a) => (a + d + total) % total);
+  const step = total > 1 ? 360 / total : 360; // spacing between cards (deg)
+  // Radius of the ring: cards just touch at the front, plus a little depth.
+  const R =
+    total > 1 && step < 180
+      ? Math.min(1200, Math.round(CARD_W / (2 * Math.tan((step * Math.PI) / 360))) + 40)
+      : 0;
+
+  const activeIdx = ((active % total) + total) % total;
+  const eq = items[activeIdx];
+
+  const go = (d) => setActive((a) => a + d);
+  const goToCard = (i) => {
+    const delta = i - activeIdx;
+    let best = delta;
+    if (Math.abs(delta + total) < Math.abs(best)) best = delta + total;
+    if (Math.abs(delta - total) < Math.abs(best)) best = delta - total;
+    setActive((a) => a + best);
+  };
 
   const specEntries = Object.entries(eq.specs || {});
   const weekly = Math.round(eq.daily * 6);
@@ -31,89 +57,97 @@ export default function Coverflow({ items }) {
       {/* stage */}
       <div
         dir="ltr"
-        className="relative h-[340px] [perspective:1400px] overflow-hidden touch-pan-y"
+        className="relative h-[340px] [perspective:1500px] overflow-hidden touch-pan-y"
         onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchX.current == null) return;
-          const delta = e.changedTouches[0].clientX - touchX.current;
-          if (Math.abs(delta) > 40) go(delta < 0 ? 1 : -1);
+          const d = e.changedTouches[0].clientX - touchX.current;
+          if (Math.abs(d) > 40) go(d < 0 ? 1 : -1);
           touchX.current = null;
         }}
       >
-        {items.map((it, i) => {
-          const offset = i - active;
-          const abs = Math.abs(offset);
-          const angle = offset * 24;
-          const rad = (angle * Math.PI) / 180;
-          const R = 380;
-          const x = Math.sin(rad) * R;
-          const z = Math.cos(rad) * R - R;
-          const rotY = -angle;
-          const scale = offset === 0 ? 1 : Math.max(0.42, 1 - abs * 0.16);
-          const opacity = abs > 3 ? 0 : offset === 0 ? 1 : Math.max(0.18, 0.85 - abs * 0.28);
-          const isActive = offset === 0;
+        <div
+          className="absolute inset-0"
+          style={{
+            transformStyle: "preserve-3d",
+            transform: `rotateY(${-active * step}deg)`,
+            transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1)",
+          }}
+        >
+          {items.map((it, i) => {
+            const rel = norm(i * step - active * step);
+            const abs = Math.abs(rel);
+            const visible = abs <= 115;
+            const isActive = abs < step / 2;
+            const opacity = !visible ? 0 : isActive ? 1 : Math.max(0.16, 1 - abs / 120);
+            const scale = isActive ? 1.06 : 0.9;
+            const clickable = visible && !isActive;
 
-          return (
-            <button
-              key={it.name.en}
-              onClick={() => !isActive && setActive(i)}
-              type="button"
-              className={`absolute top-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                isActive ? "cursor-default" : "cursor-pointer"
-              }`}
-              style={{
-                left: "50%",
-                width: CARD_W,
-                marginLeft: -CARD_W / 2,
-                transform: `translateX(${x}px) translateZ(${z}px) scale(${scale}) rotateY(${rotY}deg)`,
-                opacity,
-                zIndex: 10 - abs,
-                pointerEvents: abs > 3 ? "none" : "auto",
-                transformOrigin: "center center",
-                willChange: "transform, opacity",
-              }}
-              aria-label={it.name[lang]}
-            >
-              <div
-                className={`bg-[#0d2240] rounded-sm overflow-hidden border ${
-                  isActive ? "border-[#009466] shadow-[0_20px_60px_rgba(0,148,102,0.25)]" : "border-white/10"
-                }`}
+            return (
+              <button
+                key={it.name.en}
+                type="button"
+                onClick={() => clickable && goToCard(i)}
+                className="absolute top-1/2"
+                style={{
+                  left: "50%",
+                  width: CARD_W,
+                  height: CARD_H,
+                  marginLeft: -CARD_W / 2,
+                  marginTop: -CARD_H / 2,
+                  transform: `rotateY(${i * step}deg) translateZ(${R}px) scale(${scale})`,
+                  opacity,
+                  zIndex: Math.round(100 - abs),
+                  pointerEvents: visible || isActive ? "auto" : "none",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                  transition: "opacity 0.5s ease",
+                  transformStyle: "preserve-3d",
+                  cursor: clickable ? "pointer" : "default",
+                }}
+                aria-label={it.name[lang]}
               >
-                <div className="relative h-52 overflow-hidden">
-                  <Image
-                    src={it.img}
-                    alt={it.name[lang]}
-                    className="w-full h-full"
-                    fittingType="fill"
-                    focalPointX={0.5}
-                    focalPointY={0.5}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d2240] via-[#0d2240]/10 to-transparent" />
-                  {isActive && (
-                    <div className="absolute top-3 end-3 bg-[#0A1A30]/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white/70 border border-white/10">
-                      {it.tag[lang]}
+                <div
+                  className={`bg-[#0d2240] rounded-sm overflow-hidden border h-full flex flex-col ${
+                    isActive ? "border-[#009466] shadow-[0_20px_60px_rgba(0,148,102,0.25)]" : "border-white/10"
+                  }`}
+                >
+                  <div className="relative h-52 overflow-hidden">
+                    <Image
+                      src={it.img}
+                      alt={it.name[lang]}
+                      className="w-full h-full"
+                      fittingType="fill"
+                      focalPointX={0.5}
+                      focalPointY={0.5}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0d2240] via-[#0d2240]/10 to-transparent" />
+                    {isActive && (
+                      <>
+                        <div className="absolute top-3 end-3 bg-[#0A1A30]/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white/70 border border-white/10">
+                          {it.tag[lang]}
+                        </div>
+                        <div className="absolute top-3 start-3 flex items-center gap-1.5 bg-[#0A1A30]/80 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#009466]" />
+                          <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
+                        </div>
+                      </>
+                    )}
+                    {!isActive && <div className="absolute inset-0 bg-[#081626]/55 pointer-events-none" />}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-white font-bold text-base leading-tight">{it.name[lang]}</h3>
+                    <div className="flex items-end gap-1.5 mt-2">
+                      <span className="text-[#009466] font-bold font-mono text-xl">{num(it.daily)}</span>
+                      <Riyal size={14} />
+                      <span className="text-white/40 text-xs">{equipmentVault.perDay[lang]}</span>
                     </div>
-                  )}
-                  {isActive && (
-                    <div className="absolute top-3 start-3 flex items-center gap-1.5 bg-[#0A1A30]/80 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#009466]" />
-                      <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
-                    </div>
-                  )}
-                  {!isActive && <div className="absolute inset-0 bg-[#081626]/55 pointer-events-none" />}
-                </div>
-                <div className="p-4">
-                  <h3 className="text-white font-bold text-base leading-tight">{it.name[lang]}</h3>
-                  <div className="flex items-end gap-1.5 mt-2">
-                    <span className="text-[#009466] font-bold font-mono text-xl">{num(it.daily)}</span>
-                    <Riyal size={14} />
-                    <span className="text-white/40 text-xs">{equipmentVault.perDay[lang]}</span>
                   </div>
                 </div>
-              </div>
-            </button>
-          );
-        })}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* nav arrows */}
@@ -121,7 +155,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(-1)}
         aria-label="Previous"
-        className="flex absolute top-[170px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] disabled:opacity-20 disabled:pointer-events-none transition-colors"
+        className="flex absolute top-[170px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] transition-colors"
       >
         <ChevronLeft size={18} />
       </button>
@@ -129,7 +163,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(1)}
         aria-label="Next"
-        className="flex absolute top-[170px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] disabled:opacity-20 disabled:pointer-events-none transition-colors"
+        className="flex absolute top-[170px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] transition-colors"
       >
         <ChevronRight size={18} />
       </button>
@@ -140,9 +174,9 @@ export default function Coverflow({ items }) {
           <button
             key={it.name.en}
             type="button"
-            onClick={() => setActive(i)}
+            onClick={() => goToCard(i)}
             aria-label={it.name[lang]}
-            className={`h-1.5 rounded-full transition-all ${i === active ? "w-8 bg-[#009466]" : "w-3 bg-white/20"}`}
+            className={`h-1.5 rounded-full transition-all ${i === activeIdx ? "w-8 bg-[#009466]" : "w-3 bg-white/20"}`}
           />
         ))}
       </div>
@@ -187,7 +221,6 @@ export default function Coverflow({ items }) {
                 <Riyal size={16} />
               </div>
             </div>
-            {/* monthly removed — focus on daily + weekly */}
           </div>
           <a
             href="#request"
