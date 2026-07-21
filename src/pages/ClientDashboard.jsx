@@ -11,6 +11,7 @@ import {
   Inbox,
 } from "lucide-react";
 import RentalTracker from "@/components/client/RentalTracker";
+import RatingStars from "@/components/client/RatingStars";
 import { useToast } from "@/components/ui/use-toast";
 
 const STATUS_AR = {
@@ -26,6 +27,23 @@ function durLabel(d) {
 
 function ReqCard({ req }) {
   const st = STATUS_AR[req.status] || STATUS_AR.pending;
+  const { toast } = useToast();
+  const [rating, setRating] = useState(req.rating || 0);
+  const [saving, setSaving] = useState(false);
+
+  const saveRating = async (v) => {
+    setSaving(true);
+    try {
+      await base44.entities.RentalRequest.update(req.id, { rating: v });
+      setRating(v);
+      toast({ title: "تم حفظ تقييمك", description: "شكراً لمساهمتك في تحسين الخدمة" });
+    } catch (e) {
+      toast({ title: "تعذّر حفظ التقييم", variant: "destructive" });
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
     <div className="bg-[#0A1A30] border border-white/10 rounded-sm p-5 md:p-6" dir="rtl">
       {/* head */}
@@ -49,6 +67,13 @@ function ReqCard({ req }) {
       <div className="bg-[#081626] border border-white/5 rounded-sm p-5">
         <RentalTracker status={req.status} createdAt={req.created_date} updatedAt={req.updated_date} />
       </div>
+
+      {/* rating — only once the rental is completed (equipment returned) */}
+      {req.status === "completed" && (
+        <div className="bg-[#081626] border border-white/5 rounded-sm p-5 mt-4">
+          <RatingStars value={rating} onSave={saveRating} saving={saving} />
+        </div>
+      )}
     </div>
   );
 }
