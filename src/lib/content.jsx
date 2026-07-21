@@ -99,7 +99,7 @@ export const equipment = [
     },
     daily: 600,
     monthly: 15000,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/1a9a257c8_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/d859fd237_generated_image.png",
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
@@ -111,7 +111,7 @@ export const equipment = [
     },
     daily: 600,
     monthly: 15000,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/bc05e29f6_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/0f9f5284e_generated_image.png",
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
@@ -123,7 +123,7 @@ export const equipment = [
     },
     daily: 800,
     monthly: 18000,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/62dd04ca4_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/f678860a2_generated_image.png",
     tag: { ar: "الأعلى طلباً", en: "Most Requested" },
   },
   {
@@ -135,7 +135,7 @@ export const equipment = [
     },
     daily: 1000,
     monthly: 25000,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/17db0bc7d_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/ab62fa212_generated_image.png",
     tag: { ar: "للمشاريع الكبرى", en: "For Major Projects" },
   },
   {
@@ -147,7 +147,7 @@ export const equipment = [
     },
     daily: 500,
     monthly: 13000,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/fb133f7c5_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/0864830d3_generated_image.png",
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
