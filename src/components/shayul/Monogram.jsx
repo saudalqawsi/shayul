@@ -1,37 +1,21 @@
 import React from "react";
 
 /**
- * Shaywal mark — a simple, abstracted wheel-loader silhouette
- * (body, cab, boom+bucket, wheels) rendered in white on brand green.
+ * Shaywal mark — an isolated wheel-loader logo (transparent background).
  */
+const LOGO_URL =
+  "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/f6085f55f_generated_image.png";
+
 export default function Monogram({ size = 36, className = "" }) {
   return (
-    <span
-      className={`inline-flex items-center justify-center bg-[#009466] rounded-md ${className}`}
+    <img
+      src={LOGO_URL}
+      alt="Shaywal"
+      width={size}
+      height={size}
+      className={`object-contain ${className}`}
       style={{ width: size, height: size }}
       aria-hidden="true"
-    >
-      <svg viewBox="0 0 36 36" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* wheels (drawn first — chassis covers their tops) */}
-        <circle cx="12" cy="30" r="3" fill="#ffffff" />
-        <circle cx="12" cy="30" r="1.1" fill="#009466" />
-        <circle cx="25" cy="30" r="3" fill="#ffffff" />
-        <circle cx="25" cy="30" r="1.1" fill="#009466" />
-
-        {/* chassis */}
-        <rect x="7" y="22" width="22" height="6" rx="2" fill="#ffffff" />
-
-        {/* cab */}
-        <rect x="8" y="13.5" width="8" height="8.5" rx="2" fill="#ffffff" />
-        {/* cab window cutout */}
-        <rect x="10" y="15.5" width="4" height="4.5" rx="1" fill="#009466" />
-
-        {/* boom arm */}
-        <path d="M19 22 L29 15 L30.3 16.3 L20 23 Z" fill="#ffffff" />
-
-        {/* bucket */}
-        <path d="M29 12.5 L33 11.5 L33.8 18 L30 18.7 Z" fill="#ffffff" />
-      </svg>
-    </span>
+    />
   );
 }
