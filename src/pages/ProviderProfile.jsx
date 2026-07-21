@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import StarBadge from "@/components/StarBadge";
+import EquipmentBadge from "@/components/shayul/EquipmentBadge";
 
 const STATUS_AR = {
   available: { label: "متاحة", cls: "bg-[#D97706]/10 text-[#D97706] border-[#D97706]/30" },
@@ -50,6 +51,9 @@ function FleetCard({ eq }) {
         <span className={`absolute top-3 end-3 text-xs font-bold px-2.5 py-1 rounded-full border ${st.cls}`}>
           {st.label}
         </span>
+        <div className="absolute top-3 left-3 pointer-events-none">
+          <EquipmentBadge type={eq.type} width={72} theme="dark" />
+        </div>
       </div>
       <div className="p-4">
         <h4 className="text-white font-bold leading-snug">{eq.name}</h4>
