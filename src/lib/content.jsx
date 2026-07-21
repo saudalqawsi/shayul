@@ -178,7 +178,7 @@ export const equipment = [
     },
     daily: 700,
     monthly: 16000,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/bc33f39ac_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/b64050886_generated_image.png",
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
