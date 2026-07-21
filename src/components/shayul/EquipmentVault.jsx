@@ -112,6 +112,22 @@ function EquipCard({ eq }) {
   );
 }
 
+function CtaCard() {
+  const { lang } = useI18n();
+  return (
+    <div className="bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center">
+      <div className="w-14 h-14 bg-[#009466]/20 rounded-sm flex items-center justify-center mb-4">
+        <Shield size={28} className="text-[#009466]" />
+      </div>
+      <h3 className="text-white font-bold text-lg mb-2">{equipmentVault.ctaTitle[lang]}</h3>
+      <p className="text-white/40 text-sm mb-5 leading-relaxed">{equipmentVault.ctaDesc[lang]}</p>
+      <a href="#request" className="bg-[#009466] hover:bg-[#007a54] text-white px-6 py-2.5 rounded-sm text-sm font-bold transition-colors">
+        {equipmentVault.ctaBtn[lang]}
+      </a>
+    </div>
+  );
+}
+
 function Chips({ options, value, onChange, lang }) {
   return (
     <div className="flex flex-wrap gap-2">
@@ -246,13 +262,7 @@ export default function EquipmentVault() {
               <span className="text-white/40">{equipmentVault.title2[lang]}</span>
             </h2>
           </div>
-          <button
-            onClick={() => setOpenMobile(true)}
-            className="lg:hidden inline-flex items-center gap-2 bg-white/5 border border-white/15 rounded-sm px-4 py-2.5 text-white text-sm font-bold"
-          >
-            <SlidersHorizontal size={15} /> {labels.filters[lang]}
-            {activeCount > 0 && <span className="bg-[#009466] text-white text-[10px] px-1.5 rounded-full">{activeCount}</span>}
-          </button>
+          <div className="lg:hidden text-white/45 text-xs font-mono">{labels.results(filtered.length)[lang]}</div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
@@ -275,7 +285,7 @@ export default function EquipmentVault() {
 
           {/* Catalog */}
           <div>
-            <div className="text-white/45 text-sm mb-4 font-mono">
+            <div className="hidden sm:block text-white/45 text-sm mb-4 font-mono">
               {labels.results(filtered.length)[lang]}
             </div>
 
@@ -288,28 +298,42 @@ export default function EquipmentVault() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-                {filtered.map((eq) => (
-                  <EquipCard key={eq.name.en} eq={eq} />
-                ))}
-                {/* CTA card */}
-                <div className="bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center">
-                  <div className="w-14 h-14 bg-[#009466]/20 rounded-sm flex items-center justify-center mb-4">
-                    <Shield size={28} className="text-[#009466]" />
+              <>
+                {/* mobile swipe carousel */}
+                <div className="sm:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  {filtered.map((eq) => (
+                    <div key={eq.name.en} className="w-[78vw] shrink-0 snap-start">
+                      <EquipCard eq={eq} />
+                    </div>
+                  ))}
+                  <div className="w-[78vw] shrink-0 snap-start">
+                    <CtaCard />
                   </div>
-                  <h3 className="text-white font-bold text-lg mb-2">{equipmentVault.ctaTitle[lang]}</h3>
-                  <p className="text-white/40 text-sm mb-5 leading-relaxed">{equipmentVault.ctaDesc[lang]}</p>
-                  <a href="#request" className="bg-[#009466] hover:bg-[#007a54] text-white px-6 py-2.5 rounded-sm text-sm font-bold transition-colors">
-                    {equipmentVault.ctaBtn[lang]}
-                  </a>
                 </div>
-              </div>
+
+                {/* desktop grid */}
+                <div className="hidden sm:grid grid-cols-2 xl:grid-cols-3 gap-5">
+                  {filtered.map((eq) => (
+                    <EquipCard key={eq.name.en} eq={eq} />
+                  ))}
+                  <CtaCard />
+                </div>
+              </>
             )}
           </div>
         </div>
 
         <RentalCalculator />
       </div>
+
+      {/* floating mobile filter button — always reachable while browsing */}
+      <button
+        onClick={() => setOpenMobile(true)}
+        className="lg:hidden fixed bottom-5 end-5 z-40 inline-flex items-center gap-2 bg-[#009466] text-white px-5 py-3.5 rounded-full shadow-lg shadow-[#009466]/40 font-bold text-sm"
+      >
+        <SlidersHorizontal size={16} /> {labels.filters[lang]}
+        {activeCount > 0 && <span className="bg-white text-[#009466] text-[10px] font-bold px-1.5 py-0.5 rounded-full">{activeCount}</span>}
+      </button>
     </section>
   );
 }
