@@ -1,40 +1,36 @@
 import React from "react";
 
 /**
- * Shaywal monogram lockup — a typographic "S" mark with an industrial
- * chevron accent (loader-bucket inspiration), not a photo.
+ * Shaywal mark — a simple, abstracted wheel-loader silhouette
+ * (body, cab, boom+bucket, wheels) rendered in white on brand green.
  */
 export default function Monogram({ size = 36, className = "" }) {
   return (
     <span
-      className={`inline-flex items-center justify-center bg-[#009466] rounded-sm ${className}`}
+      className={`inline-flex items-center justify-center bg-[#009466] rounded-md ${className}`}
       style={{ width: size, height: size }}
       aria-hidden="true"
     >
-      <svg
-        viewBox="0 0 36 36"
-        width={size}
-        height={size}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {/* S path — bold, slightly industrial cut on the spine */}
-        <path
-          d="M26 12.5C26 9.46 23.76 7 20 7H15C11.13 7 8.5 9.13 8.5 12.3C8.5 15.2 10.8 16.7 14 17.5L20 19C23.2 19.8 25.5 20.3 25.5 23.2C25.5 26.4 22.87 28.5 19 28.5H14C10.24 28.5 8 26.04 8 23"
-          stroke="#ffffff"
-          strokeWidth="3.4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        {/* chevron accent — loader bucket nod */}
-        <path
-          d="M9.5 23.5L13 21L16.5 23.5"
-          stroke="#0A1A30"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          opacity="0.9"
-        />
+      <svg viewBox="0 0 36 36" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* wheels (drawn first — chassis covers their tops) */}
+        <circle cx="12" cy="30" r="3" fill="#ffffff" />
+        <circle cx="12" cy="30" r="1.1" fill="#009466" />
+        <circle cx="25" cy="30" r="3" fill="#ffffff" />
+        <circle cx="25" cy="30" r="1.1" fill="#009466" />
+
+        {/* chassis */}
+        <rect x="7" y="22" width="22" height="6" rx="2" fill="#ffffff" />
+
+        {/* cab */}
+        <rect x="8" y="13.5" width="8" height="8.5" rx="2" fill="#ffffff" />
+        {/* cab window cutout */}
+        <rect x="10" y="15.5" width="4" height="4.5" rx="1" fill="#009466" />
+
+        {/* boom arm */}
+        <path d="M19 22 L29 15 L30.3 16.3 L20 23 Z" fill="#ffffff" />
+
+        {/* bucket */}
+        <path d="M29 12.5 L33 11.5 L33.8 18 L30 18.7 Z" fill="#ffffff" />
       </svg>
     </span>
   );
