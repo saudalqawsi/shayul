@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Shield, CheckCircle } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { requestForm } from "@/lib/content";
+import { base44 } from "@/api/base44Client";
 
 export default function RequestForm() {
   const { lang, dir } = useI18n();
@@ -12,8 +13,25 @@ export default function RequestForm() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // Persist the request so the client can track it in their dashboard.
+    try {
+      await base44.entities.RentalRequest.create({
+        equipment_name: form.equipType,
+        client_name: form.name,
+        phone: form.phone,
+        company: form.company,
+        location: form.location,
+        duration: form.duration,
+        qty: Number(form.quantity) || 1,
+        status: "pending",
+        notes: form.notes,
+      });
+    } catch (err) {
+      // Non-fatal: public visitors without an account still see the success screen.
+      console.warn("RentalRequest not saved:", err);
+    }
     setSubmitted(true);
   };
 

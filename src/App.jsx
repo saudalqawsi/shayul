@@ -10,6 +10,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import ProviderPortal from './pages/ProviderPortal';
+import ClientDashboard from './pages/ClientDashboard';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -40,6 +41,7 @@ const AuthenticatedApp = () => {
       <Route path="/" element={<Home />} />
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
         <Route path="/provider" element={<ProviderPortal />} />
+        <Route path="/dashboard" element={<ClientDashboard />} />
       </Route>
       {/* Add your page Route elements here */}
       <Route path="*" element={<PageNotFound />} />
