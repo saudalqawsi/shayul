@@ -21,7 +21,7 @@ export default function Coverflow({ items }) {
   if (!total) return null;
   const eq = items[active];
 
-  const go = (d) => setActive((a) => Math.min(total - 1, Math.max(0, a + d)));
+  const go = (d) => setActive((a) => (a + d + total) % total);
 
   const specEntries = Object.entries(eq.specs || {});
   const weekly = Math.round(eq.daily * 6);
@@ -115,7 +115,6 @@ export default function Coverflow({ items }) {
       <button
         type="button"
         onClick={() => go(-1)}
-        disabled={active === 0}
         aria-label="Previous"
         className="flex absolute top-[170px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] disabled:opacity-20 disabled:pointer-events-none transition-colors"
       >
@@ -124,7 +123,6 @@ export default function Coverflow({ items }) {
       <button
         type="button"
         onClick={() => go(1)}
-        disabled={active === total - 1}
         aria-label="Next"
         className="flex absolute top-[170px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] disabled:opacity-20 disabled:pointer-events-none transition-colors"
       >

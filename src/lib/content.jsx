@@ -258,14 +258,14 @@ export const equipment = [
     tag: { ar: "دفع مقدّم", en: "Prepayment Required" },
   },
   {
-    name: { ar: "فوركلفت", en: "Telehandler" },
-    nameAlt: { ar: "Telehandler", en: "فوركلفت" },
+    name: { ar: "تليهاندلر", en: "Telehandler" },
+    nameAlt: { ar: "Telehandler", en: "تليهاندلر" },
     specs: {
       weight: { ar: "١٨ طن", en: "18 T" },
     },
     daily: 1000,
     monthly: null,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/648246f79_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/020dc4771_generated_image.png",
     tag: { ar: "للمشاريع الكبرى", en: "For Major Projects" },
   },
 ];
@@ -445,7 +445,7 @@ export const pricing = {
       items: [
         { name: { ar: "قريدر G14", en: "Motor Grader G14" }, daily: 1500, monthly: 28000, note: null },
         { name: { ar: "بلدوزر 800-D9", en: "Bulldozer 800-D9" }, daily: 3000, monthly: null, note: { ar: "يُشترط الدفع المقدّم", en: "Prepayment required" } },
-        { name: { ar: "فوركلفت", en: "Telehandler" }, daily: 1000, monthly: null, note: null },
+        { name: { ar: "تليهاندلر", en: "Telehandler" }, daily: 1000, monthly: null, note: null },
       ],
     },
   ],
