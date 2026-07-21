@@ -160,6 +160,9 @@ export default function Coverflow({ items }) {
                       </span>
                     </div>
                   )}
+                  <div className="absolute top-3 start-3">
+                    <EquipmentIcon name={it.name.en} size={32} theme="dark" />
+                  </div>
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <p className="text-[10px] tracking-[0.18em] uppercase mb-1 text-[#FCD34D] font-medium">{it.nameAlt[lang]}</p>
                     <h3 className="text-white font-bold text-lg leading-tight">{it.name[lang]}</h3>
@@ -169,9 +172,6 @@ export default function Coverflow({ items }) {
                         .map(([, v]) => v[lang])
                         .join(" · ")}
                     </p>
-                    <div className="flex justify-center my-2">
-                      <EquipmentIcon name={it.name.en} size={28} theme="dark" />
-                    </div>
                     <div className="flex items-end justify-between gap-2 mt-2.5 pt-2.5 border-t border-white/15">
                       <div className="flex items-end gap-1">
                         <span className="text-[#FCD34D] font-bold font-mono text-base">{num(it.daily)}</span>
