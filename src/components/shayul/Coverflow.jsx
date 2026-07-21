@@ -54,7 +54,7 @@ export default function Coverflow({ items }) {
                 marginLeft: -CARD_W / 2,
                 transform: `translateX(${x}px) scale(${scale}) rotateY(${rotY}deg)`,
                 opacity,
-                zIndex: 50 - abs,
+                zIndex: 10 - abs,
                 pointerEvents: abs > 2 ? "none" : "auto",
                 transformOrigin: "center center",
               }}
@@ -107,7 +107,7 @@ export default function Coverflow({ items }) {
         onClick={() => go(-1)}
         disabled={active === 0}
         aria-label="Previous"
-        className="flex absolute top-[170px] -translate-y-1/2 start-0 z-[60] items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] disabled:opacity-20 disabled:pointer-events-none transition-colors"
+        className="flex absolute top-[170px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] disabled:opacity-20 disabled:pointer-events-none transition-colors"
       >
         <ChevronLeft size={18} />
       </button>
@@ -116,7 +116,7 @@ export default function Coverflow({ items }) {
         onClick={() => go(1)}
         disabled={active === total - 1}
         aria-label="Next"
-        className="flex absolute top-[170px] -translate-y-1/2 end-0 z-[60] items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] disabled:opacity-20 disabled:pointer-events-none transition-colors"
+        className="flex absolute top-[170px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] disabled:opacity-20 disabled:pointer-events-none transition-colors"
       >
         <ChevronRight size={18} />
       </button>
