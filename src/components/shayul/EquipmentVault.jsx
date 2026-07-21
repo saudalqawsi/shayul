@@ -1,8 +1,44 @@
-import React, { useState, useRef } from "react";
-import { Shield, ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useState, useMemo } from "react";
+import { Shield, SlidersHorizontal, X, RotateCcw } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
 import { equipment, equipmentVault } from "@/lib/content";
+
+// Pull the first number out of a localized spec string ("18 T", "250 HP", ...)
+const numFrom = (s) => {
+  const m = String(s ?? "").replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).match(/[\d.]+/);
+  return m ? parseFloat(m[0]) : null;
+};
+
+const WEIGHT_BUCKETS = [
+  { value: "", ar: "الكل", en: "All" },
+  { value: "s", ar: "حتى ١٠ طن", en: "Up to 10 T" },
+  { value: "m", ar: "١٠ – ٢٥ طن", en: "10 – 25 T" },
+  { value: "l", ar: "فوق ٢٥ طن", en: "Over 25 T" },
+];
+const POWER_BUCKETS = [
+  { value: "", ar: "الكل", en: "All" },
+  { value: "s", ar: "حتى ١٠٠ حصان", en: "Up to 100 HP" },
+  { value: "m", ar: "١٠٠ – ٢٥٠ حصان", en: "100 – 250 HP" },
+  { value: "l", ar: "فوق ٢٥٠ حصان", en: "Over 250 HP" },
+];
+
+function weightOk(n, b) {
+  if (!b) return true;
+  if (n === null) return false;
+  if (b === "s") return n <= 10;
+  if (b === "m") return n > 10 && n <= 25;
+  if (b === "l") return n > 25;
+  return true;
+}
+function powerOk(n, b) {
+  if (!b) return true;
+  if (n === null) return false;
+  if (b === "s") return n <= 100;
+  if (b === "m") return n > 100 && n <= 250;
+  if (b === "l") return n > 250;
+  return true;
+}
 
 function EquipCard({ eq }) {
   const { lang, num, dir } = useI18n();
@@ -10,14 +46,12 @@ function EquipCard({ eq }) {
 
   return (
     <div
-      className="relative snap-start flex-shrink-0 w-[86vw] sm:w-[440px] md:w-[540px] lg:w-[600px] bg-[#0d2240] border border-white/10 rounded-sm overflow-hidden group cursor-pointer"
-      data-card
+      className="relative w-full bg-[#0d2240] border border-white/10 rounded-sm overflow-hidden group cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       dir={dir}
     >
-      {/* Image */}
-      <div className="relative h-60 md:h-72 overflow-hidden">
+      <div className="relative h-52 overflow-hidden">
         <Image
           src={eq.img}
           alt={eq.name[lang]}
@@ -27,33 +61,18 @@ function EquipCard({ eq }) {
           focalPointY={0.5}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d2240] via-transparent to-transparent" />
-
-        {/* Tag */}
-        <div className="absolute top-3 right-3 bg-[#0A1A30]/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white/70 border border-white/10">
+        <div className="absolute top-3 end-3 bg-[#0A1A30]/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white/70 border border-white/10">
           {eq.tag[lang]}
         </div>
-
-        {/* Ready badge */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-[#0A1A30]/80 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+        <div className="absolute top-3 start-3 flex items-center gap-1.5 bg-[#0A1A30]/80 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
           <span className="w-1.5 h-1.5 rounded-full bg-[#009466]" />
           <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
         </div>
-
-        {/* Dimension lines on hover */}
-        {hovered && (
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-4 right-4 h-px bg-[#009466]/40 border-t border-dashed border-[#009466]/40" />
-            <div className="absolute top-4 bottom-4 left-1/2 w-px bg-[#009466]/40 border-l border-dashed border-[#009466]/40" />
-            <div className="absolute top-4 left-6 text-[#009466] text-xs font-mono">H: {eq.specs.weight[lang]}</div>
-          </div>
-        )}
       </div>
 
-      {/* Quick Spec Overlay on hover */}
+      {/* hover spec overlay */}
       <div
-        className={`absolute bottom-0 left-0 right-0 bg-[#009466] transition-all duration-300 ${
-          hovered ? "h-28" : "h-0"
-        } overflow-hidden`}
+        className={`absolute bottom-0 start-0 end-0 bg-[#009466] transition-all duration-300 ${hovered ? "h-28" : "h-0"} overflow-hidden`}
       >
         <div className="p-4">
           <div className="grid grid-cols-3 gap-2 mb-3">
@@ -70,7 +89,6 @@ function EquipCard({ eq }) {
         </div>
       </div>
 
-      {/* Card Body */}
       <div className={`p-5 transition-all duration-300 ${hovered ? "mb-28" : ""}`}>
         <div className="mb-1">
           <h3 className="text-white font-bold text-lg">{eq.name[lang]}</h3>
@@ -79,12 +97,12 @@ function EquipCard({ eq }) {
         <div className="flex items-end justify-between mt-3">
           <div>
             <span className="text-[#009466] font-bold text-2xl font-mono">{num(eq.daily)}</span>
-            <span className="text-white/40 text-sm mr-1">{equipmentVault.perDay[lang]}</span>
+            <span className="text-white/40 text-sm ms-1">{equipmentVault.perDay[lang]}</span>
           </div>
           {eq.monthly !== null && (
             <div className="text-white/30 text-sm">
               <span className="font-mono">{num(eq.monthly)}</span>
-              <span className="mr-1 text-xs">{equipmentVault.monthlyShort[lang]}</span>
+              <span className="ms-1 text-xs">{equipmentVault.monthlyShort[lang]}</span>
             </div>
           )}
         </div>
@@ -93,86 +111,199 @@ function EquipCard({ eq }) {
   );
 }
 
+function Chips({ options, value, onChange, lang }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {options.map((o) => {
+        const active = o.value === value;
+        return (
+          <button
+            key={o.value || "all"}
+            onClick={() => onChange(o.value)}
+            className={`px-3 py-1.5 rounded-sm text-xs font-bold border transition-colors ${
+              active
+                ? "bg-[#009466] border-[#009466] text-white"
+                : "bg-white/5 border-white/10 text-white/55 hover:border-white/25 hover:text-white/80"
+            }`}
+          >
+            {o[lang]}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function EquipmentVault() {
   const { lang, dir } = useI18n();
-  const scrollRef = useRef(null);
+  const [weight, setWeight] = useState("");
+  const [power, setPower] = useState("");
+  const [size, setSize] = useState("");
+  const [openMobile, setOpenMobile] = useState(false);
 
-  const scroll = (dirAmt) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const card = el.querySelector("[data-card]");
-    const amount = card ? card.offsetWidth + 20 : 560;
-    el.scrollBy({ left: dirAmt * amount, behavior: "smooth" });
+  const sizes = useMemo(() => {
+    const seen = [];
+    equipment.forEach((eq) => {
+      const key = eq.specs.size.en;
+      if (!seen.find((s) => s.key === key)) seen.push({ key, label: eq.specs.size[lang] });
+    });
+    return seen;
+  }, [lang]);
+
+  const filtered = useMemo(() => {
+    return equipment.filter((eq) => {
+      const tons = numFrom(eq.specs.weight.en);
+      const hp = numFrom(eq.specs.hp.en);
+      return (
+        weightOk(tons, weight) &&
+        powerOk(hp, power) &&
+        (!size || eq.specs.size.en === size)
+      );
+    });
+  }, [weight, power, size]);
+
+  const activeCount = [weight, power, size].filter(Boolean).length;
+  const reset = () => { setWeight(""); setPower(""); setSize(""); };
+
+  const labels = {
+    filters: { ar: "تصفية النتائج", en: "Filter Results" },
+    clear: { ar: "مسح", en: "Clear" },
+    weight: { ar: "الوزن (طن)", en: "Weight (T)" },
+    power: { ar: "القدرة (حصان)", en: "Power (HP)" },
+    size: { ar: "المقاس", en: "Size" },
+    sizeAll: { ar: "كل المقاسات", en: "All sizes" },
+    results: (n) => ({ ar: `${n} معدة`, en: `${n} units` }),
+    empty: { ar: "لا توجد معدات مطابقة — جرّب توسيع التصفية.", en: "No matching units — try widening the filters." },
+    reset: { ar: "إعادة ضبط", en: "Reset" },
   };
+
+  const aside = (
+    <div className="bg-[#0d2240] border border-white/10 rounded-sm p-5">
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-2 text-white font-bold text-sm">
+          <SlidersHorizontal size={15} className="text-[#009466]" />
+          {labels.filters[lang]}
+          {activeCount > 0 && (
+            <span className="text-[10px] font-mono bg-[#009466]/15 text-[#009466] px-1.5 py-0.5 rounded-full">{activeCount}</span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          {activeCount > 0 && (
+            <button onClick={reset} className="inline-flex items-center gap-1 text-white/45 hover:text-white text-[11px]">
+              <RotateCcw size={12} /> {labels.reset[lang]}
+            </button>
+          )}
+          <button onClick={() => setOpenMobile(false)} className="lg:hidden text-white/40 hover:text-white">
+            <X size={16} />
+          </button>
+        </div>
+      </div>
+
+      {/* Weight */}
+      <div className="mb-6">
+        <div className="text-white/50 text-xs font-bold tracking-wide uppercase mb-2.5">{labels.weight[lang]}</div>
+        <Chips options={WEIGHT_BUCKETS} value={weight} onChange={setWeight} lang={lang} />
+      </div>
+      {/* Power */}
+      <div className="mb-6">
+        <div className="text-white/50 text-xs font-bold tracking-wide uppercase mb-2.5">{labels.power[lang]}</div>
+        <Chips options={POWER_BUCKETS} value={power} onChange={setPower} lang={lang} />
+      </div>
+      {/* Size */}
+      <div>
+        <div className="text-white/50 text-xs font-bold tracking-wide uppercase mb-2.5">{labels.size[lang]}</div>
+        <div className="relative">
+          <select
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+            className="w-full bg-white/5 border border-white/15 rounded-sm px-3 py-2.5 text-white text-sm appearance-none focus:outline-none focus:border-[#009466]"
+          >
+            <option value="" className="bg-[#0d2240]">{labels.sizeAll[lang]}</option>
+            {sizes.map((s) => (
+              <option key={s.key} value={s.key} className="bg-[#0d2240]">{s.label}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section id="equipment" className="py-24 bg-[#081626] relative" dir={dir}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 mb-10">
-        <div className="flex items-end justify-between">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <div className="mb-10 flex items-end justify-between gap-4 flex-wrap">
           <div>
             <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
               {equipmentVault.eyebrow[lang]}
             </p>
-            <h2
-              className="text-white font-bold leading-tight"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}
-            >
+            <h2 className="text-white font-bold leading-tight" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}>
               {equipmentVault.title1[lang]}
               <br />
               <span className="text-white/40">{equipmentVault.title2[lang]}</span>
             </h2>
           </div>
+          <button
+            onClick={() => setOpenMobile(true)}
+            className="lg:hidden inline-flex items-center gap-2 bg-white/5 border border-white/15 rounded-sm px-4 py-2.5 text-white text-sm font-bold"
+          >
+            <SlidersHorizontal size={15} /> {labels.filters[lang]}
+            {activeCount > 0 && <span className="bg-[#009466] text-white text-[10px] px-1.5 rounded-full">{activeCount}</span>}
+          </button>
         </div>
-      </div>
 
-      {/* Horizontal Scroll — peek next/prev */}
-      <div className="relative">
-        {/* Edge fades — darker on both sides */}
-        <div className="absolute top-0 bottom-4 left-0 w-24 md:w-40 bg-gradient-to-r from-[#081626] via-[#081626]/85 to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 bottom-4 right-0 w-24 md:w-40 bg-gradient-to-l from-[#081626] via-[#081626]/85 to-transparent pointer-events-none z-10" />
+        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
+          {/* Sidebar (sticky on desktop) */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-24">{aside}</div>
+          </aside>
 
-        {/* Arrows within the equipment thumbnail */}
-        <button
-          onClick={() => scroll(1)}
-          className="absolute left-4 md:left-6 top-[120px] md:top-[144px] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A1A30]/70 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-[#009466] hover:border-[#009466] transition-colors"
-        >
-          <ChevronLeft size={20} />
-        </button>
-        <button
-          onClick={() => scroll(-1)}
-          className="absolute right-4 md:right-6 top-[120px] md:top-[144px] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A1A30]/70 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-[#009466] hover:border-[#009466] transition-colors"
-        >
-          <ChevronRight size={20} />
-        </button>
-
-        <div
-          ref={scrollRef}
-          className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
-          style={{
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            paddingLeft: "max(1.5rem, calc((100% - 80rem) / 2 + 1.5rem))",
-            paddingRight: "max(1.5rem, calc((100% - 80rem) / 2 + 1.5rem))",
-          }}
-        >
-          {equipment.map((eq) => (
-            <EquipCard key={eq.name.en} eq={eq} />
-          ))}
-          {/* CTA Card */}
-          <div className="snap-start flex-shrink-0 w-[86vw] sm:w-[440px] md:w-[540px] lg:w-[600px] bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center">
-            <div className="w-14 h-14 bg-[#009466]/20 rounded-sm flex items-center justify-center mb-4">
-              <Shield size={28} className="text-[#009466]" />
+          {/* Mobile drawer */}
+          {openMobile && (
+            <div className="lg:hidden fixed inset-0 z-50 bg-black/60" onClick={() => setOpenMobile(false)}>
+              <div
+                className="absolute end-0 top-0 bottom-0 w-72 max-w-[85vw] bg-[#081626] border-s border-white/10 p-4 overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {aside}
+              </div>
             </div>
-            <h3 className="text-white font-bold text-lg mb-2">{equipmentVault.ctaTitle[lang]}</h3>
-            <p className="text-white/40 text-sm mb-5 leading-relaxed">{equipmentVault.ctaDesc[lang]}</p>
-            <a
-              href="#request"
-              className="bg-[#009466] hover:bg-[#007a54] text-white px-6 py-2.5 rounded-sm text-sm font-bold transition-colors"
-            >
-              {equipmentVault.ctaBtn[lang]}
-            </a>
+          )}
+
+          {/* Catalog */}
+          <div>
+            <div className="text-white/45 text-sm mb-4 font-mono">
+              {labels.results(filtered.length)[lang]}
+            </div>
+
+            {filtered.length === 0 ? (
+              <div className="bg-[#0d2240] border border-white/10 border-dashed rounded-sm py-16 text-center">
+                <Shield size={28} className="text-white/30 mx-auto mb-3" />
+                <p className="text-white/50 text-sm">{labels.empty[lang]}</p>
+                <button onClick={reset} className="mt-4 text-[#009466] text-sm font-bold hover:underline">
+                  {labels.reset[lang]}
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+                {filtered.map((eq) => (
+                  <EquipCard key={eq.name.en} eq={eq} />
+                ))}
+                {/* CTA card */}
+                <div className="bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center">
+                  <div className="w-14 h-14 bg-[#009466]/20 rounded-sm flex items-center justify-center mb-4">
+                    <Shield size={28} className="text-[#009466]" />
+                  </div>
+                  <h3 className="text-white font-bold text-lg mb-2">{equipmentVault.ctaTitle[lang]}</h3>
+                  <p className="text-white/40 text-sm mb-5 leading-relaxed">{equipmentVault.ctaDesc[lang]}</p>
+                  <a href="#request" className="bg-[#009466] hover:bg-[#007a54] text-white px-6 py-2.5 rounded-sm text-sm font-bold transition-colors">
+                    {equipmentVault.ctaBtn[lang]}
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
