@@ -21,7 +21,7 @@ const GROUPS = [
   },
   {
     key: "other",
-    title: { ar: "معدات إضافية", en: "Other Equipment" },
+    title: { ar: "معدات أخرى", en: "Other Equipment" },
     subtitle: { ar: "للأعمال المتخصصة", en: "For specialized work" },
     order: ["Bobcat Trencher", "Bobcat Sweeper", "Bobcat Cutter", "JCB — Backhoe", "Motor Grader G14", "Bulldozer 800-D9"],
   },
