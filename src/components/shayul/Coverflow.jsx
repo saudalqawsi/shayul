@@ -7,6 +7,9 @@ import Riyal from "@/components/shayul/Riyal";
 
 const CARD_W = 260;
 const CARD_H = 320;
+// Minimum virtual slots on the ring so even tiny carousels (e.g. 2 cards)
+// spread neighbours out and rotate like the multi-card sections.
+const MIN_SLOTS = 6;
 
 // Normalise an angle (degrees) to the shortest representation in [-180, 180].
 function norm(a) {
@@ -16,21 +19,41 @@ function norm(a) {
   return r;
 }
 
+// Build a virtual ring of slots. When there are fewer items than MIN_SLOTS,
+// the items are repeated around the ring so the carousel still rotates with
+// neighbours visible — the same motion as the bigger sections. Each slot has
+// { item, origIdx, slot } where `origIdx` is the index in the original list.
+function buildSlots(items) {
+  const n = items.length;
+  if (!n) return [];
+  let repeat = 1;
+  while (n * repeat < MIN_SLOTS) repeat += 1;
+  const slots = [];
+  for (let r = 0; r < repeat; r += 1) {
+    for (let i = 0; i < n; i += 1) {
+      slots.push({ item: items[i], origIdx: i, slot: slots.length });
+    }
+  }
+  return slots;
+}
+
 /**
  * Coverflow carousel — a true circular ring. Cards are evenly placed around
  * a vertical axis and the whole ring rotates as one; there is no "first" or
  * "last" card, so scrolling loops endlessly and smoothly in both directions.
- * `active` is an unbounded rotation index; the visible card is `active % N`.
+ * `active` is an unbounded virtual-slot index; the visible card is
+ * `slots[active % slots.length]`.
  */
 export default function Coverflow({ items }) {
   const { lang, num } = useI18n();
   const [active, setActive] = useState(0);
   const touchX = useRef(null);
-  const total = items.length;
+  const slots = buildSlots(items);
+  const total = slots.length;
 
   if (!total) return null;
 
-  const step = total > 1 ? 360 / total : 360; // spacing between cards (deg)
+  const step = total > 1 ? 360 / total : 360; // spacing between slots (deg)
   // Radius of the ring: cards just touch at the front, plus a little depth.
   const R =
     total > 1 && step < 180
@@ -38,15 +61,25 @@ export default function Coverflow({ items }) {
       : 0;
 
   const activeIdx = ((active % total) + total) % total;
-  const eq = items[activeIdx];
+  const eq = slots[activeIdx].item;
+  const activeOrig = slots[activeIdx].origIdx;
 
   const go = (d) => setActive((a) => a + d);
-  const goToCard = (i) => {
-    const delta = i - activeIdx;
-    let best = delta;
-    if (Math.abs(delta + total) < Math.abs(best)) best = delta + total;
-    if (Math.abs(delta - total) < Math.abs(best)) best = delta - total;
-    setActive((a) => a + best);
+
+  // Centre the nearest virtual slot whose original index matches `origI`.
+  const goToOrig = (origI) => {
+    setActive((a) => {
+      const curr = ((a % total) + total) % total;
+      let bestDelta = Infinity;
+      slots.forEach((v, idx) => {
+        if (v.origIdx !== origI) return;
+        let delta = idx - curr;
+        if (Math.abs(delta + total) < Math.abs(delta)) delta += total;
+        if (Math.abs(delta - total) < Math.abs(delta)) delta -= total;
+        if (Math.abs(delta) < Math.abs(bestDelta)) bestDelta = delta;
+      });
+      return a + (bestDelta === Infinity ? 0 : bestDelta);
+    });
   };
 
   const specEntries = Object.entries(eq.specs || {});
@@ -74,7 +107,8 @@ export default function Coverflow({ items }) {
             transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1)",
           }}
         >
-          {items.map((it, i) => {
+          {slots.map((slot, i) => {
+            const it = slot.item;
             const rel = norm(i * step - active * step);
             const abs = Math.abs(rel);
             const visible = abs <= 115;
@@ -85,9 +119,9 @@ export default function Coverflow({ items }) {
 
             return (
               <button
-                key={it.name.en}
+                key={slot.slot}
                 type="button"
-                onClick={() => clickable && goToCard(i)}
+                onClick={() => clickable && setActive(slot.slot)}
                 className="absolute top-1/2"
                 style={{
                   left: "50%",
@@ -170,15 +204,15 @@ export default function Coverflow({ items }) {
         <ChevronRight size={18} />
       </button>
 
-      {/* counters / dots (mobile) */}
+      {/* counters / dots — one per original card */}
       <div className="flex items-center justify-center gap-2 mt-2">
         {items.map((it, i) => (
           <button
             key={it.name.en}
             type="button"
-            onClick={() => goToCard(i)}
+            onClick={() => goToOrig(i)}
             aria-label={it.name[lang]}
-            className={`h-1.5 rounded-full transition-all ${i === activeIdx ? "w-8 bg-[#A6845B]" : "w-3 bg-white/20"}`}
+            className={`h-1.5 rounded-full transition-all ${i === activeOrig ? "w-8 bg-[#A6845B]" : "w-3 bg-white/20"}`}
           />
         ))}
       </div>

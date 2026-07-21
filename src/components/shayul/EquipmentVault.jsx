@@ -15,15 +15,15 @@ const GROUPS = [
   },
   {
     key: "forklifts",
-    title: { ar: "فوركلفت", en: "Forklifts" },
-    subtitle: { ar: "للرفع والمناولة", en: "For lifting and handling" },
-    order: ["JCB — Forklift", "Telehandler"],
+    title: { ar: "بوكلين", en: "Forklifts" },
+    subtitle: { ar: "بوكلين صناعي وكسّارة", en: "Industrial forklifts & crushers" },
+    order: ["Excavator", "Crusher Excavator"],
   },
   {
     key: "other",
     title: { ar: "معدات أخرى", en: "Other Equipment" },
-    subtitle: { ar: "حفّارات ومعدات متخصصة", en: "Excavators and specialized units" },
-    order: ["Excavator", "Crusher Excavator", "Bobcat Trencher", "Bobcat Sweeper", "Bobcat Cutter", "JCB — Backhoe", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller"],
+    subtitle: { ar: "JCB وتليهاندلر ومعدات متخصصة", en: "JCB, telehandlers, and specialized units" },
+    order: ["JCB — Forklift", "Telehandler", "JCB — Backhoe", "Bobcat Trencher", "Bobcat Sweeper", "Bobcat Cutter", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller"],
   },
 ];
 
