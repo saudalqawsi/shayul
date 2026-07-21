@@ -1,33 +1,33 @@
-import React, { useState, useMemo } from "react";
-import { Shield, SlidersHorizontal, X, RotateCcw } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
 import { equipment, equipmentVault } from "@/lib/content";
 import RentalCalculator from "@/components/shayul/RentalCalculator";
 
-// Pull the first number out of a localized spec string ("18 T", "250 HP", ...)
-const numFrom = (s) => {
-  const m = String(s ?? "").replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).match(/[\d.]+/);
-  return m ? parseFloat(m[0]) : null;
-};
-
-const WEIGHT_BUCKETS = [
-  { value: "", ar: "الكل", en: "All" },
-  { value: "s", ar: "حتى ١٠ طن", en: "Up to 10 T" },
-  { value: "m", ar: "١٠ – ٢٥ طن", en: "10 – 25 T" },
-  { value: "l", ar: "فوق ٢٥ طن", en: "Over 25 T" },
+// Equipment grouped into carousels by family.
+const GROUPS = [
+  {
+    key: "loaders",
+    title: { ar: "الشيولات", en: "Loaders" },
+    subtitle: { ar: "حسب المقاس والوزن", en: "By size and weight" },
+    order: ["Loader Size 36", "Loader Size 50", "Loader Size 66", "Loader Size 80", "Loader 920"],
+  },
+  {
+    key: "forklifts",
+    title: { ar: "الفوركلفتات", en: "Forklifts" },
+    subtitle: { ar: "بأشكال وأحجام متنوّعة", en: "In multiple forms and sizes" },
+    order: ["JCB — Forklift", "Forklift", "Crusher Forklift", "Telehandler"],
+  },
+  {
+    key: "other",
+    title: { ar: "معدات إضافية", en: "Other Equipment" },
+    subtitle: { ar: "للأعمال المتخصصة", en: "For specialized work" },
+    order: ["Bobcat Trencher", "Bobcat Sweeper", "Bobcat Cutter", "JCB — Backhoe", "Motor Grader G14", "Bulldozer 800-D9"],
+  },
 ];
 
-
-function weightOk(n, b) {
-  if (!b) return true;
-  if (n === null) return false;
-  if (b === "s") return n <= 10;
-  if (b === "m") return n > 10 && n <= 25;
-  if (b === "l") return n > 25;
-  return true;
-}
-
+const findEq = (nameEn) => equipment.find((e) => e.name.en === nameEn);
 
 function EquipCard({ eq }) {
   const { lang, num, dir } = useI18n();
@@ -115,111 +115,53 @@ function CtaCard() {
   );
 }
 
-function Chips({ options, value, onChange, lang }) {
+function Carousel({ items, withCta }) {
+  const trackRef = useRef(null);
+  const scroll = (delta) => trackRef.current?.scrollBy({ left: delta, behavior: "smooth" });
+
   return (
-    <div className="flex flex-wrap gap-2">
-      {options.map((o) => {
-        const active = o.value === value;
-        return (
-          <button
-            key={o.value || "all"}
-            onClick={() => onChange(o.value)}
-            className={`px-3 py-1.5 rounded-sm text-xs font-bold border transition-colors ${
-              active
-                ? "bg-[#009466] border-[#009466] text-white"
-                : "bg-white/5 border-white/10 text-white/55 hover:border-white/25 hover:text-white/80"
-            }`}
-          >
-            {o[lang]}
-          </button>
-        );
-      })}
+    <div className="relative group/carousel">
+      <div
+        ref={trackRef}
+        className="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
+      >
+        {items.map((eq) => (
+          <div key={eq.name.en} className="w-[78vw] sm:w-[300px] shrink-0 snap-start">
+            <EquipCard eq={eq} />
+          </div>
+        ))}
+        {withCta && (
+          <div className="w-[78vw] sm:w-[300px] shrink-0 snap-start">
+            <CtaCard />
+          </div>
+        )}
+      </div>
+
+      {/* nav arrows (desktop) */}
+      <button
+        onClick={() => scroll(-340)}
+        aria-label="Previous"
+        className="hidden md:flex absolute -start-3 top-1/2 -translate-y-1/2 w-9 h-9 items-center justify-center rounded-full bg-[#0d2240] border border-white/15 text-white/70 hover:text-white hover:border-white/40 opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+      >
+        <ChevronLeft size={18} />
+      </button>
+      <button
+        onClick={() => scroll(340)}
+        aria-label="Next"
+        className="hidden md:flex absolute -end-3 top-1/2 -translate-y-1/2 w-9 h-9 items-center justify-center rounded-full bg-[#0d2240] border border-white/15 text-white/70 hover:text-white hover:border-white/40 opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+      >
+        <ChevronRight size={18} />
+      </button>
     </div>
   );
 }
 
 export default function EquipmentVault() {
   const { lang, dir } = useI18n();
-  const [weight, setWeight] = useState("");
-  const [size, setSize] = useState("");
-  const [openMobile, setOpenMobile] = useState(false);
-
-  const sizes = useMemo(() => {
-    const seen = [];
-    equipment.forEach((eq) => {
-      if (!eq.specs?.size) return;
-      const key = eq.specs.size.en;
-      if (!seen.find((s) => s.key === key)) seen.push({ key, label: eq.specs.size[lang] });
-    });
-    return seen;
-  }, [lang]);
-
-  const filtered = useMemo(() => {
-    return equipment.filter((eq) => {
-      const tons = numFrom(eq.specs.weight.en);
-      return weightOk(tons, weight) && (!size || eq.specs.size.en === size);
-    });
-  }, [weight, size]);
-
-  const activeCount = [weight, size].filter(Boolean).length;
-  const reset = () => { setWeight(""); setSize(""); };
 
   const labels = {
-    filters: { ar: "تصفية النتائج", en: "Filter Results" },
-    clear: { ar: "مسح", en: "Clear" },
-    weight: { ar: "الوزن (طن)", en: "Weight (T)" },
-    size: { ar: "المقاس", en: "Size" },
-    sizeAll: { ar: "كل المقاسات", en: "All sizes" },
-    results: (n) => ({ ar: `${n} معدة`, en: `${n} units` }),
-    empty: { ar: "لا توجد معدات مطابقة — جرّب توسيع التصفية.", en: "No matching units — try widening the filters." },
-    reset: { ar: "إعادة ضبط", en: "Reset" },
+    count: (n) => ({ ar: `${n} معدة`, en: `${n} units` }),
   };
-
-  const aside = (
-    <div className="bg-[#0d2240] border border-white/10 rounded-sm p-5">
-      <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center gap-2 text-white font-bold text-sm">
-          <SlidersHorizontal size={15} className="text-[#009466]" />
-          {labels.filters[lang]}
-          {activeCount > 0 && (
-            <span className="text-[10px] font-mono bg-[#009466]/15 text-[#009466] px-1.5 py-0.5 rounded-full">{activeCount}</span>
-          )}
-        </div>
-        <div className="flex items-center gap-2">
-          {activeCount > 0 && (
-            <button onClick={reset} className="inline-flex items-center gap-1 text-white/45 hover:text-white text-[11px]">
-              <RotateCcw size={12} /> {labels.reset[lang]}
-            </button>
-          )}
-          <button onClick={() => setOpenMobile(false)} className="lg:hidden text-white/40 hover:text-white">
-            <X size={16} />
-          </button>
-        </div>
-      </div>
-
-      {/* Weight */}
-      <div className="mb-6">
-        <div className="text-white/50 text-xs font-bold tracking-wide uppercase mb-2.5">{labels.weight[lang]}</div>
-        <Chips options={WEIGHT_BUCKETS} value={weight} onChange={setWeight} lang={lang} />
-      </div>
-      {/* Size */}
-      <div>
-        <div className="text-white/50 text-xs font-bold tracking-wide uppercase mb-2.5">{labels.size[lang]}</div>
-        <div className="relative">
-          <select
-            value={size}
-            onChange={(e) => setSize(e.target.value)}
-            className="w-full bg-white/5 border border-white/15 rounded-sm px-3 py-2.5 text-white text-sm appearance-none focus:outline-none focus:border-[#009466]"
-          >
-            <option value="" className="bg-[#0d2240]">{labels.sizeAll[lang]}</option>
-            {sizes.map((s) => (
-              <option key={s.key} value={s.key} className="bg-[#0d2240]">{s.label}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <section id="equipment" className="py-24 bg-[#081626] relative" dir={dir}>
@@ -227,89 +169,38 @@ export default function EquipmentVault() {
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="mb-10 flex items-end justify-between gap-4 flex-wrap">
-          <div>
-            <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
-              {equipmentVault.eyebrow[lang]}
-            </p>
-            <h2 className="text-white font-bold leading-tight" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}>
-              {equipmentVault.title1[lang]}
-              <br />
-              <span className="text-white/40">{equipmentVault.title2[lang]}</span>
-            </h2>
-          </div>
-          <div className="lg:hidden text-white/45 text-xs font-mono">{labels.results(filtered.length)[lang]}</div>
+        <div className="mb-12">
+          <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
+            {equipmentVault.eyebrow[lang]}
+          </p>
+          <h2 className="text-white font-bold leading-tight" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}>
+            {equipmentVault.title1[lang]}
+            <br />
+            <span className="text-white/40">{equipmentVault.title2[lang]}</span>
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
-          {/* Sidebar (sticky on desktop) */}
-          <aside className="hidden lg:block">
-            <div className="sticky top-24">{aside}</div>
-          </aside>
-
-          {/* Mobile drawer */}
-          {openMobile && (
-            <div className="lg:hidden fixed inset-0 z-50 bg-black/60" onClick={() => setOpenMobile(false)}>
-              <div
-                className="absolute end-0 top-0 bottom-0 w-72 max-w-[85vw] bg-[#081626] border-s border-white/10 p-4 overflow-y-auto"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {aside}
-              </div>
-            </div>
-          )}
-
-          {/* Catalog */}
-          <div>
-            <div className="hidden sm:block text-white/45 text-sm mb-4 font-mono">
-              {labels.results(filtered.length)[lang]}
-            </div>
-
-            {filtered.length === 0 ? (
-              <div className="bg-[#0d2240] border border-white/10 border-dashed rounded-sm py-16 text-center">
-                <Shield size={28} className="text-white/30 mx-auto mb-3" />
-                <p className="text-white/50 text-sm">{labels.empty[lang]}</p>
-                <button onClick={reset} className="mt-4 text-[#009466] text-sm font-bold hover:underline">
-                  {labels.reset[lang]}
-                </button>
-              </div>
-            ) : (
-              <>
-                {/* mobile swipe carousel */}
-                <div className="sm:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                  {filtered.map((eq) => (
-                    <div key={eq.name.en} className="w-[78vw] shrink-0 snap-start">
-                      <EquipCard eq={eq} />
-                    </div>
-                  ))}
-                  <div className="w-[78vw] shrink-0 snap-start">
-                    <CtaCard />
+        <div className="space-y-14">
+          {GROUPS.map((g, i) => {
+            const items = g.order.map(findEq).filter(Boolean);
+            const isLast = i === GROUPS.length - 1;
+            return (
+              <div key={g.key}>
+                <div className="flex items-end justify-between mb-6 pb-3 border-b border-white/10">
+                  <div>
+                    <h3 className="text-white font-bold text-2xl">{g.title[lang]}</h3>
+                    <p className="text-white/40 text-sm mt-1">{g.subtitle[lang]}</p>
                   </div>
+                  <span className="text-white/30 text-xs font-mono">{labels.count(items.length)[lang]}</span>
                 </div>
-
-                {/* desktop grid */}
-                <div className="hidden sm:grid grid-cols-2 xl:grid-cols-3 gap-5">
-                  {filtered.map((eq) => (
-                    <EquipCard key={eq.name.en} eq={eq} />
-                  ))}
-                  <CtaCard />
-                </div>
-              </>
-            )}
-          </div>
+                <Carousel items={items} withCta={isLast} />
+              </div>
+            );
+          })}
         </div>
 
         <RentalCalculator />
       </div>
-
-      {/* floating mobile filter button — always reachable while browsing */}
-      <button
-        onClick={() => setOpenMobile(true)}
-        className="lg:hidden fixed bottom-5 end-5 z-40 inline-flex items-center gap-2 bg-[#009466] text-white px-5 py-3.5 rounded-full shadow-lg shadow-[#009466]/40 font-bold text-sm"
-      >
-        <SlidersHorizontal size={16} /> {labels.filters[lang]}
-        {activeCount > 0 && <span className="bg-white text-[#009466] text-[10px] font-bold px-1.5 py-0.5 rounded-full">{activeCount}</span>}
-      </button>
     </section>
   );
 }
