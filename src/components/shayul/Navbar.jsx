@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { Image } from "@/components/ui/image";
 import { navLinks, logo, navCta, langToggle } from "@/lib/content";
 
 export default function Navbar({ scrolled }) {
@@ -19,8 +20,8 @@ export default function Navbar({ scrolled }) {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 bg-[#009466] rounded-sm flex items-center justify-center font-bold text-white text-xl leading-none">
-            S
+          <div className="w-9 h-9 rounded-sm overflow-hidden ring-1 ring-[#009466]/40 flex items-center justify-center">
+            <Image src="https://media.base44.com/images/public/6a5e151f76837cda81644b8e/f678860a2_generated_image.png" alt={logo[lang]} className="w-full h-full" fittingType="fill" focalPointX={0.5} focalPointY={0.5} />
           </div>
           <span className="font-bold text-white text-xl tracking-wide">{logo[lang]}</span>
         </a>
