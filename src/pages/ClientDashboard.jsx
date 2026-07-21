@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
 import {
   HardHat,
@@ -9,9 +9,11 @@ import {
   PlusCircle,
   ShieldCheck,
   Inbox,
+  Clock,
 } from "lucide-react";
 import RentalTracker from "@/components/client/RentalTracker";
 import RatingStars from "@/components/client/RatingStars";
+import PastRentals from "@/components/client/PastRentals";
 import { useToast } from "@/components/ui/use-toast";
 
 const STATUS_AR = {
@@ -98,20 +100,20 @@ export default function ClientDashboard() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const me = await base44.auth.me();
-        setUser(me);
-        const data = await base44.entities.RentalRequest.list("-created_date", 50);
-        setItems(Array.isArray(data) ? data : []);
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoading(false);
-      }
-    })();
+  const load = useCallback(async () => {
+    try {
+      const me = await base44.auth.me();
+      setUser(me);
+      const data = await base44.entities.RentalRequest.list("-created_date", 50);
+      setItems(Array.isArray(data) ? data : []);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => { load(); }, [load]);
 
   const logout = async () => {
     try {
@@ -123,6 +125,8 @@ export default function ClientDashboard() {
 
   const total = items.length;
   const activeCount = items.filter((r) => r.status === "pending" || r.status === "accepted").length;
+  const activeItems = items.filter((r) => r.status !== "completed");
+  const pastItems = items.filter((r) => r.status === "completed");
 
   return (
     <div className="min-h-screen bg-[#081626] text-white" dir="rtl">
@@ -188,10 +192,20 @@ export default function ClientDashboard() {
             </a>
           </div>
         ) : (
-          <div className="space-y-5">
-            {items.map((r) => (
-              <ReqCard key={r.id} req={r} />
-            ))}
+          <div className="space-y-10">
+            {activeItems.length > 0 && (
+              <section>
+                <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <Clock size={18} className="text-[#0696B0]" /> الطلبات الحالية
+                </h2>
+                <div className="space-y-5">
+                  {activeItems.map((r) => (
+                    <ReqCard key={r.id} req={r} />
+                  ))}
+                </div>
+              </section>
+            )}
+            <PastRentals items={pastItems} user={user} onReordered={load} />
           </div>
         )}
       </main>
