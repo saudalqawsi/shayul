@@ -52,12 +52,12 @@ function FleetCard({ eq }) {
         <span className={`absolute top-3 end-3 text-xs font-bold px-2.5 py-1 rounded-full border ${st.cls}`}>
           {st.label}
         </span>
+        <div className="absolute top-3 start-3">
+          <EquipmentIcon type={eq.type} size={32} theme="dark" />
+        </div>
       </div>
       <div className="p-4">
         <h4 className="text-white font-bold leading-snug">{eq.name}</h4>
-        <div className="mt-2">
-          <EquipmentIcon type={eq.type} size={28} theme="dark" />
-        </div>
         <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 text-xs text-white/50">
           {eq.weight && <span className="font-mono">{eq.weight}</span>}
           {eq.power && <span className="font-mono">{eq.power}</span>}
