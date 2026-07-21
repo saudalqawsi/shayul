@@ -108,39 +108,47 @@ export default function Coverflow({ items }) {
                 aria-label={it.name[lang]}
               >
                 <div
-                  className={`bg-[#0d2240] rounded-sm overflow-hidden border h-full flex flex-col ${
-                    isActive ? "border-[#009466] shadow-[0_20px_60px_rgba(0,148,102,0.25)]" : "border-white/10"
+                  className={`relative overflow-hidden h-full bg-[#0d2240] ${
+                    isActive ? "ring-1 ring-[#C8A96E]/60" : "ring-1 ring-white/5"
                   }`}
                 >
-                  <div className="relative h-52 overflow-hidden">
-                    <Image
-                      src={it.img}
-                      alt={it.name[lang]}
-                      className="w-full h-full"
-                      fittingType="fill"
-                      focalPointX={0.5}
-                      focalPointY={0.5}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0d2240] via-[#0d2240]/10 to-transparent" />
-                    {isActive && (
-                      <>
-                        <div className="absolute top-3 end-3 bg-[#0A1A30]/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white/70 border border-white/10">
-                          {it.tag[lang]}
-                        </div>
-                        <div className="absolute top-3 start-3 flex items-center gap-1.5 bg-[#0A1A30]/80 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#009466]" />
-                          <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
-                        </div>
-                      </>
-                    )}
-                    {!isActive && <div className="absolute inset-0 bg-[#081626]/55 pointer-events-none" />}
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-white font-bold text-base leading-tight">{it.name[lang]}</h3>
-                    <div className="flex items-end gap-1.5 mt-2">
-                      <span className="text-[#009466] font-bold font-mono text-xl">{num(it.daily)}</span>
-                      <Riyal size={14} />
-                      <span className="text-white/40 text-xs">{equipmentVault.perDay[lang]}</span>
+                  <Image
+                    src={it.img}
+                    alt={it.name[lang]}
+                    className="w-full h-full"
+                    fittingType="fill"
+                    focalPointX={0.5}
+                    focalPointY={0.5}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                  {!isActive && <div className="absolute inset-0 bg-black/45 pointer-events-none" />}
+                  {isActive && (
+                    <div className="absolute top-3 end-3">
+                      <span className="text-[9px] tracking-[0.18em] uppercase px-3 py-1 bg-black/40 backdrop-blur-sm text-white/70 font-medium">
+                        {it.tag[lang]}
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p className="text-[10px] tracking-[0.18em] uppercase mb-1 text-[#C8A96E] font-medium">{it.nameAlt[lang]}</p>
+                    <h3 className="text-white font-bold text-lg leading-tight">{it.name[lang]}</h3>
+                    <p className="text-white/50 text-xs mt-1 leading-relaxed line-clamp-1">
+                      {Object.entries(it.specs || {})
+                        .filter(([k]) => k !== "weight")
+                        .map(([, v]) => v[lang])
+                        .join(" · ")}
+                    </p>
+                    <div className="flex items-end justify-between gap-2 mt-2.5 pt-2.5 border-t border-white/15">
+                      <div className="flex items-end gap-1">
+                        <span className="text-[#C8A96E] font-bold font-mono text-base">{num(it.daily)}</span>
+                        <Riyal size={12} />
+                        <span className="text-white/50 text-[10px]">{equipmentVault.perDay[lang]}</span>
+                      </div>
+                      <div className="flex items-end gap-1">
+                        <span className="text-white font-bold font-mono text-sm">{num(Math.round(it.daily * 6))}</span>
+                        <Riyal size={11} />
+                        <span className="text-white/50 text-[10px]">{equipmentVault.weeklyShort[lang]}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -155,7 +163,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(-1)}
         aria-label="Previous"
-        className="flex absolute top-[170px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] transition-colors"
+        className="flex absolute top-[170px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
       >
         <ChevronLeft size={18} />
       </button>
@@ -163,7 +171,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(1)}
         aria-label="Next"
-        className="flex absolute top-[170px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] transition-colors"
+        className="flex absolute top-[170px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
       >
         <ChevronRight size={18} />
       </button>
@@ -176,7 +184,7 @@ export default function Coverflow({ items }) {
             type="button"
             onClick={() => goToCard(i)}
             aria-label={it.name[lang]}
-            className={`h-1.5 rounded-full transition-all ${i === activeIdx ? "w-8 bg-[#009466]" : "w-3 bg-white/20"}`}
+            className={`h-1.5 rounded-full transition-all ${i === activeIdx ? "w-8 bg-[#C8A96E]" : "w-3 bg-white/20"}`}
           />
         ))}
       </div>
