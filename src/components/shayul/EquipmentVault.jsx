@@ -115,7 +115,7 @@ function EquipCard({ eq }) {
 function CtaCard() {
   const { lang } = useI18n();
   return (
-    <div className="bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center">
+    <div className="bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col items-center justify-center p-8 text-center h-full">
       <div className="w-14 h-14 bg-[#009466]/20 rounded-sm flex items-center justify-center mb-4">
         <Shield size={28} className="text-[#009466]" />
       </div>
