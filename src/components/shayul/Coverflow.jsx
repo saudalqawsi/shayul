@@ -6,8 +6,21 @@ import { equipmentVault } from "@/lib/content";
 import Riyal from "@/components/shayul/Riyal";
 import { motion } from "framer-motion";
 
-const CARD_W = 300;
-const CARD_H = 380;
+// Calibration reference (3-card carousel = "bobcat" ratio/size, looks perfect).
+// Every other carousel (more cards → tighter rotation step → larger ring
+// radius R → stronger perspective scale) shrinks its card width/hight so the
+// perspective-inflated display size stays identical to the bobcat's (same
+// 347×440 rendered pixels, same 300:380 aspect ratio), giving a uniform frame.
+const CARD_W_REF = 300;
+const CARD_H_REF = 380;
+const PERSPECTIVE_D = 1500;
+const ACTIVE_SCALE = 1.06;
+const BOBCAT_R = Math.round(CARD_W_REF / (2 * Math.tan((120 * Math.PI) / 360))) + 40;
+const BOBCAT_PS = PERSPECTIVE_D / (PERSPECTIVE_D - BOBCAT_R);
+const TARGET_DISPLAY_W = CARD_W_REF * ACTIVE_SCALE * BOBCAT_PS; // ≈347
+const TARGET_DISPLAY_H = CARD_H_REF * ACTIVE_SCALE * BOBCAT_PS; // ≈440
+const STAGE_HEIGHT = Math.ceil(TARGET_DISPLAY_H + 30); // 470, with bobcat-style buffer
+const ASPECT = CARD_H_REF / CARD_W_REF; // 380/300, preserved across carousels
 
 // Normalise an angle (degrees) to the shortest representation in [-180, 180].
 function norm(a) {
@@ -32,17 +45,26 @@ export default function Coverflow({ items }) {
   if (!total) return null;
 
   const step = total > 1 ? 360 / total : 360; // spacing between cards (deg)
-  // Radius of the ring: cards just touch at the front, plus a little depth.
-  const R =
-    total > 1 && step < 180
-      ? Math.min(1200, Math.round(CARD_W / (2 * Math.tan((step * Math.PI) / 360))) + 40)
-      : 0;
+  // Solve per-carousel card width so the perspective-inflated display size
+  // matches the bobcat (3-card) reference. Iterate to converge — ~6 loops are
+  // stable. Tighter step (more cards) → larger R → larger ps → smaller cardW.
+  let cardW = CARD_W_REF;
+  let R = 0;
+  let ps = BOBCAT_PS;
+  if (step < 180) {
+    for (let i = 0; i < 6; i++) {
+      R = Math.round(cardW / (2 * Math.tan((step * Math.PI) / 360))) + 40;
+      ps = PERSPECTIVE_D / (PERSPECTIVE_D - R);
+      cardW = Math.round(TARGET_DISPLAY_W / (ACTIVE_SCALE * ps));
+    }
+  } else {
+    ps = 1;
+    cardW = Math.round(TARGET_DISPLAY_W / ACTIVE_SCALE);
+  }
+  const cardH = Math.round(cardW * ASPECT);
 
   const activeIdx = ((active % total) + total) % total;
-  const stageHeight = Math.max(
-    440,
-    Math.ceil(CARD_H * 1.06 * (1500 / (1500 - R)) + 30)
-  );
+  const stageHeight = STAGE_HEIGHT;
 
   const go = (d) => setActive((a) => a + d);
   const goToCard = (i) => {
@@ -99,10 +121,10 @@ export default function Coverflow({ items }) {
                 className="absolute top-1/2"
                 style={{
                   left: "50%",
-                  width: CARD_W,
-                  height: CARD_H,
-                  marginLeft: -CARD_W / 2,
-                  marginTop: -CARD_H / 2,
+                  width: cardW,
+                  height: cardH,
+                  marginLeft: -cardW / 2,
+                  marginTop: -cardH / 2,
                   transform: `rotateY(${i * step}deg) translateZ(${R}px) scale(${scale})`,
                   opacity,
                   zIndex: Math.round(100 - abs),
