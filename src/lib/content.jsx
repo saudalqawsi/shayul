@@ -28,7 +28,7 @@ export const hero = {
     durationPlaceholder: { ar: "اختر المدة", en: "Select duration" },
   },
   equipmentTypes: {
-    ar: ["شيول / لودر", "حفارة / باك لودر", "بوبكات", "بوكلين", "قريدر", "بلدوزر", "رصاصة / دكاكة", "قالب / شاحنة", "فوركلفت", "كرين"],
+    ar: ["شيول / لودر", "حفارة / باك لودر", "بوبكات", "بوكلين", "قريدر", "بلدوزر", "رصاصة / دكاكة", "قلاب / شاحنة", "فوركلفت", "كرين"],
     en: ["Wheel Loader", "Backhoe Loader", "Bobcat", "Forklift Truck", "Motor Grader", "Bulldozer", "Vibratory Roller", "Dump Truck", "Telehandler", "Crane"],
   },
   durations: [
@@ -235,8 +235,8 @@ export const equipment = [
     tag: { ar: "للمشاريع الكبرى", en: "For Major Projects" },
   },
   {
-    name: { ar: "قالب سكس", en: "Dump Truck (6-axle)" },
-    nameAlt: { ar: "Dump Truck (6-axle)", en: "قالب سكس" },
+    name: { ar: "قلاب سكس", en: "Dump Truck (6-axle)" },
+    nameAlt: { ar: "Dump Truck (6-axle)", en: "قلاب سكس" },
     specs: {
       weight: { ar: "٢٥ طن", en: "25 T" },
       size: { ar: "٦ محاور", en: "6-Axle" },
@@ -247,8 +247,8 @@ export const equipment = [
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
-    name: { ar: "قالب تريلة", en: "Dump Trailer" },
-    nameAlt: { ar: "Dump Trailer", en: "قالب تريلة" },
+    name: { ar: "قلاب تريلة", en: "Dump Trailer" },
+    nameAlt: { ar: "Dump Trailer", en: "قلاب تريلة" },
     specs: {
       weight: { ar: "٢٥ طن", en: "25 T" },
       size: { ar: "تريلة", en: "Trailer" },
@@ -479,10 +479,10 @@ export const pricing = {
       ],
     },
     {
-      name: { ar: "قالبات ونقل", en: "Dump Trucks & Transport" },
+      name: { ar: "قلابات ونقل", en: "Dump Trucks & Transport" },
       items: [
-        { name: { ar: "قالب سكس", en: "Dump Truck (6-axle)" }, daily: 650, monthly: 15000, note: null },
-        { name: { ar: "قالب تريلة", en: "Dump Trailer" }, daily: 800, monthly: 18000, note: null },
+        { name: { ar: "قلاب سكس", en: "Dump Truck (6-axle)" }, daily: 650, monthly: 15000, note: null },
+        { name: { ar: "قلاب تريلة", en: "Dump Trailer" }, daily: 800, monthly: 18000, note: null },
         { name: { ar: "وايت موية سكس", en: "Water Truck (6-axle)" }, daily: 600, monthly: 15000, note: { ar: "غير شامل تعبئة المياه", en: "Excludes water filling" } },
       ],
     },
@@ -529,7 +529,7 @@ export const requestForm = {
     notesPh: { ar: "نوع العمل، ساعات التشغيل، أي متطلبات خاصة...", en: "Work type, operating hours, any special requirements..." },
   },
   equipTypes: {
-    ar: ["شيول / لودر", "حفارة / باك لودر", "بوبكات", "بوكلين", "قريدر", "بلدوزر", "رصاصة / دكاكة", "قالب / شاحنة", "فوركلفت", "كرين", "أخرى"],
+    ar: ["شيول / لودر", "حفارة / باك لودر", "بوبكات", "بوكلين", "قريدر", "بلدوزر", "رصاصة / دكاكة", "قلاب / شاحنة", "فوركلفت", "كرين", "أخرى"],
     en: ["Wheel Loader", "Backhoe Loader", "Bobcat", "Forklift Truck", "Motor Grader", "Bulldozer", "Vibratory Roller", "Dump Truck", "Telehandler", "Crane", "Other"],
   },
   submit: { ar: "أرسل الطلب — مجاناً وبدون التزام", en: "Submit Request — free, no commitment" },
