@@ -59,6 +59,10 @@
       "title": "\u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u062a\u062c\u0631\u0628\u0629",
       "minimum": 1,
       "maximum": 5
+    },
+    "provider_id": {
+      "type": "string",
+      "title": "\u0645\u0639\u0631\u0651\u0641 \u0627\u0644\u0645\u0632\u0648\u0651\u062f"
     }
   },
   "required": [

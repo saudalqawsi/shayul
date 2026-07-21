@@ -5,6 +5,7 @@ export const navLinks = [
   { label: { ar: "المعدات", en: "Equipment" }, href: "#equipment" },
   { label: { ar: "رحلة الحجز", en: "Booking" }, href: "#how" },
   { label: { ar: "طلباتي", en: "My Rentals" }, href: "/dashboard" },
+  { label: { ar: "المزوّدون", en: "Providers" }, href: "/providers" },
   { label: { ar: "للمزوّدين", en: "For Providers" }, href: "/provider" },
   { label: { ar: "الأسعار", en: "Pricing" }, href: "#pricing" },
   { label: { ar: "تواصل معنا", en: "Contact" }, href: "#request" },

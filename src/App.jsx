@@ -11,6 +11,8 @@ import Home from './pages/Home';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import ProviderPortal from './pages/ProviderPortal';
 import ClientDashboard from './pages/ClientDashboard';
+import ProvidersDirectory from './pages/ProvidersDirectory';
+import ProviderProfile from './pages/ProviderProfile';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -39,6 +41,8 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/providers" element={<ProvidersDirectory />} />
+      <Route path="/providers/:id" element={<ProviderProfile />} />
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
         <Route path="/provider" element={<ProviderPortal />} />
         <Route path="/dashboard" element={<ClientDashboard />} />
