@@ -218,7 +218,7 @@ export const equipment = [
     },
     daily: 800,
     monthly: 20000,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/dfc3795a8_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/17fe3f62a_generated_image.png",
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
@@ -230,7 +230,7 @@ export const equipment = [
     },
     daily: 1800,
     monthly: 45000,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/1b9372067_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/28d6e41d2_generated_image.png",
     tag: { ar: "للمشاريع الكبرى", en: "For Major Projects" },
   },
   {

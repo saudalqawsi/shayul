@@ -6,13 +6,18 @@ import React from "react";
 const SYMBOL_URL =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Saudi_Riyal_Symbol.svg/960px-Saudi_Riyal_Symbol.svg.png";
 
-export default function Riyal({ size = 14, className = "" }) {
+export default function Riyal({ size = 14, className = "", light = true }) {
   return (
     <img
       src={SYMBOL_URL}
       alt="ريال سعودي"
       className={`inline-block object-contain ${className}`}
-      style={{ height: size, width: "auto", verticalAlign: "-0.18em" }}
+      style={{
+        height: size,
+        width: "auto",
+        verticalAlign: "-0.18em",
+        filter: light ? "brightness(0) invert(1)" : "none",
+      }}
       aria-hidden="true"
     />
   );

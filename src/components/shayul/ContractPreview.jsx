@@ -124,11 +124,11 @@ export default function ContractPreview() {
               <div className="relative mb-6">
                 <div className="flex justify-between items-center py-1.5 text-sm">
                   <span className="text-[#232023]/55">{contract.rateLabel[lang]}</span>
-                  <span className="font-mono font-bold text-[#1a1a1a] inline-flex items-center gap-1">{v.rate[lang]} <Riyal size={11} /></span>
+                  <span className="font-mono font-bold text-[#1a1a1a] inline-flex items-center gap-1">{v.rate[lang]} <Riyal size={11} light={false} /></span>
                 </div>
                 <div className="flex justify-between items-center py-1.5 text-sm border-t-2 border-[#232023]/50">
                   <span className="text-[#232023]/70 font-bold">{contract.totalLabel[lang]}</span>
-                  <span className="font-mono font-bold text-[#0A1A30] inline-flex items-center gap-1">{v.total[lang]} <Riyal size={12} /></span>
+                  <span className="font-mono font-bold text-[#0A1A30] inline-flex items-center gap-1">{v.total[lang]} <Riyal size={12} light={false} /></span>
                 </div>
               </div>
 
