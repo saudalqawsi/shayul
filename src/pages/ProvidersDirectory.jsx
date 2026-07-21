@@ -4,6 +4,7 @@ import { base44 } from "@/api/base44Client";
 import { Building2, MapPin, Truck, ArrowLeft, Inbox, ShieldCheck } from "lucide-react";
 import StarBadge from "@/components/StarBadge";
 import ProviderJoinSection from "@/components/shayul/ProviderJoinSection";
+import EquipmentBadge from "@/components/shayul/EquipmentBadge";
 
 export default function ProvidersDirectory() {
   const [providers, setProviders] = useState([]);
@@ -104,6 +105,14 @@ export default function ProvidersDirectory() {
                   <p className="text-white/45 text-xs leading-relaxed line-clamp-2 mb-4">
                     {p.coverage || p.bio || "مزوّد معدات موثّق"}
                   </p>
+
+                  {fleet.items && fleet.items.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {[...new Set(fleet.items.map((eq) => eq.type))].slice(0, 6).map((tp, i) => (
+                        <EquipmentBadge key={i} type={tp} width={26} />
+                      ))}
+                    </div>
+                  )}
 
                   <div className="flex items-center justify-between mb-4">
                     <StarBadge value={avg} count={r ? r.count : 0} size={14} />
