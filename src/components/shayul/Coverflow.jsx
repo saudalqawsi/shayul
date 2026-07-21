@@ -5,8 +5,8 @@ import { useI18n } from "@/lib/i18n";
 import { equipmentVault } from "@/lib/content";
 import Riyal from "@/components/shayul/Riyal";
 
-const CARD_W = 260;
-const CARD_H = 320;
+const CARD_W = 210;
+const CARD_H = 290;
 // Minimum virtual slots on the ring so even tiny carousels (e.g. 2 cards)
 // spread neighbours out and rotate like the multi-card sections.
 const MIN_SLOTS = 6;
@@ -81,9 +81,6 @@ export default function Coverflow({ items }) {
       return a + (bestDelta === Infinity ? 0 : bestDelta);
     });
   };
-
-  const specEntries = Object.entries(eq.specs || {});
-  const weekly = Math.round(eq.daily * 6);
 
   return (
     <div className="relative">
@@ -168,15 +165,23 @@ export default function Coverflow({ items }) {
                       {it.nameAlt[lang]}
                     </p>
                     <h3 className="text-white font-bold text-lg leading-tight">{it.name[lang]}</h3>
-                    <p className="text-white/45 text-xs mt-1 leading-relaxed line-clamp-2">
-                      {Object.values(it.specs || {})
-                        .map((s) => s[lang])
+                    <p className="text-white/45 text-xs mt-1 leading-relaxed line-clamp-1">
+                      {Object.entries(it.specs || {})
+                        .filter(([k]) => k !== "weight")
+                        .map(([, v]) => v[lang])
                         .join(" · ")}
                     </p>
-                    <div className="flex items-end gap-1.5 mt-3 pt-3 border-t border-white/10">
-                      <span className="text-[#A6845B] font-bold font-mono text-lg">{num(it.daily)}</span>
-                      <Riyal size={13} />
-                      <span className="text-white/40 text-xs">{equipmentVault.perDay[lang]}</span>
+                    <div className="flex items-end justify-between gap-1.5 mt-2.5 pt-2.5 border-t border-white/10">
+                      <div className="flex items-end gap-1">
+                        <span className="text-[#A6845B] font-bold font-mono text-base">{num(it.daily)}</span>
+                        <Riyal size={11} />
+                        <span className="text-white/40 text-[10px]">{equipmentVault.perDay[lang]}</span>
+                      </div>
+                      <div className="flex items-end gap-1">
+                        <span className="text-white font-bold font-mono text-sm">{num(Math.round(it.daily * 6))}</span>
+                        <Riyal size={10} />
+                        <span className="text-white/40 text-[10px]">{equipmentVault.weeklyShort[lang]}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -217,55 +222,6 @@ export default function Coverflow({ items }) {
         ))}
       </div>
 
-      {/* live detail panel for the active card */}
-      <div className="mt-6 bg-gradient-to-br from-[#11192a] to-[#0a1020] border border-[#A6845B]/25 rounded-md p-6">
-      <div className="flex items-start justify-between gap-6 flex-wrap">
-        <div className="min-w-0">
-          <p className="text-[#A6845B] text-[10px] font-bold tracking-[0.2em] uppercase mb-1">{eq.nameAlt[lang]}</p>
-          <h4 className="text-white font-bold text-2xl leading-tight">{eq.name[lang]}</h4>
-        </div>
-        <div className="flex items-center gap-1.5 bg-[#0A1A30] px-3 py-1.5 rounded-full border border-white/10 self-center">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#A6845B]" />
-          <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
-        </div>
-      </div>
-
-        {specEntries.length > 0 && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
-            {specEntries.map(([k, v]) => (
-              <div key={k} className="bg-black/20 rounded-sm px-3 py-2.5 border border-white/5">
-                <div className="text-white/40 text-[11px] tracking-[0.15em] uppercase mb-0.5">{equipmentVault.specLabels[k]?.[lang] || k}</div>
-                <div className="text-white font-bold text-sm font-mono">{v[lang]}</div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="flex items-end justify-between gap-4 flex-wrap mt-6 pt-5 border-t border-white/10">
-          <div className="flex items-end gap-8">
-            <div>
-              <div className="text-white/40 text-xs mb-0.5">{equipmentVault.perDay[lang]}</div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-[#A6845B] font-bold text-2xl font-mono">{num(eq.daily)}</span>
-                <Riyal size={20} />
-              </div>
-            </div>
-            <div>
-              <div className="text-white/40 text-xs mb-0.5">{equipmentVault.weeklyShort[lang]}</div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-white font-bold text-xl font-mono">{num(weekly)}</span>
-                <Riyal size={16} />
-              </div>
-            </div>
-          </div>
-          <a
-            href="#request"
-            className="bg-[#A6845B] hover:bg-[#8f6f4a] text-white px-6 py-3 rounded-md text-sm font-bold transition-colors"
-          >
-            {equipmentVault.addToRequest[lang]}
-          </a>
-        </div>
-      </div>
     </div>
   );
 }
