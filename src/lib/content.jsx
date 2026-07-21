@@ -235,8 +235,8 @@ export const equipment = [
     tag: { ar: "للمشاريع الكبرى", en: "For Major Projects" },
   },
   {
-    name: { ar: "قلاب سكس", en: "Dump Truck (6-axle)" },
-    nameAlt: { ar: "Dump Truck (6-axle)", en: "قلاب سكس" },
+    name: { ar: "قلاب سقس", en: "Dump Truck (6-axle)" },
+    nameAlt: { ar: "Dump Truck (6-axle)", en: "قلاب سقس" },
     specs: {
       weight: { ar: "٢٥ طن", en: "25 T" },
       size: { ar: "٦ محاور", en: "6-Axle" },
@@ -259,8 +259,8 @@ export const equipment = [
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
-    name: { ar: "وايت موية سكس", en: "Water Truck (6-axle)" },
-    nameAlt: { ar: "Water Truck (6-axle)", en: "وايت موية سكس" },
+    name: { ar: "وايت موية سقس", en: "Water Truck (6-axle)" },
+    nameAlt: { ar: "Water Truck (6-axle)", en: "وايت موية سقس" },
     specs: {
       weight: { ar: "٢٥ طن", en: "25 T" },
       size: { ar: "٦ محاور", en: "6-Axle" },
@@ -481,9 +481,9 @@ export const pricing = {
     {
       name: { ar: "قلابات ونقل", en: "Dump Trucks & Transport" },
       items: [
-        { name: { ar: "قلاب سكس", en: "Dump Truck (6-axle)" }, daily: 650, monthly: 15000, note: null },
+        { name: { ar: "قلاب سقس", en: "Dump Truck (6-axle)" }, daily: 650, monthly: 15000, note: null },
         { name: { ar: "قلاب تريلة", en: "Dump Trailer" }, daily: 800, monthly: 18000, note: null },
-        { name: { ar: "وايت موية سكس", en: "Water Truck (6-axle)" }, daily: 600, monthly: 15000, note: { ar: "غير شامل تعبئة المياه", en: "Excludes water filling" } },
+        { name: { ar: "وايت موية سقس", en: "Water Truck (6-axle)" }, daily: 600, monthly: 15000, note: { ar: "غير شامل تعبئة المياه", en: "Excludes water filling" } },
       ],
     },
     {
