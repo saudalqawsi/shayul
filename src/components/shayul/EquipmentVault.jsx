@@ -147,6 +147,7 @@ export default function EquipmentVault() {
   const sizes = useMemo(() => {
     const seen = [];
     equipment.forEach((eq) => {
+      if (!eq.specs?.size) return;
       const key = eq.specs.size.en;
       if (!seen.find((s) => s.key === key)) seen.push({ key, label: eq.specs.size[lang] });
     });
