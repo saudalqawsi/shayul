@@ -13,6 +13,7 @@ import ProviderPortal from './pages/ProviderPortal';
 import ClientDashboard from './pages/ClientDashboard';
 import ProvidersDirectory from './pages/ProvidersDirectory';
 import ProviderProfile from './pages/ProviderProfile';
+import PlatformPortal from './pages/PlatformPortal';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -46,6 +47,7 @@ const AuthenticatedApp = () => {
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
         <Route path="/provider" element={<ProviderPortal />} />
         <Route path="/dashboard" element={<ClientDashboard />} />
+        <Route path="/platform" element={<PlatformPortal />} />
       </Route>
       {/* Add your page Route elements here */}
       <Route path="*" element={<PageNotFound />} />
