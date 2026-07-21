@@ -108,11 +108,11 @@ export default function Coverflow({ items }) {
                 aria-label={it.name[lang]}
               >
                 <div
-                  className={`bg-[#0d2240] rounded-sm overflow-hidden border h-full flex flex-col ${
-                    isActive ? "border-[#009466] shadow-[0_20px_60px_rgba(0,148,102,0.25)]" : "border-white/10"
+                  className={`bg-[#11192a] rounded-md overflow-hidden border h-full flex flex-col ${
+                    isActive ? "border-[#A6845B] shadow-[0_20px_60px_rgba(166,132,91,0.28)]" : "border-white/10"
                   }`}
                 >
-                  <div className="relative h-52 overflow-hidden">
+                  <div className="relative flex-1 overflow-hidden">
                     <Image
                       src={it.img}
                       alt={it.name[lang]}
@@ -121,25 +121,27 @@ export default function Coverflow({ items }) {
                       focalPointX={0.5}
                       focalPointY={0.5}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0d2240] via-[#0d2240]/10 to-transparent" />
-                    {isActive && (
-                      <>
-                        <div className="absolute top-3 end-3 bg-[#0A1A30]/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white/70 border border-white/10">
-                          {it.tag[lang]}
-                        </div>
-                        <div className="absolute top-3 start-3 flex items-center gap-1.5 bg-[#0A1A30]/80 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#009466]" />
-                          <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
-                        </div>
-                      </>
-                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#11192a] via-transparent to-transparent" />
+                    <div className="absolute top-3 start-3 bg-black/45 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                      <span className="text-[#A6845B] text-[11px] font-bold tracking-widest uppercase">
+                        {it.tag[lang]}
+                      </span>
+                    </div>
                     {!isActive && <div className="absolute inset-0 bg-[#081626]/55 pointer-events-none" />}
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-white font-bold text-base leading-tight">{it.name[lang]}</h3>
-                    <div className="flex items-end gap-1.5 mt-2">
-                      <span className="text-[#009466] font-bold font-mono text-xl">{num(it.daily)}</span>
-                      <Riyal size={14} />
+                  <div className="px-4 pt-3 pb-4">
+                    <p className="text-[#A6845B] text-[10px] font-bold tracking-[0.2em] uppercase mb-1">
+                      {it.nameAlt[lang]}
+                    </p>
+                    <h3 className="text-white font-bold text-lg leading-tight">{it.name[lang]}</h3>
+                    <p className="text-white/45 text-xs mt-1 leading-relaxed line-clamp-2">
+                      {Object.values(it.specs || {})
+                        .map((s) => s[lang])
+                        .join(" · ")}
+                    </p>
+                    <div className="flex items-end gap-1.5 mt-3 pt-3 border-t border-white/10">
+                      <span className="text-[#A6845B] font-bold font-mono text-lg">{num(it.daily)}</span>
+                      <Riyal size={13} />
                       <span className="text-white/40 text-xs">{equipmentVault.perDay[lang]}</span>
                     </div>
                   </div>
@@ -155,7 +157,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(-1)}
         aria-label="Previous"
-        className="flex absolute top-[170px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] transition-colors"
+        className="flex absolute top-[170px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#11192a] border border-white/15 text-white/80 hover:text-white hover:border-[#A6845B] transition-colors"
       >
         <ChevronLeft size={18} />
       </button>
@@ -163,7 +165,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(1)}
         aria-label="Next"
-        className="flex absolute top-[170px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#009466] transition-colors"
+        className="flex absolute top-[170px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#11192a] border border-white/15 text-white/80 hover:text-white hover:border-[#A6845B] transition-colors"
       >
         <ChevronRight size={18} />
       </button>
@@ -176,29 +178,29 @@ export default function Coverflow({ items }) {
             type="button"
             onClick={() => goToCard(i)}
             aria-label={it.name[lang]}
-            className={`h-1.5 rounded-full transition-all ${i === activeIdx ? "w-8 bg-[#009466]" : "w-3 bg-white/20"}`}
+            className={`h-1.5 rounded-full transition-all ${i === activeIdx ? "w-8 bg-[#A6845B]" : "w-3 bg-white/20"}`}
           />
         ))}
       </div>
 
       {/* live detail panel for the active card */}
-      <div className="mt-6 bg-gradient-to-br from-[#0d2240] to-[#0a1a30] border border-[#009466]/20 rounded-sm p-6">
-        <div className="flex items-start justify-between gap-6 flex-wrap">
-          <div className="min-w-0">
-            <h4 className="text-white font-bold text-2xl leading-tight">{eq.name[lang]}</h4>
-            <p className="text-white/40 text-xs font-mono tracking-widest mt-1">{eq.nameAlt[lang].toUpperCase()}</p>
-          </div>
-          <div className="flex items-center gap-1.5 bg-[#0A1A30] px-3 py-1.5 rounded-full border border-white/10 self-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#009466]" />
-            <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
-          </div>
+      <div className="mt-6 bg-gradient-to-br from-[#11192a] to-[#0a1020] border border-[#A6845B]/25 rounded-md p-6">
+      <div className="flex items-start justify-between gap-6 flex-wrap">
+        <div className="min-w-0">
+          <p className="text-[#A6845B] text-[10px] font-bold tracking-[0.2em] uppercase mb-1">{eq.nameAlt[lang]}</p>
+          <h4 className="text-white font-bold text-2xl leading-tight">{eq.name[lang]}</h4>
         </div>
+        <div className="flex items-center gap-1.5 bg-[#0A1A30] px-3 py-1.5 rounded-full border border-white/10 self-center">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#A6845B]" />
+          <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
+        </div>
+      </div>
 
         {specEntries.length > 0 && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
             {specEntries.map(([k, v]) => (
               <div key={k} className="bg-black/20 rounded-sm px-3 py-2.5 border border-white/5">
-                <div className="text-white/40 text-[11px] tracking-wide mb-0.5">{equipmentVault.specLabels[k]?.[lang] || k}</div>
+                <div className="text-white/40 text-[11px] tracking-[0.15em] uppercase mb-0.5">{equipmentVault.specLabels[k]?.[lang] || k}</div>
                 <div className="text-white font-bold text-sm font-mono">{v[lang]}</div>
               </div>
             ))}
@@ -210,7 +212,7 @@ export default function Coverflow({ items }) {
             <div>
               <div className="text-white/40 text-xs mb-0.5">{equipmentVault.perDay[lang]}</div>
               <div className="flex items-baseline gap-1">
-                <span className="text-[#009466] font-bold text-2xl font-mono">{num(eq.daily)}</span>
+                <span className="text-[#A6845B] font-bold text-2xl font-mono">{num(eq.daily)}</span>
                 <Riyal size={20} />
               </div>
             </div>
@@ -224,7 +226,7 @@ export default function Coverflow({ items }) {
           </div>
           <a
             href="#request"
-            className="bg-[#009466] hover:bg-[#007a54] text-white px-6 py-3 rounded-sm text-sm font-bold transition-colors"
+            className="bg-[#A6845B] hover:bg-[#8f6f4a] text-white px-6 py-3 rounded-md text-sm font-bold transition-colors"
           >
             {equipmentVault.addToRequest[lang]}
           </a>
