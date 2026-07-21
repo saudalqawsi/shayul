@@ -12,13 +12,16 @@ export const navLinks = [
 ];
 
 export const hero = {
-  badge: { ar: "عقد إلكتروني موثّق", en: "Notarized e-contracts" },
-  title1: { ar: "اطلب،", en: "Request," },
-  title2: { ar: "واطمئن.", en: "Relax." },
+  badge: { ar: "متاح الآن في الرياض", en: "Available now in Riyadh" },
+  title1: { ar: "استأجر معدتك الثقيلة", en: "Rent your heavy equipment" },
+  title2: { ar: "بأمان وضمان", en: "Safe & guaranteed" },
   subtitle: {
-    ar: "سوق المعدات الثقيلة في المملكة — اطلب المعدة المناسبة لمشروعك، واحصل على عقد إلكتروني موثّق وتسليم خلال اليوم أو التالي.",
-    en: "The Kingdom's heavy-equipment marketplace — request the right unit for your project, and get a notarized e-contract with same- or next-day delivery.",
+    ar: "منصة سعودية تربط بين ملاّك المعدات الثقيلة وطالبيها — حجز فوري، سائق يصل لموقعك، وتأمين شامل على كل معدة (قريباً).",
+    en: "A Saudi platform connecting heavy-equipment owners with those who need them — instant booking, a driver to your site, and equipment-wide insurance (coming soon).",
   },
+  insurancePill: { ar: "تأمين شامل على المعدات — قريباً", en: "Equipment-wide insurance — coming soon" },
+  ctaRent: { ar: "استأجر معدة الآن", en: "Rent a unit" },
+  ctaOwner: { ar: "سجّل أسطولك", en: "List your fleet" },
   fields: {
     type: { ar: "نوع المعدة", en: "Equipment Type" },
     typePlaceholder: { ar: "اختر نوع المعدة", en: "Select equipment" },
@@ -38,10 +41,10 @@ export const hero = {
   ],
   cta: { ar: "ابحث عن المعدة المناسبة →", en: "Find the right unit →" },
   trust: [
-    { ar: "عقد إلكتروني موثّق قبل التسليم", en: "Notarized contract before delivery" },
-    { ar: "تسليم اليوم أو التالي", en: "Same or next-day delivery" },
-    { ar: "أسعار شفافة — بلا مفاجآت", en: "Transparent pricing — no surprises" },
-    { ar: "شركات معدات موثّقة", en: "Verified equipment firms" },
+    { ar: "تأمين شامل على المعدات — قريباً", en: "Equipment insurance — coming soon" },
+    { ar: "حجز فوري بدون تفاوض", en: "Instant booking, no haggling" },
+    { ar: "مؤجرون موثّقون", en: "Verified lessors" },
+    { ar: "سائق يصل لموقعك", en: "Driver to your site" },
   ],
 };
 
@@ -51,33 +54,44 @@ export const trust = {
   title2: { ar: "كل تأجير.", en: "every rental." },
   pillars: [
     {
-      icon: "Wallet",
+      icon: "ShieldCheck",
       color: "#00a884",
+      soon: true,
       num: "01",
-      title: { ar: "أسعار شفافة", en: "Transparent Pricing" },
+      title: { ar: "تأمين شامل على المعدات", en: "Equipment insurance" },
       desc: {
-        ar: "أسعار استرشادية واضحة لكل معدة — لا وسيط، لا رسوم خفية. ما تراه هو ما تتوقعه.",
-        en: "Clear indicative rates per unit — no middleman, no hidden fees. What you see is what to expect.",
+        ar: "كل معدة في المنصة ستُشمول بتغطية تأمينية — حقوقك محفوظة من أول يوم.",
+        en: "Every unit on the platform will be covered by insurance — your rights protected from day one.",
       },
     },
     {
       icon: "Zap",
-      color: "#3b82f6",
+      color: "#00a884",
       num: "02",
-      title: { ar: "تسليم اليوم أو التالي", en: "Same or Next-Day Delivery" },
+      title: { ar: "حجز فوري بدون تفاوض", en: "Instant booking, no haggling" },
       desc: {
-        ar: "يوزَّع طلبك فوراً على الشركات المطابقة قرب موقعك. غالبية الطلبات تُلبّى في اليوم نفسه أو اليوم التالي.",
-        en: "Your request is instantly routed to matched firms near your site. Most orders are fulfilled same or next day.",
+        ar: "اختر، ادفع، وانتظر التأكيد. لا اتصالات ولا مساومات.",
+        en: "Pick, pay, and wait for confirmation. No calls, no haggling.",
       },
     },
     {
-      icon: "FileText",
+      icon: "BadgeCheck",
       color: "#00a884",
       num: "03",
-      title: { ar: "العقد الموثّق قانونياً", en: "Legally-Notarized Contract" },
+      title: { ar: "مؤجرون موثّقون", en: "Verified lessors" },
       desc: {
-        ar: "كل اتفاق يتحوّل إلى عقد إلكتروني موثّق يحدد نطاق العمل والتواريخ والسعر — سند قانوني يحفظ حقك قبل بدء التشغيل.",
-        en: "Every agreement becomes a notarized e-contract defining scope, dates, and price — a legal safeguard that protects you before operation begins.",
+        ar: "كل مؤجر مراجَع ومعتمد من فريقنا قبل قبول أي طلب.",
+        en: "Every lessor is reviewed and approved by our team before any request.",
+      },
+    },
+    {
+      icon: "MapPin",
+      color: "#00a884",
+      num: "04",
+      title: { ar: "سائق يصل لموقعك", en: "Driver to your site" },
+      desc: {
+        ar: "السائق معيّن مسبقاً ويصل في الوقت المحدد مباشرة لموقع مشروعك.",
+        en: "The driver is pre-assigned and arrives on time, directly at your project.",
       },
     },
   ],
@@ -323,8 +337,8 @@ export const how = {
     {
       num: "03",
       color: "#009466",
-      title: { ar: "عقد إلكتروني موثّق", en: "Notarized e-contract" },
-      desc: { ar: "عند الاتفاق يصدر عقد إلكتروني يحدد النطاق والتواريخ والسعر — سند يحفظ حقك.", en: "Once agreed, an e-contract is issued defining scope, dates, and price — a safeguard that protects your right." },
+      title: { ar: "ادفع وارفع الإيصال", en: "Pay & upload the receipt" },
+      desc: { ar: "حوّل القيمة وارفع الإيصال — يتحوّل اتفاقك إلى عقد إلكتروني موثّق يحفظ فيه حقك.", en: "Transfer the amount and upload your receipt — your agreement becomes a notarized e-contract that protects your right." },
       party: { ar: "عقد موثّق", en: "Notarized contract" },
     },
     {

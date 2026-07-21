@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { FileText, Shield, Wallet, Zap } from "lucide-react";
+import { FileText, Shield, ShieldCheck, BadgeCheck, MapPin, Zap } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { trust } from "@/lib/content";
 
-const icons = { FileText, Shield, Wallet, Zap };
+const icons = { FileText, Shield, ShieldCheck, BadgeCheck, MapPin, Zap };
 
 // A single pillar: collapsed by default (icon + title only), expands to reveal
 // the detail text on hover (desktop) or click/tap (mobile). The header region
@@ -33,6 +33,11 @@ function Pillar({ pillar, dir, lang }) {
       <h3 className="text-white font-bold text-base sm:text-lg text-center leading-tight" dir={dir}>
         {pillar.title[lang]}
       </h3>
+      {pillar.soon && (
+        <span className="mt-2 inline-block text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full border border-[#00a884]/50 text-[#00a884] bg-[#00a884]/10">
+          {lang === "ar" ? "قريباً" : "Soon"}
+        </span>
+      )}
       <div
         className="overflow-hidden transition-all duration-500 ease-out"
         style={{
@@ -73,7 +78,7 @@ export default function TrustLayer() {
         </div>
 
         {/* Pillars — fixed LTR order; hover/click to expand detail */}
-        <div dir="ltr" className="grid grid-cols-3 gap-4 sm:gap-5 items-stretch">
+        <div dir="ltr" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
           {trust.pillars.map((p) => (
             <Pillar key={p.num} pillar={p} dir={dir} lang={lang} />
           ))}

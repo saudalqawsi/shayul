@@ -15,7 +15,7 @@ const GROUPS = [
   {
     key: "loaders",
     title: { ar: "شياول", en: "Loaders" },
-    subtitle: { ar: "حسب المقاس والوزن", en: "By size and weight" },
+    subtitle: { ar: "حفر وتحريك التربة", en: "Digging & moving earth" },
     order: ["Loader Size 36", "Loader Size 50", "Loader Size 66", "Loader Size 80", "Loader 920"],
   },
   {

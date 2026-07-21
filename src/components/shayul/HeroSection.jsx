@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown, Shield } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
@@ -58,6 +59,30 @@ export default function HeroSection() {
         <p className="text-white/60 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
           {hero.subtitle[lang]}
         </p>
+
+        {/* Role-branched CTAs (mirrors draft's renter / owner split) */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10">
+          <Link
+            to="/register?role=renter"
+            className="bg-[#009466] hover:bg-[#007a54] text-white px-7 py-3.5 rounded-sm font-bold text-sm transition-colors w-full sm:w-auto"
+          >
+            {hero.ctaRent[lang]}
+          </Link>
+          <Link
+            to="/register?role=owner"
+            className="border border-white/30 hover:border-[#009466] hover:bg-white/5 text-white px-7 py-3.5 rounded-sm font-bold text-sm transition-colors w-full sm:w-auto"
+          >
+            {hero.ctaOwner[lang]}
+          </Link>
+        </div>
+
+        {/* Insurance pill — coming soon */}
+        <div className="inline-flex items-center gap-2 mt-5 px-4 py-1.5 border border-[#009466]/40 rounded-full bg-[#009466]/10">
+          <Shield size={14} className="text-[#009466]" />
+          <span className="text-[#009466] text-xs font-bold tracking-widest">
+            {hero.insurancePill[lang]}
+          </span>
+        </div>
 
         {/* Command Bar */}
         
