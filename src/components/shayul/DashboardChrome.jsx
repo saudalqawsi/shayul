@@ -18,7 +18,7 @@ export default function DashboardChrome({ roleLabel, onLogout }) {
       {/* spacer — Navbar is position:fixed, content must clear it */}
       <div className="h-16" />
       {(roleLabel || onLogout) && (
-        <div className="bg-[#0A1A30] border-b border-white/10 sticky top-16 z-20">
+        <div className="bg-[#1C1917] border-b border-white/10 sticky top-16 z-20">
           <div className="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
             {roleLabel && (
               <span className="text-white/60 text-xs font-bold tracking-widest uppercase">

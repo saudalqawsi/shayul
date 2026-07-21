@@ -27,7 +27,7 @@ export default function RentalCalculator() {
     };
   }, [eq, unit, count, qty, lang]);
 
-  const inputClass = "w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3 text-white text-sm focus:outline-none focus:border-[#009466] transition-colors";
+  const inputClass = "w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3 text-white text-sm focus:outline-none focus:border-[#D97706] transition-colors";
   const labelClass = "text-white/50 text-xs font-bold tracking-wide block mb-2";
 
   const t = {
@@ -47,10 +47,10 @@ export default function RentalCalculator() {
   };
 
   return (
-    <div className="bg-[#0d2240] border border-white/10 rounded-sm p-8 mt-16" dir={dir}>
+    <div className="bg-[#1C1917] border border-white/10 rounded-sm p-8 mt-16" dir={dir}>
       {/* header */}
       <div className="mb-8">
-        <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-3">{t.eyebrow[lang]}</p>
+        <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-3">{t.eyebrow[lang]}</p>
         <h3 className="text-white font-bold leading-snug" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", lineHeight: 1.15 }}>
           {t.title1[lang]} <span className="text-white/40">{t.title2[lang]}</span>
         </h3>
@@ -63,7 +63,7 @@ export default function RentalCalculator() {
             <label className={labelClass}>{t.machine[lang]}</label>
             <select value={sel} onChange={(e) => setSel(e.target.value)} className={`${inputClass} appearance-none`}>
               {equipment.map((e) => (
-                <option key={e.name.en} value={e.name.en} className="bg-[#0d2240]">
+                <option key={e.name.en} value={e.name.en} className="bg-[#1C1917]">
                   {e.name[lang]}
                 </option>
               ))}
@@ -78,7 +78,7 @@ export default function RentalCalculator() {
               <label className={labelClass}>{t.unit[lang]}</label>
               <select value={unit} onChange={(e) => setUnit(e.target.value)} className={`${inputClass} appearance-none`}>
                 {units.map((u) => (
-                  <option key={u.value} value={u.value} className="bg-[#0d2240]">{u[lang]}</option>
+                  <option key={u.value} value={u.value} className="bg-[#1C1917]">{u[lang]}</option>
                 ))}
               </select>
             </div>
@@ -111,13 +111,13 @@ export default function RentalCalculator() {
         </div>
 
         {/* estimate */}
-        <div className="bg-gradient-to-br from-[#009466]/20 to-transparent border border-[#009466]/30 rounded-sm p-6 flex flex-col justify-center">
+        <div className="bg-gradient-to-br from-[#D97706]/20 to-transparent border border-[#D97706]/30 rounded-sm p-6 flex flex-col justify-center">
           <div className="flex items-center gap-2 mb-2">
-            <Calculator size={16} className="text-[#009466]" />
+            <Calculator size={16} className="text-[#D97706]" />
             <span className="text-white/60 text-sm font-bold">{t.estimate[lang]}</span>
           </div>
           <div className="flex items-baseline gap-2 mb-1">
-            <span className="text-[#009466] font-bold font-mono" style={{ fontSize: "clamp(2.25rem, 5vw, 3.5rem)", lineHeight: 1 }}>
+            <span className="text-[#D97706] font-bold font-mono" style={{ fontSize: "clamp(2.25rem, 5vw, 3.5rem)", lineHeight: 1 }}>
               {num(total)}
             </span>
             <Riyal size={26} />

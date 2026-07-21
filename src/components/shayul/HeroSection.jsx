@@ -25,7 +25,7 @@ export default function HeroSection() {
           focalPointX={0.5}
           focalPointY={0.4} />
         
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A1A30]/70 via-[#0A1A30]/50 to-[#0A1A30]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1C1917]/70 via-[#1C1917]/50 to-[#1C1917]" />
       </div>
 
       {/* Blueprint grid lines */}
@@ -41,9 +41,9 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-28 pb-12">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-[#009466]/20 border border-[#009466]/40 rounded-full px-4 py-1.5 mb-8">
-          <Shield size={14} className="text-[#009466]" />
-          <span className="text-[#009466] text-xs font-bold tracking-widest uppercase">{hero.badge[lang]}</span>
+        <div className="inline-flex items-center gap-2 bg-[#D97706]/20 border border-[#D97706]/40 rounded-full px-4 py-1.5 mb-8">
+          <Shield size={14} className="text-[#D97706]" />
+          <span className="text-[#FCD34D] text-xs font-bold tracking-widest uppercase">{hero.badge[lang]}</span>
         </div>
 
         {/* Headline */}
@@ -53,7 +53,7 @@ export default function HeroSection() {
           
           {hero.title1[lang]}
           <br />
-          <span className="text-[#009466]">{hero.title2[lang]}</span>
+          <span className="text-[#D97706]">{hero.title2[lang]}</span>
         </h1>
 
         <p className="text-white/60 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -64,22 +64,22 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10">
           <Link
             to="/register?role=renter"
-            className="bg-[#009466] hover:bg-[#007a54] text-white px-7 py-3.5 rounded-sm font-bold text-sm transition-colors w-full sm:w-auto"
+            className="bg-[#D97706] hover:bg-[#B45309] text-white px-7 py-3.5 rounded-sm font-bold text-sm transition-colors w-full sm:w-auto"
           >
             {hero.ctaRent[lang]}
           </Link>
           <Link
             to="/register?role=owner"
-            className="border border-white/30 hover:border-[#009466] hover:bg-white/5 text-white px-7 py-3.5 rounded-sm font-bold text-sm transition-colors w-full sm:w-auto"
+            className="border border-white/30 hover:border-[#D97706] hover:bg-white/5 text-white px-7 py-3.5 rounded-sm font-bold text-sm transition-colors w-full sm:w-auto"
           >
             {hero.ctaOwner[lang]}
           </Link>
         </div>
 
         {/* Insurance pill — coming soon */}
-        <div className="inline-flex items-center gap-2 mt-5 px-4 py-1.5 border border-[#009466]/40 rounded-full bg-[#009466]/10">
-          <Shield size={14} className="text-[#009466]" />
-          <span className="text-[#009466] text-xs font-bold tracking-widest">
+        <div className="inline-flex items-center gap-2 mt-5 px-4 py-1.5 border border-[#16A34A]/30 rounded-full bg-[#16A34A]/10">
+          <Shield size={14} className="text-[#86efac]" />
+          <span className="text-[#86efac] text-xs font-bold tracking-widest">
             {hero.insurancePill[lang]}
           </span>
         </div>
@@ -146,7 +146,7 @@ export default function HeroSection() {
         <div className="flex flex-wrap justify-center gap-6 mt-8 text-white/40 text-sm">
           {hero.trust.map((t) =>
           <span key={t.en} className="flex items-center gap-2">
-              <span className="text-[#009466]">✓</span> {t[lang]}
+              <span className="text-[#D97706]">✓</span> {t[lang]}
             </span>
           )}
         </div>

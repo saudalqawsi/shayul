@@ -39,16 +39,16 @@ export default function RequestForm() {
 
   if (submitted) {
     return (
-      <section id="request" className="py-24 bg-[#0A1A30]" dir={dir}>
+      <section id="request" className="py-24 bg-[#1C1917]" dir={dir}>
         <div className="max-w-2xl mx-auto px-6 text-center">
-          <div className="w-20 h-20 bg-[#009466]/20 rounded-sm flex items-center justify-center mx-auto mb-6">
-            <CheckCircle size={40} className="text-[#009466]" />
+          <div className="w-20 h-20 bg-[#D97706]/20 rounded-sm flex items-center justify-center mx-auto mb-6">
+            <CheckCircle size={40} className="text-[#D97706]" />
           </div>
           <h2 className="text-white font-bold text-3xl mb-4">{requestForm.successTitle[lang]}</h2>
           <p className="text-white/50 text-lg leading-relaxed mb-8">{requestForm.successDesc[lang]}</p>
           <button
             onClick={() => setSubmitted(false)}
-            className="bg-[#009466] hover:bg-[#007a54] text-white px-8 py-3 rounded-sm font-bold transition-colors">
+            className="bg-[#D97706] hover:bg-[#B45309] text-white px-8 py-3 rounded-sm font-bold transition-colors">
             
             {requestForm.newRequest[lang]}
           </button>
@@ -57,18 +57,18 @@ export default function RequestForm() {
 
   }
 
-  const inputClass = "w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-[#009466] transition-colors";
+  const inputClass = "w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-[#D97706] transition-colors";
   const labelClass = "text-white/50 text-xs font-bold tracking-wide block mb-2";
 
   return (
-    <section id="request" className="py-24 bg-[#0A1A30] relative" dir={dir}>
+    <section id="request" className="py-24 bg-[#1C1917] relative" dir={dir}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Left: Info */}
           <div className="lg:sticky lg:top-28">
-            <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
+            <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-4">
               {requestForm.eyebrow[lang]}
             </p>
             <h2
@@ -96,7 +96,7 @@ export default function RequestForm() {
           </div>
 
           {/* Right: Form */}
-          <div className="bg-[#081626] border border-white/10 rounded-sm p-8">
+          <div className="bg-[#0C0A09] border border-white/10 rounded-sm p-8">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
@@ -118,9 +118,9 @@ export default function RequestForm() {
                 <div>
                   <label className={labelClass}>{f.type[lang]}</label>
                   <select name="equipType" required value={form.equipType} onChange={handleChange} className={`${inputClass} appearance-none`} style={{ backgroundColor: "rgba(8,22,38,1)" }}>
-                    <option value="" className="bg-[#081626]">{f.typePh[lang]}</option>
+                    <option value="" className="bg-[#0C0A09]">{f.typePh[lang]}</option>
                     {requestForm.equipTypes[lang].map((e) =>
-                    <option key={e} value={e} className="bg-[#081626]">{e}</option>
+                    <option key={e} value={e} className="bg-[#0C0A09]">{e}</option>
                     )}
                   </select>
                 </div>
@@ -138,10 +138,10 @@ export default function RequestForm() {
               <div>
                 <label className={labelClass}>{f.duration[lang]}</label>
                 <select name="duration" required value={form.duration} onChange={handleChange} className={`${inputClass} appearance-none`} style={{ backgroundColor: "rgba(8,22,38,1)" }}>
-                  <option value="" className="bg-[#081626]">{f.durationPh[lang]}</option>
-                  <option value="day" className="bg-[#081626]">{lang === "ar" ? "يومي (وردية واحدة)" : "Daily (single shift)"}</option>
-                  <option value="week" className="bg-[#081626]">{lang === "ar" ? "أسبوعي" : "Weekly"}</option>
-                  <option value="scope" className="bg-[#081626]">{lang === "ar" ? "مقطوعة — نطاق عمل محدد" : "Lump-sum — defined scope"}</option>
+                  <option value="" className="bg-[#0C0A09]">{f.durationPh[lang]}</option>
+                  <option value="day" className="bg-[#0C0A09]">{lang === "ar" ? "يومي (وردية واحدة)" : "Daily (single shift)"}</option>
+                  <option value="week" className="bg-[#0C0A09]">{lang === "ar" ? "أسبوعي" : "Weekly"}</option>
+                  <option value="scope" className="bg-[#0C0A09]">{lang === "ar" ? "مقطوعة — نطاق عمل محدد" : "Lump-sum — defined scope"}</option>
                 </select>
               </div>
 
@@ -150,7 +150,7 @@ export default function RequestForm() {
                 <textarea name="notes" value={form.notes} onChange={handleChange} rows={3} placeholder={f.notesPh[lang]} className={`${inputClass} resize-none`} />
               </div>
 
-              <button type="submit" className="w-full bg-[#009466] hover:bg-[#007a54] text-white py-4 rounded-sm font-bold text-base transition-colors duration-200 tracking-wide">
+              <button type="submit" className="w-full bg-[#D97706] hover:bg-[#B45309] text-white py-4 rounded-sm font-bold text-base transition-colors duration-200 tracking-wide">
                 {requestForm.submit[lang]}
               </button>
 

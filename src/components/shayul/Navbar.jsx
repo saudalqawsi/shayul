@@ -12,7 +12,7 @@ export default function Navbar({ scrolled }) {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#0A1A30]/95 backdrop-blur-md border-b border-white/10 py-3"
+          ? "bg-[#1C1917]/95 backdrop-blur-md border-b border-white/10 py-3"
           : "bg-transparent py-6"
       }`}
       dir={dir}
@@ -48,7 +48,7 @@ export default function Navbar({ scrolled }) {
         <div className="flex items-center gap-3">
           <a
             href="#request"
-            className="hidden md:flex items-center gap-2 bg-[#009466] hover:bg-[#007a54] text-white px-5 py-2.5 rounded-sm text-sm font-bold transition-colors duration-200"
+            className="hidden md:flex items-center gap-2 bg-[#D97706] hover:bg-[#B45309] text-white px-5 py-2.5 rounded-sm text-sm font-bold transition-colors duration-200"
           >
             <span>{navCta[lang]}</span>
           </a>
@@ -75,7 +75,7 @@ export default function Navbar({ scrolled }) {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[#0A1A30] border-t border-white/10 px-6 py-4 flex flex-col gap-4">
+        <div className="md:hidden bg-[#1C1917] border-t border-white/10 px-6 py-4 flex flex-col gap-4">
           {navLinks.map((l) => (
             <a
               key={l.href}
@@ -89,7 +89,7 @@ export default function Navbar({ scrolled }) {
           <a
             href="#request"
             onClick={() => setMenuOpen(false)}
-            className="bg-[#009466] text-white py-3 text-center rounded-sm font-bold mt-2"
+            className="bg-[#D97706] text-white py-3 text-center rounded-sm font-bold mt-2"
           >
             {navCta[lang]}
           </a>

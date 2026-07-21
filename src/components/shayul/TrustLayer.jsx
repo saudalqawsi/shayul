@@ -24,17 +24,17 @@ function Pillar({ pillar, dir, lang }) {
           e.preventDefault();
         }
       }}
-      className="group bg-[#0b1623] border rounded-md p-6 pt-8 flex flex-col items-center cursor-pointer transition-all duration-400"
-      style={{ borderColor: open ? "rgba(0,168,132,0.5)" : "#1a3449" }}
+      className="group bg-[#1C1917] border rounded-md p-6 pt-8 flex flex-col items-center cursor-pointer transition-all duration-400"
+      style={{ borderColor: open ? "rgba(217,119,6,0.5)" : "#292524" }}
     >
-      <div className="w-14 h-14 rounded-md bg-[#162738] flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110">
+      <div className="w-14 h-14 rounded-md bg-[#292524] flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110">
         <Icon size={26} style={{ color: pillar.color }} />
       </div>
       <h3 className="text-white font-bold text-base sm:text-lg text-center leading-tight" dir={dir}>
         {pillar.title[lang]}
       </h3>
       {pillar.soon && (
-        <span className="mt-2 inline-block text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full border border-[#00a884]/50 text-[#00a884] bg-[#00a884]/10">
+        <span className="mt-2 inline-block text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full border border-[#16A34A]/40 text-[#86efac] bg-[#16A34A]/10">
           {lang === "ar" ? "قريباً" : "Soon"}
         </span>
       )}
@@ -46,7 +46,7 @@ function Pillar({ pillar, dir, lang }) {
           marginTop: open ? "1rem" : 0,
         }}
       >
-        <p className="text-[#a3b3c2] text-sm leading-relaxed text-center" dir={dir}>
+        <p className="text-[#A8A29E] text-sm leading-relaxed text-center" dir={dir}>
           {pillar.desc[lang]}
         </p>
       </div>
@@ -58,13 +58,13 @@ export default function TrustLayer() {
   const { lang, dir } = useI18n();
 
   return (
-    <section className="py-24 bg-[#0b1623] relative" dir={dir}>
+    <section className="py-24 bg-[#0C0A09] relative" dir={dir}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="mb-16 max-w-2xl" dir="ltr">
-          <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
+          <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-4">
             {trust.eyebrow[lang]}
           </p>
           <h2

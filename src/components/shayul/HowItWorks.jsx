@@ -26,7 +26,7 @@ export default function HowItWorks() {
         {/* node */}
         <div className="relative">
           <div
-            className="w-20 h-20 rounded-full bg-[#0A1A30] border-2 flex items-center justify-center"
+            className="w-20 h-20 rounded-full bg-[#1C1917] border-2 flex items-center justify-center"
             style={{ borderColor: step.color }}
           >
             <Icon size={26} style={{ color: step.color }} />
@@ -51,13 +51,13 @@ export default function HowItWorks() {
   };
 
   return (
-    <section id="how" className="py-24 bg-[#0A1A30] relative" dir={dir}>
+    <section id="how" className="py-24 bg-[#1C1917] relative" dir={dir}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
+          <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-4">
             {how.eyebrow[lang]}
           </p>
           <h2
@@ -69,16 +69,16 @@ export default function HowItWorks() {
             <span className="text-white/40">{how.title2[lang]}</span>
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-white/40 text-sm">
-            <span className="inline-flex items-center gap-1.5 whitespace-nowrap"><span className="w-2 h-2 rounded-full bg-[#009466]" /> {how.startTag[lang]}</span>
+            <span className="inline-flex items-center gap-1.5 whitespace-nowrap"><span className="w-2 h-2 rounded-full bg-[#D97706]" /> {how.startTag[lang]}</span>
             <ArrowLeft size={14} className="opacity-50 rotate-180" />
-            <span className="inline-flex items-center gap-1.5 whitespace-nowrap"><ShieldCheck size={13} className="text-[#D4A537]" /> {how.endTag[lang]}</span>
+            <span className="inline-flex items-center gap-1.5 whitespace-nowrap"><ShieldCheck size={13} className="text-[#F59E0B]" /> {how.endTag[lang]}</span>
           </div>
         </div>
 
         {/* Horizontal roadmap — desktop */}
         <div className="hidden lg:block relative pb-2">
           {/* dashed rail spanning node centers */}
-          <div className="absolute top-10 start-[12.5%] end-[12.5%] h-0 border-t-2 border-dashed border-[#009466]/30" />
+          <div className="absolute top-10 start-[12.5%] end-[12.5%] h-0 border-t-2 border-dashed border-[#D97706]/30" />
           {/* chevrons between steps (RTL: next step is to the start side) */}
           {[25, 50, 75].map((p) => (
             <div
@@ -86,8 +86,8 @@ export default function HowItWorks() {
               className="absolute top-10 -translate-x-1/2 -translate-y-1/2"
               style={{ left: `${p}%` }}
             >
-              <div className="bg-[#0A1A30] rounded-full p-0.5">
-                <ChevronLeft size={20} className="text-[#009466]/70" />
+              <div className="bg-[#1C1917] rounded-full p-0.5">
+                <ChevronLeft size={20} className="text-[#D97706]/70" />
               </div>
             </div>
           ))}
@@ -101,13 +101,13 @@ export default function HowItWorks() {
 
         {/* Vertical roadmap — mobile */}
         <div className="lg:hidden relative">
-          <div className="absolute start-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-[#009466] via-[#0696B0] to-[#009466]" />
+          <div className="absolute start-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-[#D97706] via-[#FCD34D] to-[#D97706]" />
           {how.steps.map((step, i) => {
             const Icon = StepIcons[i] || ClipboardList;
             return (
               <div key={step.num} className="relative ps-16 pb-6 last:pb-0">
                 <div
-                  className="absolute start-0 w-12 h-12 rounded-full bg-[#0A1A30] flex items-center justify-center z-10"
+                  className="absolute start-0 w-12 h-12 rounded-full bg-[#1C1917] flex items-center justify-center z-10"
                   style={{ border: `2px solid ${step.color}` }}
                 >
                   <Icon size={20} style={{ color: step.color }} />
@@ -133,7 +133,7 @@ export default function HowItWorks() {
             <ContractPreview />
           </div>
           <div className="order-1 lg:order-2">
-            <p className="text-[#D4A537] text-xs font-bold tracking-widest uppercase mb-4">
+            <p className="text-[#F59E0B] text-xs font-bold tracking-widest uppercase mb-4">
               {lang === "ar" ? "نهاية آمنة" : "Secured outcome"}
             </p>
             <h3
@@ -151,19 +151,19 @@ export default function HowItWorks() {
               {how.stats.map((s) => (
                 <div
                   key={s.val.en}
-                  className="bg-[#081626] border border-white/15 rounded-sm p-3 text-center"
+                  className="bg-[#0C0A09] border border-white/15 rounded-sm p-3 text-center"
                 >
-                  <div className="text-[#009466] font-bold text-sm font-mono">{s.val[lang]}</div>
+                  <div className="text-[#D97706] font-bold text-sm font-mono">{s.val[lang]}</div>
                   <div className="text-white/50 text-xs mt-0.5">{s.label[lang]}</div>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-2 mt-6">
               <span className="inline-flex items-center gap-1.5 text-white/55 text-xs bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
-                <FileCheck size={14} className="text-[#009466]" /> {lang === "ar" ? "عقد إلكتروني موثّق" : "Notarized contract"}
+                <FileCheck size={14} className="text-[#D97706]" /> {lang === "ar" ? "عقد إلكتروني موثّق" : "Notarized contract"}
               </span>
               <span className="inline-flex items-center gap-1.5 text-white/55 text-xs bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
-                <Clock size={14} className="text-[#0696B0]" /> {lang === "ar" ? "تسليم اليوم أو التالي" : "Same / next-day delivery"}
+                <Clock size={14} className="text-[#FCD34D]" /> {lang === "ar" ? "تسليم اليوم أو التالي" : "Same / next-day delivery"}
               </span>
             </div>
           </div>

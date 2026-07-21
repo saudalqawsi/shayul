@@ -55,7 +55,7 @@ export const trust = {
   pillars: [
     {
       icon: "ShieldCheck",
-      color: "#00a884",
+      color: "#16A34A",
       soon: true,
       num: "01",
       title: { ar: "تأمين شامل على المعدات", en: "Equipment insurance" },
@@ -66,7 +66,7 @@ export const trust = {
     },
     {
       icon: "Zap",
-      color: "#00a884",
+      color: "#16A34A",
       num: "02",
       title: { ar: "حجز فوري بدون تفاوض", en: "Instant booking, no haggling" },
       desc: {
@@ -76,7 +76,7 @@ export const trust = {
     },
     {
       icon: "BadgeCheck",
-      color: "#00a884",
+      color: "#16A34A",
       num: "03",
       title: { ar: "مؤجرون موثّقون", en: "Verified lessors" },
       desc: {
@@ -86,7 +86,7 @@ export const trust = {
     },
     {
       icon: "MapPin",
-      color: "#00a884",
+      color: "#16A34A",
       num: "04",
       title: { ar: "سائق يصل لموقعك", en: "Driver to your site" },
       desc: {
@@ -322,28 +322,28 @@ export const how = {
   steps: [
     {
       num: "01",
-      color: "#009466",
+      color: "#D97706",
       title: { ar: "اختر المعدة", en: "Choose the unit" },
       desc: { ar: "تصفّح الكتالوج وحدّد النوع والحجم المناسب لمشروعك.", en: "Browse the catalogue and pick the type and size that suit your project." },
       party: { ar: "صاحب المشروع", en: "Project Owner" },
     },
     {
       num: "02",
-      color: "#0696B0",
+      color: "#FCD34D",
       title: { ar: "حدّد الموعد والموقع", en: "Set date & location" },
       desc: { ar: "اختر تاريخ البداية والنهاية، وحدّد موقع المشروع بدقة.", en: "Pick the start and end dates, and pin your project location precisely." },
       party: { ar: "صاحب المشروع", en: "Project Owner" },
     },
     {
       num: "03",
-      color: "#009466",
+      color: "#D97706",
       title: { ar: "ادفع وانتظر التأكيد", en: "Pay & await confirmation" },
       desc: { ar: "حوّل القيمة وارفع الإيصال — فريقنا يُوثّق ويُفعّل الطلب.", en: "Transfer the amount and upload your receipt — our team verifies and activates the request." },
       party: { ar: "عقد موثّق", en: "Notarized contract" },
     },
     {
       num: "04",
-      color: "#009466",
+      color: "#D97706",
       title: { ar: "المعدة في موقعك", en: "Unit on site" },
       desc: { ar: "السائق يصل في الوقت المحدد. تابع حجزك من لوحة التحكم.", en: "The driver arrives on time. Track your booking from your dashboard." },
       party: { ar: "تسليم", en: "Delivery" },
@@ -604,8 +604,8 @@ export const journey = {
     en: "Track your request step by step — from the moment you submit it to the unit arriving on site and completion confirmed.",
   },
   roles: [
-    { key: "client", icon: "User", color: "#009466", label: { ar: "صاحب المشروع", en: "Project Owner" } },
-    { key: "platform", icon: "Database", color: "#0696B0", label: { ar: "منصة شيول", en: "Shaywal Platform" } },
+    { key: "client", icon: "User", color: "#D97706", label: { ar: "صاحب المشروع", en: "Project Owner" } },
+    { key: "platform", icon: "Database", color: "#FCD34D", label: { ar: "منصة شيول", en: "Shaywal Platform" } },
   ],
   stages: [
     {

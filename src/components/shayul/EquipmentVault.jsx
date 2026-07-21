@@ -34,13 +34,13 @@ export default function EquipmentVault() {
   const { lang, dir } = useI18n();
 
   return (
-    <section id="equipment" className="py-24 bg-[#081626] relative" dir={dir}>
+    <section id="equipment" className="py-24 bg-[#0C0A09] relative" dir={dir}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="mb-12">
-          <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
+          <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-4">
             {equipmentVault.eyebrow[lang]}
           </p>
           <h2 className="text-white font-bold" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.12 }}>
@@ -69,17 +69,17 @@ export default function EquipmentVault() {
         </div>
 
         {/* sourcing CTA */}
-        <div className="mt-16 bg-[#009466]/10 border border-[#009466]/30 border-dashed rounded-sm flex flex-col sm:flex-row items-center justify-between gap-6 p-8">
+        <div className="mt-16 bg-[#D97706]/10 border border-[#D97706]/30 border-dashed rounded-sm flex flex-col sm:flex-row items-center justify-between gap-6 p-8">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-[#009466]/20 rounded-sm flex items-center justify-center shrink-0">
-              <Shield size={28} className="text-[#009466]" />
+            <div className="w-14 h-14 bg-[#D97706]/20 rounded-sm flex items-center justify-center shrink-0">
+              <Shield size={28} className="text-[#D97706]" />
             </div>
             <div>
               <h3 className="text-white font-bold text-lg">{equipmentVault.ctaTitle[lang]}</h3>
               <p className="text-white/40 text-sm mt-1">{equipmentVault.ctaDesc[lang]}</p>
             </div>
           </div>
-          <a href="#request" className="bg-[#009466] hover:bg-[#007a54] text-white px-6 py-2.5 rounded-sm text-sm font-bold transition-colors shrink-0">
+          <a href="#request" className="bg-[#D97706] hover:bg-[#B45309] text-white px-6 py-2.5 rounded-sm text-sm font-bold transition-colors shrink-0">
             {equipmentVault.ctaBtn[lang]}
           </a>
         </div>

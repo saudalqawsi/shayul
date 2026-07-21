@@ -138,8 +138,8 @@ export default function Coverflow({ items }) {
                 aria-label={it.name[lang]}
               >
                 <div
-                  className={`relative overflow-hidden h-full bg-[#0d2240] ${
-                    isActive ? "ring-1 ring-[#C8A96E]/60" : "ring-1 ring-white/5"
+                  className={`relative overflow-hidden h-full bg-[#1C1917] ${
+                    isActive ? "ring-1 ring-[#FCD34D]/60" : "ring-1 ring-white/5"
                   }`}
                 >
                   <Image
@@ -160,7 +160,7 @@ export default function Coverflow({ items }) {
                     </div>
                   )}
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-[10px] tracking-[0.18em] uppercase mb-1 text-[#C8A96E] font-medium">{it.nameAlt[lang]}</p>
+                    <p className="text-[10px] tracking-[0.18em] uppercase mb-1 text-[#FCD34D] font-medium">{it.nameAlt[lang]}</p>
                     <h3 className="text-white font-bold text-lg leading-tight">{it.name[lang]}</h3>
                     <p className="text-white/50 text-xs mt-1 leading-relaxed line-clamp-1">
                       {Object.entries(it.specs || {})
@@ -170,7 +170,7 @@ export default function Coverflow({ items }) {
                     </p>
                     <div className="flex items-end justify-between gap-2 mt-2.5 pt-2.5 border-t border-white/15">
                       <div className="flex items-end gap-1">
-                        <span className="text-[#C8A96E] font-bold font-mono text-base">{num(it.daily)}</span>
+                        <span className="text-[#FCD34D] font-bold font-mono text-base">{num(it.daily)}</span>
                         <Riyal size={12} />
                         <span className="text-white/50 text-[10px]">{equipmentVault.perDay[lang]}</span>
                       </div>
@@ -193,7 +193,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(-1)}
         aria-label="Previous"
-        className="flex absolute -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
+        className="flex absolute -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#1C1917] border border-white/15 text-white/80 hover:text-white hover:border-[#FCD34D] transition-colors"
         style={{ top: `${stageHeight / 2}px` }}
       >
         <ChevronLeft size={18} />
@@ -202,7 +202,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(1)}
         aria-label="Next"
-        className="flex absolute -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
+        className="flex absolute -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#1C1917] border border-white/15 text-white/80 hover:text-white hover:border-[#FCD34D] transition-colors"
         style={{ top: `${stageHeight / 2}px` }}
       >
         <ChevronRight size={18} />
@@ -216,7 +216,7 @@ export default function Coverflow({ items }) {
             type="button"
             onClick={() => goToCard(i)}
             aria-label={it.name[lang]}
-            className={`h-1.5 rounded-full transition-all ${i === activeIdx ? "w-8 bg-[#C8A96E]" : "w-3 bg-white/20"}`}
+            className={`h-1.5 rounded-full transition-all ${i === activeIdx ? "w-8 bg-[#FCD34D]" : "w-3 bg-white/20"}`}
           />
         ))}
       </div>

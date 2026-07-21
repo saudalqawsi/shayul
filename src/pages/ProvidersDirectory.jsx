@@ -46,17 +46,17 @@ export default function ProvidersDirectory() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#081626] text-white" dir="rtl">
+    <div className="min-h-screen bg-[#0C0A09] text-white" dir="rtl">
       {/* header */}
-      <header className="border-b border-white/10 bg-[#0A1A30] sticky top-0 z-20">
+      <header className="border-b border-white/10 bg-[#1C1917] sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
           <Link to="/" className="text-white/40 text-xs hover:text-white/70">← العودة للموقع</Link>
-          <span className="text-[#009466] font-mono text-sm font-bold tracking-widest">SHAYWAL</span>
+          <span className="text-[#D97706] font-mono text-sm font-bold tracking-widest">SHAYWAL</span>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-5 py-10">
-        <p className="text-[#009466] text-xs font-bold tracking-widest uppercase mb-3">دليل المزوّدين</p>
+        <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-3">دليل المزوّدين</p>
         <h1 className="text-3xl font-bold mb-3">شركات المعدات الموثّقة في شيول</h1>
         <p className="text-white/50 text-sm leading-relaxed mb-10 max-w-2xl">
           تصفّح مزوّدي المعدات المعتمدين، استعرض أساطيلهم وتقييمات عملائهم، ثم اطلب المعدة المناسبة لمشروعك.
@@ -64,10 +64,10 @@ export default function ProvidersDirectory() {
 
         {loading ? (
           <div className="flex justify-center py-20">
-            <div className="w-8 h-8 border-4 border-white/20 border-t-[#009466] rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-white/20 border-t-[#D97706] rounded-full animate-spin" />
           </div>
         ) : providers.length === 0 ? (
-          <div className="bg-[#0A1A30] border border-white/10 rounded-sm py-16 text-center">
+          <div className="bg-[#1C1917] border border-white/10 rounded-sm py-16 text-center">
             <Inbox size={32} className="text-white/30 mx-auto mb-3" />
             <p className="text-white/60 font-medium">لا يوجد مزوّدون مسجّلون بعد</p>
             <p className="text-white/35 text-sm mt-1">تابعنا قريباً بعد انضمام الشركات.</p>
@@ -82,11 +82,11 @@ export default function ProvidersDirectory() {
                 <Link
                   key={p.id}
                   to={`/providers/${p.id}`}
-                  className="group bg-[#0A1A30] border border-white/10 rounded-sm p-5 hover:border-[#009466]/40 transition-colors flex flex-col"
+                  className="group bg-[#1C1917] border border-white/10 rounded-sm p-5 hover:border-[#D97706]/40 transition-colors flex flex-col"
                 >
                   <div className="flex items-start gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-sm bg-[#0696B0]/15 flex items-center justify-center flex-shrink-0">
-                      <Building2 size={22} className="text-[#0696B0]" />
+                    <div className="w-12 h-12 rounded-sm bg-[#FCD34D]/15 flex items-center justify-center flex-shrink-0">
+                      <Building2 size={22} className="text-[#FCD34D]" />
                     </div>
                     <div className="min-w-0">
                       <h3 className="font-bold text-white truncate">{p.company_name}</h3>
@@ -108,10 +108,10 @@ export default function ProvidersDirectory() {
                   </div>
 
                   <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/10">
-                    <span className="inline-flex items-center gap-1 text-[10px] text-[#0696B0] font-bold">
+                    <span className="inline-flex items-center gap-1 text-[10px] text-[#FCD34D] font-bold">
                       <ShieldCheck size={12} /> مزوّد موثّق
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[#009466] text-xs font-bold group-hover:gap-2 transition-all">
+                    <span className="inline-flex items-center gap-1 text-[#D97706] text-xs font-bold group-hover:gap-2 transition-all">
                       عرض الملف <ArrowLeft size={14} className="rotate-180" />
                     </span>
                   </div>

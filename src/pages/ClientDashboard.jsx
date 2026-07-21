@@ -18,9 +18,9 @@ import { useToast } from "@/components/ui/use-toast";
 import DashboardChrome from "@/components/shayul/DashboardChrome";
 
 const STATUS_AR = {
-  pending: { label: "قيد المراجعة", chip: "bg-[#0696B0]/10 text-[#0696B0] border-[#0696B0]/30" },
-  accepted: { label: "مقبول", chip: "bg-[#D4A537]/10 text-[#D4A537] border-[#D4A537]/30" },
-  completed: { label: "مكتمل", chip: "bg-[#009466]/10 text-[#009466] border-[#009466]/30" },
+  pending: { label: "قيد المراجعة", chip: "bg-[#FCD34D]/10 text-[#FCD34D] border-[#FCD34D]/30" },
+  accepted: { label: "مقبول", chip: "bg-[#F59E0B]/10 text-[#F59E0B] border-[#F59E0B]/30" },
+  completed: { label: "مكتمل", chip: "bg-[#D97706]/10 text-[#D97706] border-[#D97706]/30" },
   rejected: { label: "مرفوض", chip: "bg-red-500/10 text-red-400 border-red-500/30" },
 };
 
@@ -48,7 +48,7 @@ function ReqCard({ req }) {
   };
 
   return (
-    <div className="bg-[#0A1A30] border border-white/10 rounded-sm p-5 md:p-6" dir="rtl">
+    <div className="bg-[#1C1917] border border-white/10 rounded-sm p-5 md:p-6" dir="rtl">
       {/* head */}
       <div className="flex items-start justify-between gap-3 mb-5 flex-wrap">
         <div>
@@ -67,13 +67,13 @@ function ReqCard({ req }) {
       </div>
 
       {/* tracker */}
-      <div className="bg-[#081626] border border-white/5 rounded-sm p-5">
+      <div className="bg-[#0C0A09] border border-white/5 rounded-sm p-5">
         <RentalTracker status={req.status} createdAt={req.created_date} updatedAt={req.updated_date} />
       </div>
 
       {/* rating — only once the rental is completed (equipment returned) */}
       {req.status === "completed" && (
-        <div className="bg-[#081626] border border-white/5 rounded-sm p-5 mt-4">
+        <div className="bg-[#0C0A09] border border-white/5 rounded-sm p-5 mt-4">
           <RatingStars value={rating} onSave={saveRating} saving={saving} />
         </div>
       )}
@@ -130,7 +130,7 @@ export default function ClientDashboard() {
   const pastItems = items.filter((r) => r.status === "completed");
 
   return (
-    <div className="min-h-screen bg-[#081626] text-white" dir="rtl">
+    <div className="min-h-screen bg-[#0C0A09] text-white" dir="rtl">
       <DashboardChrome
         roleLabel={{ ar: "بوابة العميل", en: "Client Portal" }}
         onLogout={logout}
@@ -145,19 +145,19 @@ export default function ClientDashboard() {
             </h1>
             <p className="text-white/45 text-sm mt-1">تابع حالة طلبات تأجير المعدات من الطلب حتى العقد الموثّق.</p>
           </div>
-          <a href="/#request" className="inline-flex items-center gap-2 bg-[#009466] hover:bg-[#007a54] px-4 py-2.5 rounded-sm text-sm font-bold">
+          <a href="/#request" className="inline-flex items-center gap-2 bg-[#D97706] hover:bg-[#B45309] px-4 py-2.5 rounded-sm text-sm font-bold">
             <PlusCircle size={16} /> طلب جديد
           </a>
         </div>
 
         {/* stats */}
         <div className="grid grid-cols-2 gap-3 mb-8">
-          <div className="bg-[#0A1A30] border border-white/10 rounded-sm p-4">
+          <div className="bg-[#1C1917] border border-white/10 rounded-sm p-4">
             <div className="text-3xl font-bold font-mono text-white">{total}</div>
             <div className="text-white/45 text-xs mt-1">إجمالي الطلبات</div>
           </div>
-          <div className="bg-[#0A1A30] border border-white/10 rounded-sm p-4">
-            <div className="text-3xl font-bold font-mono text-[#009466]">{activeCount}</div>
+          <div className="bg-[#1C1917] border border-white/10 rounded-sm p-4">
+            <div className="text-3xl font-bold font-mono text-[#D97706]">{activeCount}</div>
             <div className="text-white/45 text-xs mt-1">قيد التنفيذ</div>
           </div>
         </div>
@@ -165,14 +165,14 @@ export default function ClientDashboard() {
         {/* list */}
         {loading ? (
           <div className="flex justify-center py-16">
-            <div className="w-8 h-8 border-4 border-white/20 border-t-[#009466] rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-white/20 border-t-[#D97706] rounded-full animate-spin" />
           </div>
         ) : total === 0 ? (
-          <div className="bg-[#0A1A30] border border-white/10 rounded-sm py-16 text-center">
+          <div className="bg-[#1C1917] border border-white/10 rounded-sm py-16 text-center">
             <Inbox size={32} className="text-white/30 mx-auto mb-3" />
             <p className="text-white/60 font-medium mb-1">لا توجد طلبات بعد</p>
             <p className="text-white/35 text-sm mb-5">أرسل طلب معدات أول ليظهر هنا مع متابعة الحالة.</p>
-            <a href="/#request" className="inline-flex items-center gap-2 bg-[#009466] hover:bg-[#007a54] px-5 py-2.5 rounded-sm text-sm font-bold">
+            <a href="/#request" className="inline-flex items-center gap-2 bg-[#D97706] hover:bg-[#B45309] px-5 py-2.5 rounded-sm text-sm font-bold">
               <PlusCircle size={16} /> أرسل طلبك
             </a>
           </div>
@@ -181,7 +181,7 @@ export default function ClientDashboard() {
             {activeItems.length > 0 && (
               <section>
                 <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-                  <Clock size={18} className="text-[#0696B0]" /> الطلبات الحالية
+                  <Clock size={18} className="text-[#FCD34D]" /> الطلبات الحالية
                 </h2>
                 <div className="space-y-5">
                   {activeItems.map((r) => (

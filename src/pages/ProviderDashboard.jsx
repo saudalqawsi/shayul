@@ -42,7 +42,7 @@ export default function ProviderDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#081626] text-white" dir="rtl">
+    <div className="min-h-screen bg-[#0C0A09] text-white" dir="rtl">
       <DashboardChrome roleLabel={{ ar: "بوابة المزوّد", en: "Provider Portal" }} />
 
       <main className="max-w-6xl mx-auto px-5 py-8">
@@ -50,8 +50,8 @@ export default function ProviderDashboard() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
           {[
             { label: "إجمالي المعدات", val: stats.total },
-            { label: "متاحة", val: stats.available, color: "#009466" },
-            { label: "مؤجّرة", val: stats.rented, color: "#0696B0" },
+            { label: "متاحة", val: stats.available, color: "#D97706" },
+            { label: "مؤجّرة", val: stats.rented, color: "#FCD34D" },
             { label: "طلبات جديدة", val: stats.pending, color: "#D4A537" },
           ].map((s) => (
             <div key={s.label} className="bg-white/4 border border-white/10 rounded-sm p-4">
@@ -63,18 +63,18 @@ export default function ProviderDashboard() {
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-4 border-white/20 border-t-[#009466] rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-white/20 border-t-[#D97706] rounded-full animate-spin" />
           </div>
         ) : (
           <Tabs defaultValue="enlist" dir="rtl">
             <TabsList className="bg-white/5 border border-white/10 p-1 h-auto flex w-full mb-6">
-              <TabsTrigger value="enlist" className="flex-1 data-[state=active]:bg-[#009466] data-[state=active]:text-white text-white/60 text-sm gap-2">
+              <TabsTrigger value="enlist" className="flex-1 data-[state=active]:bg-[#D97706] data-[state=active]:text-white text-white/60 text-sm gap-2">
                 <PackagePlus size={15} /> تسجيل معدة
               </TabsTrigger>
-              <TabsTrigger value="fleet" className="flex-1 data-[state=active]:bg-[#009466] data-[state=active]:text-white text-white/60 text-sm gap-2">
+              <TabsTrigger value="fleet" className="flex-1 data-[state=active]:bg-[#D97706] data-[state=active]:text-white text-white/60 text-sm gap-2">
                 <Truck size={15} /> حالة الأسطول
               </TabsTrigger>
-              <TabsTrigger value="requests" className="flex-1 data-[state=active]:bg-[#009466] data-[state=active]:text-white text-white/60 text-sm gap-2">
+              <TabsTrigger value="requests" className="flex-1 data-[state=active]:bg-[#D97706] data-[state=active]:text-white text-white/60 text-sm gap-2">
                 <ClipboardList size={15} /> طلبات التأجير
                 {stats.pending > 0 && <span className="bg-amber-500 text-black text-[10px] font-bold rounded-full px-1.5">{stats.pending}</span>}
               </TabsTrigger>

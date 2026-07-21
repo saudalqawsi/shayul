@@ -7,13 +7,13 @@ export default function FooterSection() {
   const { lang, dir } = useI18n();
 
   return (
-    <footer className="bg-[#050f1c] border-t border-white/10 pt-16 pb-8" dir={dir}>
+    <footer className="bg-[#0C0A09] border-t border-white/10 pt-16 pb-8" dir={dir}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 bg-[#009466] rounded-sm flex items-center justify-center font-bold text-white text-xl">
+              <div className="w-10 h-10 bg-[#D97706] rounded-sm flex items-center justify-center font-bold text-white text-xl">
                 S
               </div>
               <div>
@@ -22,9 +22,9 @@ export default function FooterSection() {
               </div>
             </div>
             <p className="text-white/40 text-sm leading-relaxed max-w-xs mb-6">{footer.desc[lang]}</p>
-            <div className="flex items-center gap-2 bg-[#009466]/10 border border-[#009466]/30 rounded-sm px-4 py-2.5 w-fit">
-              <Shield size={14} className="text-[#009466]" />
-              <span className="text-[#009466] text-sm font-bold">{footer.badge[lang]}</span>
+            <div className="flex items-center gap-2 bg-[#D97706]/10 border border-[#D97706]/30 rounded-sm px-4 py-2.5 w-fit">
+              <Shield size={14} className="text-[#D97706]" />
+              <span className="text-[#D97706] text-sm font-bold">{footer.badge[lang]}</span>
             </div>
           </div>
 
@@ -45,12 +45,12 @@ export default function FooterSection() {
             <h4 className="text-white font-bold text-sm mb-5 tracking-wide">{footer.contactTitle[lang]}</h4>
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-white/40 text-sm">
-                <MapPin size={14} className="text-[#009466] flex-shrink-0" />
+                <MapPin size={14} className="text-[#D97706] flex-shrink-0" />
                 {footer.location[lang]}
               </li>
               <li>
                 <a href="https://shayul.com" className="flex items-center gap-2 text-white/40 hover:text-white text-sm transition-colors">
-                  <span className="text-[#009466] text-xs font-mono">WWW</span>
+                  <span className="text-[#D97706] text-xs font-mono">WWW</span>
                   shayul.com
                 </a>
               </li>

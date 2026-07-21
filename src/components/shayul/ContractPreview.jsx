@@ -49,11 +49,11 @@ export default function ContractPreview() {
               {/* Letterhead */}
               <div className="relative flex items-start justify-between gap-4 mb-5">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-sm bg-[#0A1A30] flex items-center justify-center">
-                    <ShieldCheck size={18} className="text-[#D4A537]" />
+                  <div className="w-9 h-9 rounded-sm bg-[#1C1917] flex items-center justify-center">
+                    <ShieldCheck size={18} className="text-[#F59E0B]" />
                   </div>
                   <div>
-                    <div className="font-bold text-[#0A1A30] text-base leading-none">{contract.logoText[lang]}</div>
+                    <div className="font-bold text-[#1C1917] text-base leading-none">{contract.logoText[lang]}</div>
                     <div className="text-[#232023]/45 text-[9px] mt-0.5 tracking-widest font-mono">HEAVY EQUIPMENT · KSA</div>
                   </div>
                 </div>
@@ -86,8 +86,8 @@ export default function ContractPreview() {
               {/* Parties */}
               <div className="relative grid grid-cols-2 gap-5 mb-6">
                 {[
-                  { role: contract.client[lang], color: "#0696B0" },
-                  { role: contract.provider[lang], color: "#009466" },
+                  { role: contract.client[lang], color: "#FCD34D" },
+                  { role: contract.provider[lang], color: "#D97706" },
                 ].map((p, i) => (
                   <div key={i}>
                     <div className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: p.color }}>
@@ -128,7 +128,7 @@ export default function ContractPreview() {
                 </div>
                 <div className="flex justify-between items-center py-1.5 text-sm border-t-2 border-[#232023]/50">
                   <span className="text-[#232023]/70 font-bold">{contract.totalLabel[lang]}</span>
-                  <span className="font-mono font-bold text-[#0A1A30] inline-flex items-center gap-1">{v.total[lang]} <Riyal size={12} light={false} /></span>
+                  <span className="font-mono font-bold text-[#1C1917] inline-flex items-center gap-1">{v.total[lang]} <Riyal size={12} light={false} /></span>
                 </div>
               </div>
 
@@ -136,7 +136,7 @@ export default function ContractPreview() {
               <ol className="relative mb-7 space-y-2.5">
                 {contract.terms.map((t, i) => (
                   <li key={i} className="flex gap-2.5 text-xs leading-relaxed text-[#232023]/70">
-                    <span className="font-mono font-bold text-[#0A1A30] flex-shrink-0">{ar ? ["١","٢"][i] : i + 1}.</span>
+                    <span className="font-mono font-bold text-[#1C1917] flex-shrink-0">{ar ? ["١","٢"][i] : i + 1}.</span>
                     <span>{t[lang]}</span>
                   </li>
                 ))}

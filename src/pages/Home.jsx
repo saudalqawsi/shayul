@@ -21,7 +21,7 @@ function HomeContent() {
   }, []);
 
   return (
-    <div className="bg-[#0A1A30] text-white min-h-screen overflow-x-hidden" dir={dir}>
+    <div className="bg-[#1C1917] text-white min-h-screen overflow-x-hidden" dir={dir}>
       <Navbar scrolled={scrolled} />
       <HeroSection />
       <TrustLayer />

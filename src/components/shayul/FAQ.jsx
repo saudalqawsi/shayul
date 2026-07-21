@@ -8,11 +8,11 @@ export default function FAQ() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="py-24 bg-[#0A1A30] border-t border-white/5" dir={dir}>
+    <section id="faq" className="py-24 bg-[#1C1917] border-t border-white/5" dir={dir}>
       <div className="max-w-3xl mx-auto px-6">
         {/* header */}
         <div className="mb-12 text-center">
-          <div className="inline-flex items-center gap-2 text-[#009466] text-xs font-bold tracking-widest uppercase mb-4">
+          <div className="inline-flex items-center gap-2 text-[#D97706] text-xs font-bold tracking-widest uppercase mb-4">
             <HelpCircle size={14} />
             {faq.eyebrow[lang]}
           </div>
@@ -30,7 +30,7 @@ export default function FAQ() {
             return (
               <div
                 key={i}
-                className={`rounded-sm border transition-colors ${isOpen ? "border-[#009466]/40 bg-[#0d2240]" : "border-white/10 bg-[#0d2240]/40"}`}
+                className={`rounded-sm border transition-colors ${isOpen ? "border-[#D97706]/40 bg-[#1C1917]" : "border-white/10 bg-[#1C1917]/40"}`}
               >
                 <button
                   type="button"
@@ -41,7 +41,7 @@ export default function FAQ() {
                   <span className="text-white font-bold text-base sm:text-lg leading-snug">
                     {item.q[lang]}
                   </span>
-                  <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isOpen ? "bg-[#009466] text-white" : "bg-white/5 text-white/60"}`}>
+                  <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isOpen ? "bg-[#D97706] text-white" : "bg-white/5 text-white/60"}`}>
                     {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                   </span>
                 </button>
@@ -61,7 +61,7 @@ export default function FAQ() {
         {/* CTA */}
         <div className="mt-12 text-center">
           <p className="text-white/40 text-sm mb-4">{faq.stillQues[lang]}</p>
-          <a href="#request" className="inline-flex items-center gap-2 bg-[#009466] hover:bg-[#007a54] text-white px-6 py-3 rounded-sm text-sm font-bold transition-colors">
+          <a href="#request" className="inline-flex items-center gap-2 bg-[#D97706] hover:bg-[#B45309] text-white px-6 py-3 rounded-sm text-sm font-bold transition-colors">
             {faq.cta[lang]}
           </a>
         </div>
