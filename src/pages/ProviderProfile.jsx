@@ -15,20 +15,8 @@ import {
 } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import StarBadge from "@/components/StarBadge";
-
-const TYPE_AR = {
-  "Wheel Loader": "شيول / لودر",
-  "Backhoe Loader": "حفارة / باك لودر",
-  "Bobcat": "بوبكات",
-  "Forklift Truck": "بوكلين",
-  "Motor Grader": "قريدر",
-  "Bulldozer": "بلدوزر",
-  "Vibratory Roller": "رصاصة / دكاكة",
-  "Dump Truck": "قالب / شاحنة",
-  "Telehandler": "فوركلفت",
-  "Crane": "كرين",
-  "Other": "أخرى",
-};
+import EquipmentIcon, { EquipmentIconRow } from "@/components/shayul/EquipmentIcon";
+import { equipmentToIconKeys } from "@/components/shayul/equipmentIcons";
 
 const STATUS_AR = {
   available: { label: "متاحة", cls: "bg-[#D97706]/10 text-[#D97706] border-[#D97706]/30" },
@@ -67,7 +55,9 @@ function FleetCard({ eq }) {
       </div>
       <div className="p-4">
         <h4 className="text-white font-bold leading-snug">{eq.name}</h4>
-        <div className="text-white/35 text-xs mt-0.5">{TYPE_AR[eq.type] || eq.type}</div>
+        <div className="mt-2">
+          <EquipmentIcon type={eq.type} size={28} theme="dark" />
+        </div>
         <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 text-xs text-white/50">
           {eq.weight && <span className="font-mono">{eq.weight}</span>}
           {eq.power && <span className="font-mono">{eq.power}</span>}
@@ -170,6 +160,14 @@ export default function ProviderProfile() {
               <div className="text-white/40 text-xs mt-3 inline-flex items-center gap-1.5">
                 <MapPin size={13} /> نطاق التغطية: {provider.coverage || "—"}
               </div>
+              {fleet.length > 0 && (
+                <EquipmentIconRow
+                  iconKeys={equipmentToIconKeys(fleet)}
+                  size={28}
+                  theme="dark"
+                  className="mt-4"
+                />
+              )}
             </div>
 
             {/* rating highlight */}

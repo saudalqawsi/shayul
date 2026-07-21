@@ -4,6 +4,7 @@ import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
 import { equipmentVault } from "@/lib/content";
 import Riyal from "@/components/shayul/Riyal";
+import EquipmentIcon from "@/components/shayul/EquipmentIcon";
 import { motion } from "framer-motion";
 
 // Calibration reference (3-card carousel = "bobcat" ratio/size, looks perfect).
@@ -168,6 +169,9 @@ export default function Coverflow({ items }) {
                         .map(([, v]) => v[lang])
                         .join(" · ")}
                     </p>
+                    <div className="flex justify-center my-2">
+                      <EquipmentIcon name={it.name.en} size={28} theme="dark" />
+                    </div>
                     <div className="flex items-end justify-between gap-2 mt-2.5 pt-2.5 border-t border-white/15">
                       <div className="flex items-end gap-1">
                         <span className="text-[#FCD34D] font-bold font-mono text-base">{num(it.daily)}</span>
