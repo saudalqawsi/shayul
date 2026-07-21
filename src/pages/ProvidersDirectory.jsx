@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { Building2, MapPin, Truck, ArrowLeft, Inbox, ShieldCheck } from "lucide-react";
 import StarBadge from "@/components/StarBadge";
+import ProviderJoinSection from "@/components/shayul/ProviderJoinSection";
 import { EquipmentIconRow } from "@/components/shayul/EquipmentIcon";
 import { equipmentToIconKeys } from "@/components/shayul/equipmentIcons";
 
@@ -59,6 +60,9 @@ export default function ProvidersDirectory() {
       </header>
 
       <main className="max-w-6xl mx-auto px-5 py-10">
+        {/* Process to register & enlist (merged "For Providers" content) */}
+        <ProviderJoinSection />
+
         <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-3">دليل المزوّدين</p>
         <h1 className="text-3xl font-bold mb-3">شركات المعدات الموثّقة في شيول</h1>
         <p className="text-white/50 text-sm leading-relaxed mb-10 max-w-2xl">
