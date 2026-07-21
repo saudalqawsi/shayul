@@ -15,7 +15,7 @@ const GROUPS = [
   },
   {
     key: "forklifts",
-    title: { ar: "الفوركلفتات", en: "Forklifts" },
+    title: { ar: "فوركلفت", en: "Forklifts" },
     subtitle: { ar: "بأشكال وأحجام متنوّعة", en: "In multiple forms and sizes" },
     order: ["JCB — Forklift", "Forklift", "Crusher Forklift", "Telehandler"],
   },
