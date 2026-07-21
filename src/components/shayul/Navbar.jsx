@@ -18,8 +18,8 @@ export default function Navbar({ scrolled }) {
       dir={dir}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-3 group">
+        {/* Logo — points home on every page so dashboard chrome has a back-to-site affordance */}
+        <a href="/" className="flex items-center gap-3 group">
           <Monogram size={36} />
           <span className="font-bold text-white text-xl tracking-wide">{logo[lang]}</span>
         </a>

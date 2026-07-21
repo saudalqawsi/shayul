@@ -15,6 +15,7 @@ import RentalTracker from "@/components/client/RentalTracker";
 import RatingStars from "@/components/client/RatingStars";
 import PastRentals from "@/components/client/PastRentals";
 import { useToast } from "@/components/ui/use-toast";
+import DashboardChrome from "@/components/shayul/DashboardChrome";
 
 const STATUS_AR = {
   pending: { label: "قيد المراجعة", chip: "bg-[#0696B0]/10 text-[#0696B0] border-[#0696B0]/30" },
@@ -130,26 +131,10 @@ export default function ClientDashboard() {
 
   return (
     <div className="min-h-screen bg-[#081626] text-white" dir="rtl">
-      {/* header */}
-      <header className="border-b border-white/10 bg-[#0A1A30] sticky top-0 z-20">
-        <div className="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-sm bg-[#009466]/15 flex items-center justify-center">
-              <ShieldCheck size={18} className="text-[#009466]" />
-            </div>
-            <div>
-              <div className="font-bold leading-none">شيول</div>
-              <div className="text-white/40 text-[11px] mt-1">بوابة العميل</div>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <a href="/" className="text-white/50 hover:text-white text-sm">← العودة للموقع</a>
-            <button onClick={logout} className="flex items-center gap-1.5 text-white/50 hover:text-white text-sm">
-              <LogOut size={15} /> خروج
-            </button>
-          </div>
-        </div>
-      </header>
+      <DashboardChrome
+        roleLabel={{ ar: "بوابة العميل", en: "Client Portal" }}
+        onLogout={logout}
+      />
 
       <main className="max-w-5xl mx-auto px-5 py-8">
         {/* greeting */}

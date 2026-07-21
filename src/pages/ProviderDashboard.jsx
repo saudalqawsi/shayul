@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Truck, ClipboardList, PackagePlus } from "lucide-react";
+import DashboardChrome from "@/components/shayul/DashboardChrome";
 import EnlistEquipment from "@/components/provider/EnlistEquipment";
 import FleetList from "@/components/provider/FleetList";
 import RequestsList from "@/components/provider/RequestsList";
@@ -42,16 +43,7 @@ export default function ProviderDashboard() {
 
   return (
     <div className="min-h-screen bg-[#081626] text-white" dir="rtl">
-      {/* Top bar */}
-      <header className="border-b border-white/10 bg-[#0A1A30] sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
-          <div>
-            <Link to="/" className="text-white/40 text-xs hover:text-white/70 block mb-1">← العودة للموقع</Link>
-            <h1 className="text-lg font-bold">بوابة المزوّد · شيول</h1>
-          </div>
-          <div className="text-[#009466] font-mono text-sm font-bold tracking-widest">SHAYWAL</div>
-        </div>
-      </header>
+      <DashboardChrome roleLabel={{ ar: "بوابة المزوّد", en: "Provider Portal" }} />
 
       <main className="max-w-6xl mx-auto px-5 py-8">
         {/* Stats */}
