@@ -8,7 +8,7 @@ export default function RequestForm() {
   const { lang, dir } = useI18n();
   const [form, setForm] = useState({
     name: "", phone: "", company: "", equipType: "", quantity: "1",
-    location: "", duration: "", notes: "",
+    location: "", duration: "", notes: ""
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -26,7 +26,7 @@ export default function RequestForm() {
         duration: form.duration,
         qty: Number(form.quantity) || 1,
         status: "pending",
-        notes: form.notes,
+        notes: form.notes
       });
     } catch (err) {
       // Non-fatal: public visitors without an account still see the success screen.
@@ -48,13 +48,13 @@ export default function RequestForm() {
           <p className="text-white/50 text-lg leading-relaxed mb-8">{requestForm.successDesc[lang]}</p>
           <button
             onClick={() => setSubmitted(false)}
-            className="bg-[#009466] hover:bg-[#007a54] text-white px-8 py-3 rounded-sm font-bold transition-colors"
-          >
+            className="bg-[#009466] hover:bg-[#007a54] text-white px-8 py-3 rounded-sm font-bold transition-colors">
+            
             {requestForm.newRequest[lang]}
           </button>
         </div>
-      </section>
-    );
+      </section>);
+
   }
 
   const inputClass = "w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-[#009466] transition-colors";
@@ -73,25 +73,25 @@ export default function RequestForm() {
             </p>
             <h2
               className="text-white font-bold leading-tight mb-6"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}
-            >
+              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 0.95 }}>
+              
               {requestForm.title1[lang]}
               <br />
               <span className="text-white/40">{requestForm.title2[lang]}</span>
             </h2>
-            <p className="text-white/50 text-base leading-relaxed mb-10">{requestForm.intro[lang]}</p>
+            <p className="text-white/50 text-base leading-relaxed mb-10 hidden">{requestForm.intro[lang]}</p>
 
             {/* Guarantees */}
-            <div className="space-y-4">
-              {requestForm.guarantees.map((g) => (
-                <div key={g.title.en} className="flex items-start gap-3">
+            <div className="space-y-4 hidden">
+              {requestForm.guarantees.map((g) =>
+              <div key={g.title.en} className="flex items-start gap-3">
                   <Shield size={16} className="text-[#009466] flex-shrink-0 mt-0.5" />
                   <div>
                     <div className="text-white font-semibold text-sm">{g.title[lang]}</div>
                     <div className="text-white/40 text-xs">{g.desc[lang]}</div>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
           </div>
 
@@ -119,9 +119,9 @@ export default function RequestForm() {
                   <label className={labelClass}>{f.type[lang]}</label>
                   <select name="equipType" required value={form.equipType} onChange={handleChange} className={`${inputClass} appearance-none`} style={{ backgroundColor: "rgba(8,22,38,1)" }}>
                     <option value="" className="bg-[#081626]">{f.typePh[lang]}</option>
-                    {requestForm.equipTypes[lang].map((e) => (
-                      <option key={e} value={e} className="bg-[#081626]">{e}</option>
-                    ))}
+                    {requestForm.equipTypes[lang].map((e) =>
+                    <option key={e} value={e} className="bg-[#081626]">{e}</option>
+                    )}
                   </select>
                 </div>
                 <div>
@@ -160,6 +160,6 @@ export default function RequestForm() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 }
