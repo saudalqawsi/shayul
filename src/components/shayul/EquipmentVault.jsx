@@ -9,7 +9,7 @@ import RentalCalculator from "@/components/shayul/RentalCalculator";
 const GROUPS = [
   {
     key: "loaders",
-    title: { ar: "الشيولات", en: "Loaders" },
+    title: { ar: "شياول", en: "Loaders" },
     subtitle: { ar: "حسب المقاس والوزن", en: "By size and weight" },
     order: ["Loader Size 36", "Loader Size 50", "Loader Size 66", "Loader Size 80", "Loader 920"],
   },
