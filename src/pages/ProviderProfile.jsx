@@ -52,7 +52,7 @@ function FleetCard({ eq }) {
           {st.label}
         </span>
         <div className="absolute top-3 left-3 pointer-events-none">
-          <EquipmentBadge type={eq.type} width={72} theme="dark" />
+          <EquipmentBadge type={eq.type} width={40} />
         </div>
       </div>
       <div className="p-4">

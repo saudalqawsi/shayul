@@ -161,7 +161,7 @@ export default function Coverflow({ items }) {
                     </div>
                   )}
                   <div className="absolute top-3 left-3 pointer-events-none">
-                    <EquipmentBadge name={it.name.en} width={64} theme="dark" />
+                    <EquipmentBadge name={it.name.en} width={32} />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <p className="text-[10px] tracking-[0.18em] uppercase mb-1 text-[#FCD34D] font-medium">{it.nameAlt[lang]}</p>

@@ -1,15 +1,20 @@
-// Central heavy-equipment icon+label badge library.
+// Central heavy-equipment icon badge library.
 //
 // Source: a single JPEG sprite sheet, 4 rows × 8 cols = 32 cells. Each cell
-// holds a black line-art icon centered above a capitalized text label — we
-// use the WHOLE cell as one composite badge ("icon + label"), not the icon
-// half alone. The white JPEG background is stripped client-side via canvas
-// chroma-keying (see EquipmentBadge.jsx) so the result reads as a logo.
+// holds a black line-art icon above a capitalized text label — we use ONLY
+// the icon (top portion of each cell); the label is cropped out at canvas
+// time. The white JPEG background is stripped client-side via canvas
+// chroma-keying (see EquipmentBadge.jsx) so the result renders as a clean
+// masked shape. CSS `mask` then "paints" the icon shape in the brand amber,
+// so the badge reads as a one-color logo over any background.
 
 export const ICON_SHEET_URL =
   "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/b85c32fd8_IMG_4408.jpeg";
 
 export const ICON_GRID = { rows: 4, cols: 8 };
+
+// Icon fraction of each cell height that is the icon (rest is label).
+export const ICON_FRACTION = 0.6;
 
 // 0-indexed (row, col) positions inside the sprite sheet.
 export const EQUIPMENT_ICONS = {
@@ -88,30 +93,36 @@ export function typeToIcon(type) {
   return "truck";
 }
 
-// Whole-cell (icon + label) background style. `url` is expected to be a
-// background-stripped transparent PNG produced once in EquipmentBadge.jsx;
-// `cellAspect` (cell width / cell height) lets the badge keep natural
-// proportions so neither the icon nor the label gets squished.
-export function getEquipmentBadgeStyle(iconKey, width, theme, url, cellAspect) {
+// Returns the inline-style object that paints the icon shape in `color` using
+// the cached transparent PNG as a CSS mask. `url` is the chroma-keyed,
+// label-cropped sheet produced in EquipmentBadge.jsx; `cellAspect`
+// (icon-cell width / height) sets the natural icon proportions so the icon
+// isn't squished.
+export function getEquipmentBadgeStyle(
+  iconKey,
+  width,
+  url,
+  cellAspect = 0.83,
+  color = "#D97706"
+) {
   const key = EQUIPMENT_ICONS[iconKey] ? iconKey : "truck";
   const pos = EQUIPMENT_ICONS[key];
   const { cols, rows } = ICON_GRID;
   const xPct = (pos.col / (cols - 1)) * 100;
   const yPct = (pos.row / (rows - 1)) * 100;
-  const w = Math.max(24, Math.round(width));
-  const h = Math.max(24, Math.round(width / Math.max(cellAspect || 0.78, 0.1)));
-  const style = {
+  const w = Math.max(14, Math.round(width));
+  const h = Math.max(14, Math.round(width / Math.max(cellAspect, 0.1)));
+  return {
     width: `${w}px`,
     height: `${h}px`,
-    backgroundImage: `url('${url}')`,
-    backgroundSize: `${cols * 100}% ${rows * 100}%`,
-    backgroundPosition: `${xPct}% ${yPct}%`,
-    backgroundRepeat: "no-repeat",
+    backgroundColor: color,
+    WebkitMaskImage: `url('${url}')`,
+    WebkitMaskSize: `${cols * 100}% ${rows * 100}%`,
+    WebkitMaskPosition: `${xPct}% ${yPct}%`,
+    WebkitMaskRepeat: "no-repeat",
+    maskImage: `url('${url}')`,
+    maskSize: `${cols * 100}% ${rows * 100}%`,
+    maskPosition: `${xPct}% ${yPct}%`,
+    maskRepeat: "no-repeat",
   };
-  if (theme === "dark") {
-    // Source is black-on-white. Invert flips the line work to white so it
-    // reads cleanly against dark cards. Transparent pixels stay transparent.
-    style.filter = "invert(1)";
-  }
-  return style;
 }
