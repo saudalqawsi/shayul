@@ -246,7 +246,7 @@ export default function EquipmentVault() {
   );
 
   return (
-    <section id="equipment" className="py-24 bg-[#081626] relative" dir={dir}>
+    <section id="equipment" className="py-14 bg-[#081626] relative" dir={dir}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6">
