@@ -16,7 +16,6 @@ import {
 import { Image } from "@/components/ui/image";
 import StarBadge from "@/components/StarBadge";
 import EquipmentBadge from "@/components/shayul/EquipmentBadge";
-
 const STATUS_AR = {
   available: { label: "متاحة", cls: "bg-[#D97706]/10 text-[#D97706] border-[#D97706]/30" },
   rented: { label: "مؤجّرة", cls: "bg-[#FCD34D]/10 text-[#FCD34D] border-[#FCD34D]/30" },

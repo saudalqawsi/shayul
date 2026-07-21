@@ -5,6 +5,7 @@ import { Building2, MapPin, Truck, ArrowLeft, Inbox, ShieldCheck } from "lucide-
 import StarBadge from "@/components/StarBadge";
 import ProviderJoinSection from "@/components/shayul/ProviderJoinSection";
 import EquipmentBadge from "@/components/shayul/EquipmentBadge";
+import { LanguageProvider } from "@/lib/i18n";
 
 export default function ProvidersDirectory() {
   const [providers, setProviders] = useState([]);
@@ -49,6 +50,7 @@ export default function ProvidersDirectory() {
   }, []);
 
   return (
+    <LanguageProvider>
     <div className="min-h-screen bg-[#0C0A09] text-white" dir="rtl">
       {/* header */}
       <header className="border-b border-white/10 bg-[#1C1917] sticky top-0 z-20">
@@ -136,5 +138,6 @@ export default function ProvidersDirectory() {
         )}
       </main>
     </div>
+    </LanguageProvider>
   );
 }
