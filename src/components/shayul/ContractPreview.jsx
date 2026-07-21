@@ -2,6 +2,7 @@ import React from "react";
 import { Stamp, ShieldCheck } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { contract } from "@/lib/content";
+import Riyal from "@/components/shayul/Riyal";
 
 const crop = "absolute w-3 h-3 border-[#2b2b2b]";
 
@@ -123,11 +124,11 @@ export default function ContractPreview() {
               <div className="relative mb-6">
                 <div className="flex justify-between items-center py-1.5 text-sm">
                   <span className="text-[#232023]/55">{contract.rateLabel[lang]}</span>
-                  <span className="font-mono font-bold text-[#1a1a1a]">{v.rate[lang]}</span>
+                  <span className="font-mono font-bold text-[#1a1a1a] inline-flex items-center gap-1">{v.rate[lang]} <Riyal size={11} /></span>
                 </div>
                 <div className="flex justify-between items-center py-1.5 text-sm border-t-2 border-[#232023]/50">
                   <span className="text-[#232023]/70 font-bold">{contract.totalLabel[lang]}</span>
-                  <span className="font-mono font-bold text-[#0A1A30]">{v.total[lang]}</span>
+                  <span className="font-mono font-bold text-[#0A1A30] inline-flex items-center gap-1">{v.total[lang]} <Riyal size={12} /></span>
                 </div>
               </div>
 

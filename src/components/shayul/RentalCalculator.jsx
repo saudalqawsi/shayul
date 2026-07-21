@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from "react";
-import { Calculator, Info } from "lucide-react";
+import { Calculator } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { equipment } from "@/lib/content";
+import Riyal from "@/components/shayul/Riyal";
 
 const units = [
   { value: "day", ar: "يومي", en: "Daily" },
   { value: "week", ar: "أسبوعي", en: "Weekly" },
-  { value: "month", ar: "شهري", en: "Monthly" },
 ];
 
 export default function RentalCalculator() {
@@ -18,16 +18,12 @@ export default function RentalCalculator() {
 
   const eq = useMemo(() => equipment.find((e) => e.name.en === sel) || equipment[0], [sel]);
 
-  const { rate, total, unitLabel, monthlyUsed } = useMemo(() => {
-    let r;
-    if (unit === "day") r = eq.daily;
-    else if (unit === "week") r = eq.daily * 7;
-    else r = eq.monthly != null ? eq.monthly : eq.daily * 30;
+  const { rate, total, unitLabel } = useMemo(() => {
+    const r = unit === "day" ? eq.daily : eq.daily * 6;
     return {
       rate: r,
       total: r * Math.max(1, count) * Math.max(1, qty),
       unitLabel: units.find((u) => u.value === unit)[lang],
-      monthlyUsed: unit === "month" && eq.monthly == null,
     };
   }, [eq, unit, count, qty, lang]);
 
@@ -73,10 +69,7 @@ export default function RentalCalculator() {
               ))}
             </select>
             <div className="flex gap-3 mt-2 text-xs text-white/40">
-              <span className="font-mono"><span className="text-white/60">{num(eq.daily)}</span> {lang === "ar" ? "ر.س/يوم" : "SAR/day"}</span>
-              {eq.monthly != null && (
-                <span className="font-mono"><span className="text-white/60">{num(eq.monthly)}</span> {lang === "ar" ? "ر.س/شهر" : "SAR/mo"}</span>
-              )}
+              <span className="font-mono flex items-center gap-1"><span className="text-white/60">{num(eq.daily)}</span><Riyal size={11} /><span>{lang === "ar" ? "/يوم" : "/day"}</span></span>
             </div>
           </div>
 
@@ -114,12 +107,7 @@ export default function RentalCalculator() {
             />
           </div>
 
-          {monthlyUsed && (
-            <div className="flex items-start gap-2 text-white/45 text-xs">
-              <Info size={13} className="flex-shrink-0 mt-0.5" />
-              <span>{t.monthlyFallback[lang]}</span>
-            </div>
-          )}
+          {/* monthly option removed — focus on daily + weekly */}
         </div>
 
         {/* estimate */}
@@ -132,7 +120,7 @@ export default function RentalCalculator() {
             <span className="text-[#009466] font-bold font-mono" style={{ fontSize: "clamp(2.25rem, 5vw, 3.5rem)", lineHeight: 1 }}>
               {num(total)}
             </span>
-            <span className="text-white/40 text-lg">ر.س</span>
+            <Riyal size={26} />
           </div>
           <div className="text-white/45 text-sm font-mono mb-4">
             {num(rate)} × {Math.max(1, count)} × {Math.max(1, qty)}

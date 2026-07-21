@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
 import { equipmentVault } from "@/lib/content";
+import Riyal from "@/components/shayul/Riyal";
 
 const CARD_W = 260;
 
@@ -98,8 +99,9 @@ export default function Coverflow({ items }) {
                 </div>
                 <div className="p-4">
                   <h3 className="text-white font-bold text-base leading-tight">{it.name[lang]}</h3>
-                  <div className="flex items-end justify-between mt-2">
+                  <div className="flex items-end gap-1.5 mt-2">
                     <span className="text-[#009466] font-bold font-mono text-xl">{num(it.daily)}</span>
+                    <Riyal size={14} />
                     <span className="text-white/40 text-xs">{equipmentVault.perDay[lang]}</span>
                   </div>
                 </div>
@@ -172,25 +174,17 @@ export default function Coverflow({ items }) {
               <div className="text-white/40 text-xs mb-0.5">{equipmentVault.perDay[lang]}</div>
               <div className="flex items-baseline gap-1">
                 <span className="text-[#009466] font-bold text-2xl font-mono">{num(eq.daily)}</span>
-                <span className="text-white/50 text-sm">ر.س</span>
+                <Riyal size={20} />
               </div>
             </div>
             <div>
               <div className="text-white/40 text-xs mb-0.5">{equipmentVault.weeklyShort[lang]}</div>
               <div className="flex items-baseline gap-1">
                 <span className="text-white font-bold text-xl font-mono">{num(weekly)}</span>
-                <span className="text-white/40 text-sm">ر.س</span>
+                <Riyal size={16} />
               </div>
             </div>
-            {eq.monthly != null && (
-              <div>
-                <div className="text-white/40 text-xs mb-0.5">{lang === "ar" ? "شهري" : "Monthly"}</div>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-white font-bold text-xl font-mono">{num(eq.monthly)}</span>
-                  <span className="text-white/40 text-sm">ر.س</span>
-                </div>
-              </div>
-            )}
+            {/* monthly removed — focus on daily + weekly */}
           </div>
           <a
             href="#request"

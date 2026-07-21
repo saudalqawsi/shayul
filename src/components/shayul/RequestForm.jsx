@@ -141,7 +141,6 @@ export default function RequestForm() {
                   <option value="" className="bg-[#081626]">{f.durationPh[lang]}</option>
                   <option value="day" className="bg-[#081626]">{lang === "ar" ? "يومي (وردية واحدة)" : "Daily (single shift)"}</option>
                   <option value="week" className="bg-[#081626]">{lang === "ar" ? "أسبوعي" : "Weekly"}</option>
-                  <option value="month" className="bg-[#081626]">{lang === "ar" ? "شهري" : "Monthly"}</option>
                   <option value="scope" className="bg-[#081626]">{lang === "ar" ? "مقطوعة — نطاق عمل محدد" : "Lump-sum — defined scope"}</option>
                 </select>
               </div>
