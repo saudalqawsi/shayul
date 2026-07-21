@@ -3,10 +3,15 @@ import { Shield } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { equipment, equipmentVault } from "@/lib/content";
 import Coverflow from "@/components/shayul/Coverflow";
-import RentalCalculator from "@/components/shayul/RentalCalculator";
 
 // Equipment grouped into carousels by family.
 const GROUPS = [
+  {
+    key: "bobcats",
+    title: { ar: "بوبكات", en: "Bobcats" },
+    subtitle: { ar: "تجهيزات متعددة الاستخدامات", en: "Multi-purpose attachments" },
+    order: ["Bobcat Trencher", "Bobcat Sweeper", "Bobcat Cutter"],
+  },
   {
     key: "loaders",
     title: { ar: "شياول", en: "Loaders" },
@@ -14,16 +19,10 @@ const GROUPS = [
     order: ["Loader Size 36", "Loader Size 50", "Loader Size 66", "Loader Size 80", "Loader 920"],
   },
   {
-    key: "forklifts",
-    title: { ar: "فوركلفت", en: "Forklifts" },
-    subtitle: { ar: "للرفع والمناولة", en: "For lifting and handling" },
-    order: ["JCB — Forklift", "Telehandler"],
-  },
-  {
     key: "other",
     title: { ar: "معدات أخرى", en: "Other Equipment" },
     subtitle: { ar: "حفّارات ومعدات متخصصة", en: "Excavators and specialized units" },
-    order: ["Excavator", "Crusher Excavator", "Bobcat Trencher", "Bobcat Sweeper", "Bobcat Cutter", "JCB — Backhoe", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller"],
+    order: ["Excavator", "Crusher Excavator", "JCB — Backhoe", "JCB — Forklift", "Telehandler", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller"],
   },
 ];
 
@@ -84,8 +83,6 @@ export default function EquipmentVault() {
             {equipmentVault.ctaBtn[lang]}
           </a>
         </div>
-
-        <RentalCalculator />
       </div>
     </section>
   );

@@ -6,8 +6,8 @@ import { equipmentVault } from "@/lib/content";
 import Riyal from "@/components/shayul/Riyal";
 import { motion } from "framer-motion";
 
-const CARD_W = 260;
-const CARD_H = 320;
+const CARD_W = 300;
+const CARD_H = 380;
 
 // Normalise an angle (degrees) to the shortest representation in [-180, 180].
 function norm(a) {
@@ -39,7 +39,6 @@ export default function Coverflow({ items }) {
       : 0;
 
   const activeIdx = ((active % total) + total) % total;
-  const eq = items[activeIdx];
 
   const go = (d) => setActive((a) => a + d);
   const goToCard = (i) => {
@@ -49,9 +48,6 @@ export default function Coverflow({ items }) {
     if (Math.abs(delta - total) < Math.abs(best)) best = delta - total;
     setActive((a) => a + best);
   };
-
-  const specEntries = Object.entries(eq.specs || {});
-  const weekly = Math.round(eq.daily * 6);
 
   return (
     <motion.div
@@ -64,7 +60,7 @@ export default function Coverflow({ items }) {
       {/* stage */}
       <div
         dir="ltr"
-        className="relative h-[340px] [perspective:1500px] overflow-hidden touch-pan-y"
+        className="relative h-[440px] [perspective:1500px] overflow-hidden touch-pan-y"
         onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchX.current == null) return;
@@ -170,7 +166,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(-1)}
         aria-label="Previous"
-        className="flex absolute top-[170px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
+        className="flex absolute top-[220px] -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
       >
         <ChevronLeft size={18} />
       </button>
@@ -178,7 +174,7 @@ export default function Coverflow({ items }) {
         type="button"
         onClick={() => go(1)}
         aria-label="Next"
-        className="flex absolute top-[170px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
+        className="flex absolute top-[220px] -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#0d2240] border border-white/15 text-white/80 hover:text-white hover:border-[#C8A96E] transition-colors"
       >
         <ChevronRight size={18} />
       </button>
@@ -196,55 +192,6 @@ export default function Coverflow({ items }) {
         ))}
       </div>
 
-      {/* live detail panel for the active card */}
-      <div className="mt-6 bg-gradient-to-br from-[#0d2240] to-[#0a1a30] border border-[#009466]/20 rounded-sm p-6">
-        <div className="flex items-start justify-between gap-6 flex-wrap">
-          <div className="min-w-0">
-            <h4 className="text-white font-bold text-2xl leading-tight">{eq.name[lang]}</h4>
-            <p className="text-white/40 text-xs font-mono tracking-widest mt-1">{eq.nameAlt[lang].toUpperCase()}</p>
-          </div>
-          <div className="flex items-center gap-1.5 bg-[#0A1A30] px-3 py-1.5 rounded-full border border-white/10 self-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#009466]" />
-            <span className="text-white/80 text-xs font-bold">{equipmentVault.ready[lang]}</span>
-          </div>
-        </div>
-
-        {specEntries.length > 0 && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
-            {specEntries.map(([k, v]) => (
-              <div key={k} className="bg-black/20 rounded-sm px-3 py-2.5 border border-white/5">
-                <div className="text-white/40 text-[11px] tracking-wide mb-0.5">{equipmentVault.specLabels[k]?.[lang] || k}</div>
-                <div className="text-white font-bold text-sm font-mono">{v[lang]}</div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="flex items-end justify-between gap-4 flex-wrap mt-6 pt-5 border-t border-white/10">
-          <div className="flex items-end gap-8">
-            <div>
-              <div className="text-white/40 text-xs mb-0.5">{equipmentVault.perDay[lang]}</div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-[#009466] font-bold text-2xl font-mono">{num(eq.daily)}</span>
-                <Riyal size={20} />
-              </div>
-            </div>
-            <div>
-              <div className="text-white/40 text-xs mb-0.5">{equipmentVault.weeklyShort[lang]}</div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-white font-bold text-xl font-mono">{num(weekly)}</span>
-                <Riyal size={16} />
-              </div>
-            </div>
-          </div>
-          <a
-            href="#request"
-            className="bg-[#009466] hover:bg-[#007a54] text-white px-6 py-3 rounded-sm text-sm font-bold transition-colors"
-          >
-            {equipmentVault.addToRequest[lang]}
-          </a>
-        </div>
-      </div>
     </motion.div>
   );
 }
