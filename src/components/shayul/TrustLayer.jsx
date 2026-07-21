@@ -84,13 +84,6 @@ export default function TrustLayer() {
           ))}
         </div>
 
-        {/* Quote */}
-        <div className="mt-12 border-r-2 border-[#009466] pr-6">
-          <p className="text-white/60 text-lg leading-relaxed max-w-3xl">
-            {trust.quote[lang]}{" "}
-            <span className="text-white font-semibold">{trust.quoteAccent[lang]}</span>
-          </p>
-        </div>
       </div>
     </section>
   );
