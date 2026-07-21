@@ -43,10 +43,14 @@ export default function Coverflow({ items }) {
         {items.map((it, i) => {
           const offset = i - active;
           const abs = Math.abs(offset);
-          const x = offset * 165;
-          const scale = offset === 0 ? 1 : 0.7;
-          const rotY = offset === 0 ? 0 : offset > 0 ? -28 : 28;
-          const opacity = abs > 2 ? 0 : offset === 0 ? 1 : 0.4;
+          const angle = offset * 24;
+          const rad = (angle * Math.PI) / 180;
+          const R = 380;
+          const x = Math.sin(rad) * R;
+          const z = Math.cos(rad) * R - R;
+          const rotY = -angle;
+          const scale = offset === 0 ? 1 : Math.max(0.42, 1 - abs * 0.16);
+          const opacity = abs > 3 ? 0 : offset === 0 ? 1 : Math.max(0.18, 0.85 - abs * 0.28);
           const isActive = offset === 0;
 
           return (
@@ -54,18 +58,19 @@ export default function Coverflow({ items }) {
               key={it.name.en}
               onClick={() => !isActive && setActive(i)}
               type="button"
-              className={`absolute top-0 transition-all duration-500 ease-out ${
+              className={`absolute top-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                 isActive ? "cursor-default" : "cursor-pointer"
               }`}
               style={{
                 left: "50%",
                 width: CARD_W,
                 marginLeft: -CARD_W / 2,
-                transform: `translateX(${x}px) scale(${scale}) rotateY(${rotY}deg)`,
+                transform: `translateX(${x}px) translateZ(${z}px) scale(${scale}) rotateY(${rotY}deg)`,
                 opacity,
                 zIndex: 10 - abs,
-                pointerEvents: abs > 2 ? "none" : "auto",
+                pointerEvents: abs > 3 ? "none" : "auto",
                 transformOrigin: "center center",
+                willChange: "transform, opacity",
               }}
               aria-label={it.name[lang]}
             >
