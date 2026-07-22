@@ -14,21 +14,15 @@ const GROUPS = [
   },
   {
     key: "loaders",
-    title: { ar: "شياول", en: "Loaders" },
+    title: { ar: "شياول وباك لودر", en: "Loaders & Backhoe" },
     subtitle: { ar: "حفر وتحريك التربة", en: "Digging & moving earth" },
-    order: ["Loader Size 36", "Loader Size 50", "Loader Size 66", "Loader Size 80", "Loader 920"],
-  },
-  {
-    key: "lifts",
-    title: { ar: "منصات وأوناش", en: "Lifts & Platforms" },
-    subtitle: { ar: "مان لفت وسيزر لفت", en: "Boom and scissor lifts" },
-    order: ["Man Lift — Genie S-45 HF", "Scissor Lift — Genie GS-1932"],
+    order: ["Loader Size 36", "Loader Size 50", "Loader Size 66", "Loader Size 80", "Loader 920", "JCB — Backhoe"],
   },
   {
     key: "other",
     title: { ar: "معدات أخرى", en: "Other Equipment" },
-    subtitle: { ar: "حفّارات ومعدات متخصصة", en: "Excavators and specialized units" },
-    order: ["Excavator", "Crusher Excavator", "JCB — Backhoe", "JCB — Forklift", "Telehandler", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller", "Walk-Behind Roller"],
+    subtitle: { ar: "حفّارات ومنصات ومعدات متخصصة", en: "Excavators, lifts, and specialized units" },
+    order: ["Excavator", "Crusher Excavator", "JCB — Forklift", "Telehandler", "Man Lift — Genie S-45 HF", "Scissor Lift — Genie GS-1932", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller", "Walk-Behind Roller"],
   },
 ];
 
