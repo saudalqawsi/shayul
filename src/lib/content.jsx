@@ -48,7 +48,7 @@ export const hero = {
 };
 
 export const trust = {
-  eyebrow: { ar: "لماذا شيول", en: "Why Shaywal" },
+  eyebrow: { ar: "لماذا شيول", en: "Why Shayul" },
   title1: { ar: "ثقة في", en: "Trust on" },
   title2: { ar: "كل تأجير.", en: "every rental." },
   pillars: [
@@ -96,7 +96,7 @@ export const trust = {
   ],
   quote: {
     ar: "شيول تعيد بناء الطبقة الغائبة في السوق:",
-    en: "Shaywal rebuilds the missing layer in the market:",
+    en: "Shayul rebuilds the missing layer in the market:",
   },
   quoteAccent: { ar: "الثقة.", en: "Trust." },
 };
@@ -421,7 +421,7 @@ export const contract = {
   serial: "SER · {EN}-4827",
   issueDate: { ar: "٢٠ يوليو ٢٠٢٦", en: "20 July 2026" },
   dateLabel: { ar: "تاريخ الإصدار", en: "Issue Date" },
-  logoText: { ar: "شيول", en: "SHAYWAL" },
+  logoText: { ar: "شيول", en: "SHAYUL" },
   client: { ar: "صاحب المشروع (المستأجر)", en: "Project Owner (Lessee)" },
   provider: { ar: "صاحب المعدة (المؤجّر)", en: "Equipment Owner (Lessor)" },
   scopeLabel: { ar: "نطاق العمل", en: "Scope of Work" },
@@ -454,7 +454,7 @@ export const provider = {
   title2: { ar: "ووردك أسرع.", en: "faster orders." },
   intro: {
     ar: "انضم إلى شبكة شيول من شركات المعدات الموثّقة. أعدّ عناصر أسطولك وأسعارك، واستلم طلبات مؤهّلة قرب منطقتك — بعقد إلكتروني موثّق يحفظ حقك.",
-    en: "Join Shaywal's network of verified equipment firms. Set up your fleet and rates, receive qualified leads near your area — backed by a notarized e-contract that protects your rights.",
+    en: "Join Shayul's network of verified equipment firms. Set up your fleet and rates, receive qualified leads near your area — backed by a notarized e-contract that protects your rights.",
   },
   reqTitle: { ar: "متطلبات التسجيل", en: "Onboarding Requirements" },
   requirements: [
@@ -632,7 +632,7 @@ export const faq = {
       },
     },
     {
-      q: { ar: "كيف أصبح مزوّداً على منصة شيول؟", en: "How do I become a provider on Shaywal?" },
+      q: { ar: "كيف أصبح مزوّداً على منصة شيول؟", en: "How do I become a provider on Shayul?" },
       a: {
         ar: "انضم من بوابة المزوّدين — أرفع سجلك التجاري وتفاصيل أسطولك وأسعارك ونطاق تغطيتك، وبعد التحقق تستقبل طلبات مؤهّلة قرب منطقتك.",
         en: "Join via the Provider portal — upload your commercial registration, fleet details, rates, and coverage area. After verification you'll receive qualified leads near your area.",
@@ -642,8 +642,8 @@ export const faq = {
 };
 
 export const footer = {
-  brand: { ar: "شيول", en: "Shaywal" },
-  brandEn: { ar: "SHAYWAL", en: "شيول" },
+  brand: { ar: "شيول", en: "Shayul" },
+  brandEn: { ar: "SHAYUL", en: "شيول" },
   desc: {
     ar: "سوق المعدات الثقيلة في المملكة — عقد إلكتروني موثّق وتسليم سريع على كل طلب.",
     en: "The Kingdom's heavy-equipment marketplace — a notarized e-contract and fast delivery on every request.",
@@ -656,7 +656,7 @@ export const footer = {
   },
   contactTitle: { ar: "تواصل معنا", en: "Contact" },
   location: { ar: "الرياض، المملكة العربية السعودية", en: "Riyadh, Saudi Arabia" },
-  copyright: { ar: "© ٢٠٢٦ شيول · جميع الحقوق محفوظة · v2.0", en: "© 2026 Shaywal · All rights reserved · v2.0" },
+  copyright: { ar: "© ٢٠٢٦ شيول · جميع الحقوق محفوظة · v2.0", en: "© 2026 Shayul · All rights reserved · v2.0" },
   legal: { ar: ["سياسة الخصوصية", "شروط الاستخدام", "اتفاقية الخدمة"], en: ["Privacy Policy", "Terms of Use", "Service Agreement"] },
   tagline: { ar: "ثقة في كل تأجير", en: "Trust on every rental" },
 };
@@ -671,7 +671,7 @@ export const journey = {
   },
   roles: [
     { key: "client", icon: "User", color: "#D97706", label: { ar: "صاحب المشروع", en: "Project Owner" } },
-    { key: "platform", icon: "Database", color: "#FCD34D", label: { ar: "منصة شيول", en: "Shaywal Platform" } },
+    { key: "platform", icon: "Database", color: "#FCD34D", label: { ar: "منصة شيول", en: "Shayul Platform" } },
   ],
   stages: [
     {
@@ -724,7 +724,7 @@ export const journey = {
 
 export const logo = {
   ar: "شيول",
-  en: "Shaywal",
+  en: "Shayul",
 };
 
 export const navCta = { ar: "اطلب المعدة", en: "Request a Unit" };
