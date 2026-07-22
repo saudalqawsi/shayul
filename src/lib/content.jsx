@@ -329,6 +329,18 @@ export const equipment = [
     img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/2025aa3f1_generated_image.png",
     tag: { ar: "السعر قيد التحديث", en: "Pricing TBC" },
   },
+  {
+    name: { ar: "قلاب سقس", en: "Dump Truck" },
+    nameAlt: { ar: "Dump Truck", en: "قلاب سقس" },
+    specs: {
+      weight: { ar: "٢٥ طن", en: "25 T" },
+      size: { ar: "١٢ م٣", en: "12 m³" },
+    },
+    daily: null,
+    monthly: null,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/68f0c8722_generated_image.png",
+    tag: { ar: "السعر قيد التحديث", en: "Pricing TBC" },
+  },
 ];
 
 // White-background studio thumbnails used ONLY inside the reserve-form
@@ -355,6 +367,7 @@ export const pickerImgs = {
   "Man Lift — Genie S-45 HF": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/2d63b9ad7_generated_image.png",
   "Scissor Lift — Genie GS-1932": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/0b7d77d14_generated_image.png",
   "Walk-Behind Roller": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/20c295481_generated_image.png",
+  "Dump Truck": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/44b710c99_generated_image.png",
 };
 
 export const equipmentVault = {

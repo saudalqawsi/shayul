@@ -187,13 +187,18 @@ export default function RequestForm() {
                     </div>
                   );
                 }
-                const dayTotal = Object.entries(cart)
-                  .filter(([, q]) => q > 0)
-                  .reduce((s, [key, qty]) => {
-                    const eq = equipment.find((e) => e.name.en === key);
-                    return s + qty * (eq?.daily || 0);
-                  }, 0);
-                if (dayTotal === 0) return null;
+                const cartLines = Object.entries(cart).filter(([, q]) => q > 0);
+                const dayTotal = cartLines.reduce((s, [key, qty]) => {
+                  const eq = equipment.find((e) => e.name.en === key);
+                  return s + qty * (eq?.daily || 0);
+                }, 0);
+                const tbcSelected = cartLines.some(([key]) => {
+                  const eq = equipment.find((e) => e.name.en === key);
+                  return eq ? !eq.daily : false;
+                });
+                const tbcNote = lang === "ar"
+                  ? "* أسعار المعدات قيد التحديث ستُحدّد لاحقاً عند تأكيد الطلب."
+                  : "* TBC unit prices will be provided accordingly upon request.";
                 const factor = form.duration === "day" ? 1 : 6;
                 const quote = dayTotal * factor;
                 const headLabel =
@@ -204,6 +209,19 @@ export default function RequestForm() {
                     : lang === "ar"
                       ? "التكلفة التقديرية · أسبوعي"
                       : "Indicative cost · weekly";
+                if (dayTotal === 0) {
+                  if (tbcSelected) {
+                    return (
+                      <div className="rounded-sm border border-white/15 bg-white/5 px-4 py-3">
+                        <p className="text-[#FCD34D] text-xs font-bold tracking-widest uppercase">
+                          {lang === "ar" ? "السعر قيد التحديث" : "Pricing TBC"}
+                        </p>
+                        <p className="text-white/55 text-[11px] mt-1 leading-relaxed">{tbcNote}</p>
+                      </div>
+                    );
+                  }
+                  return null;
+                }
                 return (
                   <div className="rounded-sm border border-[#D97706]/30 bg-[#D97706]/10 px-4 py-4 flex items-center justify-between gap-4">
                     <div>
@@ -213,9 +231,12 @@ export default function RequestForm() {
                           ? "تشمل السائق والوقود · السعر النهائي يحدده العقد الموثّق."
                           : "Includes operator & fuel · final price is set by the notarized contract."}
                       </p>
+                      {tbcSelected && (
+                        <p className="text-[#FCD34D]/80 text-[11px] mt-1 leading-relaxed">{tbcNote}</p>
+                      )}
                     </div>
                     <div className="flex items-end gap-1 shrink-0">
-                      <span className="text-[#FCD34D] font-bold font-mono text-2xl leading-none">{num(quote)}</span>
+                      <span className="text-[#FCD34D] font-bold font-mono text-2xl leading-none">{num(quote)}{tbcSelected ? "*" : ""}</span>
                       <Riyal size={15} />
                     </div>
                   </div>

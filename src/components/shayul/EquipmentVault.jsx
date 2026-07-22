@@ -22,7 +22,7 @@ const GROUPS = [
     key: "other",
     title: { ar: "معدات أخرى", en: "Other Equipment" },
     subtitle: { ar: "حفّارات ومنصات ومعدات متخصصة", en: "Excavators, lifts, and specialized units" },
-    order: ["Excavator", "Crusher Excavator", "JCB — Forklift", "Telehandler", "Man Lift — Genie S-45 HF", "Scissor Lift — Genie GS-1932", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller", "Walk-Behind Roller"],
+    order: ["Excavator", "Crusher Excavator", "JCB — Forklift", "Telehandler", "Man Lift — Genie S-45 HF", "Scissor Lift — Genie GS-1932", "Motor Grader G14", "Bulldozer 800-D9", "Vibratory Roller", "Walk-Behind Roller", "Dump Truck"],
   },
 ];
 
