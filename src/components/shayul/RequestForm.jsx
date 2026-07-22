@@ -213,6 +213,17 @@ export default function RequestForm() {
                 );
               })()}
 
+              {/* Delivery promise — sits beside the indicative quote to tie the
+                  cost with the turnaround expectation. Shown whenever the user
+                  has both picked equipment and chosen a duration. */}
+              {hasItems && form.duration && (
+                <p className="text-white/45 text-[11px] text-center leading-relaxed">
+                  {lang === "ar"
+                    ? "تسليم اليوم أو اليوم التالي · حسب التوفّر*"
+                    : "Same / next-day delivery · based on availability*"}
+                </p>
+              )}
+
               <button
                 type="submit"
                 disabled={!hasItems}
