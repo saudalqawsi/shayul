@@ -15,6 +15,9 @@ import ClientDashboard from './pages/ClientDashboard';
 import ProvidersDirectory from './pages/ProvidersDirectory';
 import ProviderProfile from './pages/ProviderProfile';
 import PlatformPortal from './pages/PlatformPortal';
+import TrustPage from './pages/TrustPage';
+import PricingPage from './pages/PricingPage';
+import HowItWorksPage from './pages/HowItWorksPage';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -45,6 +48,9 @@ const AuthenticatedApp = () => {
       <Route path="/" element={<Home />} />
       <Route path="/providers" element={<ProvidersDirectory />} />
       <Route path="/providers/:id" element={<ProviderProfile />} />
+      <Route path="/trust" element={<TrustPage />} />
+      <Route path="/pricing" element={<PricingPage />} />
+      <Route path="/how-it-works" element={<HowItWorksPage />} />
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
         <Route path="/provider" element={<ProviderPortal />} />
         <Route path="/dashboard" element={<ClientDashboard />} />

@@ -3,11 +3,11 @@
 
 export const navLinks = [
   { label: { ar: "المعدات", en: "Equipment" }, href: "/#equipment" },
-  { label: { ar: "رحلة الحجز", en: "Booking" }, href: "/#how" },
-  { label: { ar: "طلباتي", en: "My Rentals" }, href: "/dashboard" },
+  { label: { ar: "كيف يعمل", en: "How It Works" }, href: "/how-it-works" },
+  { label: { ar: "الأسعار", en: "Pricing" }, href: "/pricing" },
+  { label: { ar: "الثقة والتأمين", en: "Trust & Insurance" }, href: "/trust" },
   { label: { ar: "المزوّدون", en: "Providers" }, href: "/providers" },
-  { label: { ar: "الأسعار", en: "Pricing" }, href: "/#pricing" },
-  { label: { ar: "تواصل معنا", en: "Contact" }, href: "/#request" },
+  { label: { ar: "طلباتي", en: "My Rentals" }, href: "/dashboard" },
 ];
 
 export const hero = {
