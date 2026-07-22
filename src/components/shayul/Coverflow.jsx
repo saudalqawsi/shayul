@@ -114,14 +114,15 @@ export default function Coverflow({ items }) {
                   fittingType="fill"
                   focalPointX={0.5}
                   focalPointY={0.5}
-                  style={{ filter: "saturate(1.45) brightness(1.32) contrast(1.06) sepia(0.18) hue-rotate(-8deg)" }}
+                  style={{ filter: "saturate(1.6) brightness(1.5) contrast(1.02) sepia(0.28) hue-rotate(-12deg)" }}
                 />
-                {/* Sunny-day tint — a soft amber/gold light layer over the
-                    image masks any overcast look in the source shots,
-                    while the bottom gradient keeps the card copy legible. */}
-                <div className="absolute inset-0 bg-gradient-to-b from-amber-300/20 via-amber-100/5 to-orange-300/25 mix-blend-soft-light pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-                {!isActive && <div className="absolute inset-0 bg-black/25 pointer-events-none" />}
+                {/* Sunny-day light: warm amber tint + a top-right sun glow so
+                    every coverflow card reads as a bright daytime shoot,
+                    regardless of the source shot's actual weather. */}
+                <div className="absolute inset-0 bg-amber-300/15 mix-blend-soft-light pointer-events-none" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_5%,rgba(255,224,160,0.55),transparent_55%)] mix-blend-overlay pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />
+                {!isActive && <div className="absolute inset-0 bg-black/20 pointer-events-none" />}
                 {isActive && (
                   <div className="absolute top-3 end-3">
                     <span className="text-[9px] tracking-[0.18em] uppercase px-3 py-1 bg-black/40 backdrop-blur-sm text-white/70 font-medium">
