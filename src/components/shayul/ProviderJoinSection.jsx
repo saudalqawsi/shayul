@@ -127,7 +127,7 @@ export default function ProviderJoinSection() {
       </div>
 
       <Link
-        to="/provider"
+        to="/provider-dashboard"
         className="inline-flex items-center gap-2 bg-[#D97706] hover:bg-[#B45309] text-white px-6 py-3 rounded-sm text-sm font-bold transition-colors">
         
         {provider.cta[lang]}

@@ -7,7 +7,7 @@ export const navLinks = [
   { label: { ar: "الأسعار", en: "Pricing" }, href: "/pricing" },
   { label: { ar: "الثقة والتأمين", en: "Trust & Insurance" }, href: "/trust" },
   { label: { ar: "المزوّدون", en: "Providers" }, href: "/providers" },
-  { label: { ar: "طلباتي", en: "My Rentals" }, href: "/dashboard" },
+  { label: { ar: "طلباتي", en: "My Rentals" }, href: "/client-dashboard" },
 ];
 
 export const hero = {

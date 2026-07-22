@@ -52,9 +52,9 @@ const AuthenticatedApp = () => {
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/how-it-works" element={<HowItWorksPage />} />
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
-        <Route path="/provider" element={<ProviderPortal />} />
-        <Route path="/dashboard" element={<ClientDashboard />} />
-        <Route path="/platform" element={<PlatformPortal />} />
+        <Route path="/provider-dashboard" element={<ProviderPortal />} />
+        <Route path="/client-dashboard" element={<ClientDashboard />} />
+        <Route path="/platform-dashboard" element={<PlatformPortal />} />
       </Route>
       {/* Add your page Route elements here */}
       <Route path="*" element={<PageNotFound />} />

@@ -110,7 +110,7 @@ export default function RequestForm() {
                 <span className="text-white/40 text-[11px]">
                   {lang === "ar" ? "لديك حساب معنا؟" : "Already have an account?"}
                 </span>
-                <Link to="/login?from=/dashboard" className="text-[#FCD34D] hover:text-white text-[11px] font-bold transition-colors">
+                <Link to="/login?from=/client-dashboard" className="text-[#FCD34D] hover:text-white text-[11px] font-bold transition-colors">
                   {lang === "ar" ? "سجّل الدخول" : "Log in"}
                 </Link>
               </div>

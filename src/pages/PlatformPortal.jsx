@@ -87,7 +87,7 @@ export default function PlatformPortal() {
       <div className="min-h-screen bg-[#1C1917] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
         <Lock size={30} className="text-white/40" />
         <p className="text-white/70">يلزم تسجيل الدخول للوصول إلى لوحة المنصة.</p>
-        <Link to="/login?from=/platform" className="bg-[#D97706] hover:bg-[#B45309] px-5 py-2 rounded-sm text-sm font-bold">تسجيل الدخول</Link>
+        <Link to="/login?from=/platform-dashboard" className="bg-[#D97706] hover:bg-[#B45309] px-5 py-2 rounded-sm text-sm font-bold">تسجيل الدخول</Link>
       </div>
     );
   }
