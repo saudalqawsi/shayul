@@ -46,6 +46,16 @@ export default function ContractPreview() {
                 </span>
               </div>
 
+              {/* Bismillah — opens the document Saudi-style; always Arabic,
+                  inked in faint slate so it reads as calligraphic opener, not heading. */}
+              <p
+                className="relative text-center text-[#232023]/65 mb-4 select-none"
+                dir="rtl"
+                style={{ fontFamily: "'Aref Ruqaa', 'IBM Plex Sans Arabic', serif", fontSize: "0.95rem", letterSpacing: "0.04em" }}
+              >
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              </p>
+
               {/* Letterhead */}
               <div className="relative flex items-start justify-between gap-4 mb-5">
                 <div className="flex items-center gap-2.5">
@@ -144,16 +154,28 @@ export default function ContractPreview() {
 
               {/* Signatures + notary stamp */}
               <div className="relative grid grid-cols-2 gap-8 pt-10 mt-4">
+                {/* Ink signatures — Arabic handwriting in royal blue, slightly
+                    skewed per signatory so each reads as an individual stroke. */}
                 {[
-                  contract.clientSign[lang],
-                  contract.providerSign[lang],
-                ].map((s, i) => (
+                  { label: contract.clientSign[lang], name: "محمد العتيبي", rot: -3 },
+                  { label: contract.providerSign[lang], name: "سلطان المطيري", rot: 2.5 },
+                ].map((p, i) => (
                   <div key={i} className="text-center">
-                    <div className="text-[#232023]/40 text-sm mb-1" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                      {ar ? "签字" : "signed"}
+                    <div
+                      className="text-[#1D4ED8] mb-2 inline-block select-none"
+                      style={{
+                        fontFamily: "'Aref Ruqaa', 'IBM Plex Sans Arabic', serif",
+                        fontSize: "1.4rem",
+                        fontWeight: 700,
+                        transform: `rotate(${p.rot}deg)`,
+                        letterSpacing: "0.02em",
+                        textShadow: "0 0.5px 0 rgba(29,78,216,0.12)",
+                      }}
+                    >
+                      {p.name}
                     </div>
                     <div className="border-t border-[#232023]/70 mx-4" />
-                    <div className="text-[#232023]/55 text-[11px] mt-1.5">{s}</div>
+                    <div className="text-[#232023]/55 text-[11px] mt-1.5">{p.label}</div>
                   </div>
                 ))}
 
@@ -173,7 +195,7 @@ export default function ContractPreview() {
                 className="relative mt-10 pt-3 border-t border-[#232023]/20 text-center text-[#232023]/30 text-[8px] tracking-widest font-mono"
                 style={{ letterSpacing: "0.15em" }}
               >
-                {ar ? "هذه وثيقة موثّقة إلكترونياً · شيول · SHAYWAL" : "ELECTRONICALLY NOTARIZED INSTRUMENT · SHAYWAL"}
+                {ar ? "هذه وثيقة موثّقة إلكترونياً · شيول · SHAYUL" : "ELECTRONICALLY NOTARIZED INSTRUMENT · SHAYUL"}
               </div>
             </div>
           </div>
