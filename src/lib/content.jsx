@@ -352,6 +352,9 @@ export const pickerImgs = {
   "Bulldozer 800-D9": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/d3f34b4ad_generated_image.png",
   "Telehandler": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/dcfa9fda9_generated_image.png",
   "Vibratory Roller": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/d33448dc0_generated_image.png",
+  "Man Lift — Genie S-45 HF": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/2d63b9ad7_generated_image.png",
+  "Scissor Lift — Genie GS-1932": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/0b7d77d14_generated_image.png",
+  "Walk-Behind Roller": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/20c295481_generated_image.png",
 };
 
 export const equipmentVault = {

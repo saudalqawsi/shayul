@@ -12,7 +12,7 @@ export default function EquipmentPicker({ items, value, onInc, onDec }) {
 
   return (
     <div dir="ltr">
-      <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 sm:gap-2.5">
+      <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 sm:gap-2.5">
         {items.map((eq) => {
           const count = value[eq.name.en] || 0;
           const selected = count > 0;
