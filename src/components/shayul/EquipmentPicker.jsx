@@ -2,6 +2,7 @@ import React from "react";
 import { Plus, Minus } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { useI18n } from "@/lib/i18n";
+import { pickerImgs } from "@/lib/content";
 
 // Equipment line-up wrapped across multiple lines instead of one long
 // slide track — smaller thumbnails (72-80px) let several units share each
@@ -18,20 +19,21 @@ export default function EquipmentPicker({ items, value, onInc, onDec }) {
           return (
             <div key={eq.name.en} className="flex flex-col">
               {/* thumbnail */}
+              {/* White-frame thumbnail using a dedicated white-background studio
+                  image (pickerImgs) for crisp visibility on small thumbs. */}
               <div
-                className={`relative aspect-square overflow-hidden rounded-sm border transition-colors ${
-                  selected ? "border-[#FCD34D]" : "border-white/10"
+                className={`relative aspect-square overflow-hidden rounded-sm border bg-white transition-colors ${
+                  selected ? "border-[#FCD34D]" : "border-white/15"
                 }`}
               >
                 <Image
-                  src={eq.img}
+                  src={pickerImgs[eq.name.en] || eq.img}
                   alt={eq.name[lang]}
                   className="w-full h-full"
-                  fittingType="fill"
+                  fittingType="fit"
                   focalPointX={0.5}
                   focalPointY={0.5}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
                 {selected && (
                   <span className="absolute top-1 end-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#FCD34D] text-[#1C1917] text-[10px] font-mono font-bold flex items-center justify-center">
                     {count}

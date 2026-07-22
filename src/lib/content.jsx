@@ -219,7 +219,7 @@ export const equipment = [
     },
     daily: 700,
     monthly: 22000,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/2315e1624_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/d730794bb_generated_image.png",
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
   {
@@ -278,7 +278,7 @@ export const equipment = [
     },
     daily: 1000,
     monthly: null,
-    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/dcfa9fda9_generated_image.png",
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/1fa7fa76b_generated_image.png",
     tag: { ar: "للمشاريع الكبرى", en: "For Major Projects" },
   },
   {
@@ -294,6 +294,29 @@ export const equipment = [
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
 ];
+
+// White-background studio thumbnails used ONLY inside the reserve-form
+// picker (cleaner, more visible on small thumbs). The coverflow cards keep
+// the "realistic look" — they keep using each item's `img` above. Keyed by
+// the equipment's English name so the picker can look it up directly.
+export const pickerImgs = {
+  "Loader Size 36": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/561f62ac5_generated_image.png",
+  "Loader Size 50": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/a976c94fe_generated_image.png",
+  "Loader Size 66": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/0b8ceb2fa_generated_image.png",
+  "Loader Size 80": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/a05d11eb1_generated_image.png",
+  "Loader 920": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/43b38b471_generated_image.png",
+  "Bobcat Trencher": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/000913ec8_generated_image.png",
+  "Bobcat Sweeper": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/c1e207150_generated_image.png",
+  "Bobcat Cutter": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/c6a528b3a_generated_image.png",
+  "JCB — Backhoe": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/27d5d2c5b_generated_image.png",
+  "JCB — Forklift": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/2315e1624_generated_image.png",
+  "Excavator": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/502d8d2ba_generated_image.png",
+  "Crusher Excavator": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/b30733543_generated_image.png",
+  "Motor Grader G14": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/0101da91a_generated_image.png",
+  "Bulldozer 800-D9": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/d3f34b4ad_generated_image.png",
+  "Telehandler": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/dcfa9fda9_generated_image.png",
+  "Vibratory Roller": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/d33448dc0_generated_image.png",
+};
 
 export const equipmentVault = {
   eyebrow: { ar: "معرض المعدات", en: "Equipment Vault" },
