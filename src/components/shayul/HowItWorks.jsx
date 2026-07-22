@@ -75,7 +75,7 @@ export default function HowItWorks() {
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-white/40 text-sm">
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap"><span className="w-2 h-2 rounded-full bg-[#D97706]" /> {how.startTag[lang]}</span>
-            <ArrowLeft size={14} className="opacity-50 rotate-180" />
+            <ArrowLeft size={14} className={`opacity-50 ${dir === "rtl" ? "" : "rotate-180"}`} />
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap"><ShieldCheck size={13} className="text-[#F59E0B]" /> {how.endTag[lang]}</span>
           </div>
         </div>
@@ -83,19 +83,23 @@ export default function HowItWorks() {
         {/* Horizontal roadmap — scrolls horizontally on small screens so
             the four steps stay in one continuous line rather than collapsing
             into a long vertical timeline that prolongs the page. */}
-        <div className="relative pb-2 overflow-x-auto overscroll-x-contain">
+        {/* pt-4 gives the floating number bubble headroom above the circle so
+            the overflow-x scroll container no longer clips its top corner. */}
+        <div className="relative pt-4 pb-2 overflow-x-auto overscroll-x-contain">
           {/* dashed rail spanning node centers (visible at every breakpoint so
               the sequential order is obvious even while horizontally scrolling) */}
-          <div className="absolute top-10 start-[12.5%] end-[12.5%] h-0 border-t-2 border-dashed border-[#D97706]/30" />
-          {/* chevrons between steps — always visible */}
+          <div className="absolute top-14 start-[12.5%] end-[12.5%] h-0 border-t-2 border-dashed border-[#D97706]/30" />
+          {/* chevrons between steps — always visible. The chevron direction
+              mirrors with the language so the flow arrow points the right way
+              for both RTL (right→left) and LTR (left→right) reading orders. */}
           {[25, 50, 75].map((p) => (
             <div
               key={p}
-              className="absolute top-10 -translate-x-1/2 -translate-y-1/2"
+              className="absolute top-14 -translate-x-1/2 -translate-y-1/2"
               style={{ left: `${p}%` }}
             >
               <div className="bg-[#1C1917] rounded-full p-0.5">
-                <ChevronLeft size={20} className="text-[#D97706]/70" />
+                <ChevronLeft size={20} className={`text-[#D97706]/70 ${dir === "rtl" ? "" : "rotate-180"}`} />
               </div>
             </div>
           ))}
