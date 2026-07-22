@@ -18,6 +18,10 @@ import PlatformPortal from './pages/PlatformPortal';
 import TrustPage from './pages/TrustPage';
 import PricingPage from './pages/PricingPage';
 import HowItWorksPage from './pages/HowItWorksPage';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -45,6 +49,11 @@ const AuthenticatedApp = () => {
   // Render the main app
   return (
     <Routes>
+      {/* Auth — public, no authentication required */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/" element={<Home />} />
       <Route path="/providers" element={<ProvidersDirectory />} />
       <Route path="/providers/:id" element={<ProviderProfile />} />

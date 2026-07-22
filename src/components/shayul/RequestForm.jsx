@@ -6,11 +6,12 @@ import { base44 } from "@/api/base44Client";
 import { useCart } from "@/lib/cart";
 import EquipmentPicker from "@/components/shayul/EquipmentPicker";
 import Riyal from "@/components/shayul/Riyal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function RequestForm() {
   const { lang, dir, num } = useI18n();
   const { cart, inc, dec, total, clear } = useCart();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "", phone: "", company: "",
     location: "", duration: "", notes: "",
@@ -44,8 +45,15 @@ export default function RequestForm() {
     } catch (err) {
       console.warn("RentalRequest not saved:", err);
     }
-    setSubmitted(true);
+    // After capturing the request, route the visitor:
+    //  • Returning user (already signed in) → straight to their dashboard.
+    //  • New user → registration page, so we can record their account
+    //    information. The request we just saved is keyed by the phone number
+    //    they entered, so it can be attributed to the new account later.
+    let isAuthed = false;
+    try { isAuthed = await base44.auth.isAuthenticated(); } catch { isAuthed = false; }
     clear();
+    navigate(isAuthed ? "/client-dashboard" : "/register?from=/client-dashboard");
   };
 
   const f = requestForm.fields;
@@ -102,19 +110,6 @@ export default function RequestForm() {
           {/* Right: Form */}
           <div className="bg-[#0C0A09] border border-white/10 rounded-sm p-8">
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Returning customer — login shortcut at the top of the request
-                  form, so existing users can skip the guest flow. Subtle gold
-                  link sitting on a thin divider rule — harmonious with the
-                  dark card. */}
-              <div className="flex items-center justify-end gap-2 pb-3 border-b border-white/5">
-                <span className="text-white/40 text-[11px]">
-                  {lang === "ar" ? "لديك حساب معنا؟" : "Already have an account?"}
-                </span>
-                <Link to="/login?from=/client-dashboard" className="text-[#FCD34D] hover:text-white text-[11px] font-bold transition-colors">
-                  {lang === "ar" ? "سجّل الدخول" : "Log in"}
-                </Link>
-              </div>
-
               {/* Contact info — name + phone squeezed into one row at every breakpoint */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
@@ -247,6 +242,18 @@ export default function RequestForm() {
               </button>
 
               <p className="text-white/25 text-xs text-center">{requestForm.consent[lang]}</p>
+
+              {/* Returning customer — login sits just below submit so a guest
+                  filling out a list has the option to either create an account
+                  (submit) or finish the request after logging in. */}
+              <div className="flex items-center justify-center gap-2 pt-3 border-t border-white/5">
+                <span className="text-white/40 text-[11px]">
+                  {lang === "ar" ? "لديك حساب معنا؟" : "Already have an account?"}
+                </span>
+                <Link to="/login?from=/client-dashboard" className="text-[#FCD34D] hover:text-white text-[11px] font-bold transition-colors">
+                  {lang === "ar" ? "سجّل الدخول" : "Log in"}
+                </Link>
+              </div>
             </form>
           </div>
         </div>

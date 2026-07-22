@@ -114,8 +114,11 @@ export default function Coverflow({ items }) {
                   fittingType="fill"
                   focalPointX={0.5}
                   focalPointY={0.5}
+                  style={{ filter: "saturate(1.18) brightness(1.1) contrast(1.04) sepia(0.05)" }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                {/* Lighter overlay + warm filter on the image above gives
+                    the cards a sunny-day feel without losing text legibility. */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
                 {!isActive && <div className="absolute inset-0 bg-black/45 pointer-events-none" />}
                 {isActive && (
                   <div className="absolute top-3 end-3">
