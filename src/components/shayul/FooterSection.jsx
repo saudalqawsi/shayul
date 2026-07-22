@@ -1,8 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Shield, MapPin } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { footer } from "@/lib/content";
 import Monogram from "@/components/shayul/Monogram";
+
+// Index-aligned routes so each footer link resolves to a real page.
+// platformLinks order matches the central `footer.platformLinks` array in
+// content.jsx: Equipment, How It Works, For Providers, Pricing, Request a Unit.
+const PLATFORM_LINKS = [
+  "/#equipment",
+  "/how-it-works",
+  "/providers",
+  "/pricing",
+  "/#request",
+];
+// legalLinks order: Privacy Policy, Terms of Use, Service Agreement.
+const LEGAL_LINKS = ["/legal/privacy", "/legal/terms", "/legal/service"];
 
 export default function FooterSection() {
   const { lang, dir } = useI18n();
@@ -31,15 +45,21 @@ export default function FooterSection() {
           <div>
             <h4 className="text-white font-bold text-sm mb-5 tracking-wide">{footer.platformTitle[lang]}</h4>
             <ul className="space-y-3">
-              {footer.platformLinks[lang].map((l) => (
+              {footer.platformLinks[lang].map((l, i) => (
                 <li key={l}>
-                  <a href="#" className="text-white/40 hover:text-white text-sm transition-colors">{l}</a>
+                  <Link
+                    to={PLATFORM_LINKS[i]}
+                    className="text-white/40 hover:text-white text-sm transition-colors"
+                  >
+                    {l}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact — WWW links to the on-page request form so the row
+              never points to a parked homepage that might not exist yet. */}
           <div>
             <h4 className="text-white font-bold text-sm mb-5 tracking-wide">{footer.contactTitle[lang]}</h4>
             <ul className="space-y-3">
@@ -48,10 +68,13 @@ export default function FooterSection() {
                 {footer.location[lang]}
               </li>
               <li>
-                <a href="https://shayul.com" className="flex items-center gap-2 text-white/40 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/#request"
+                  className="flex items-center gap-2 text-white/40 hover:text-white text-sm transition-colors"
+                >
                   <span className="text-[#D97706] text-xs font-mono">WWW</span>
-                  shayul.com
-                </a>
+                  shaywal.com
+                </Link>
               </li>
             </ul>
           </div>
@@ -64,8 +87,14 @@ export default function FooterSection() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/25 text-xs">{footer.copyright[lang]}</p>
           <div className="flex gap-6">
-            {footer.legal[lang].map((l) => (
-              <a key={l} href="#" className="text-white/25 hover:text-white/50 text-xs transition-colors">{l}</a>
+            {footer.legal[lang].map((l, i) => (
+              <Link
+                key={l}
+                to={LEGAL_LINKS[i]}
+                className="text-white/25 hover:text-white/50 text-xs transition-colors"
+              >
+                {l}
+              </Link>
             ))}
           </div>
           <p className="text-white/15 text-xs font-mono tracking-widest">
