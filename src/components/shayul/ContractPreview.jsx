@@ -3,6 +3,7 @@ import { Stamp, ShieldCheck } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { contract } from "@/lib/content";
 import Riyal from "@/components/shayul/Riyal";
+import SignatureMark from "@/components/shayul/SignatureMark";
 
 const crop = "absolute w-3 h-3 border-[#2b2b2b]";
 
@@ -154,25 +155,18 @@ export default function ContractPreview() {
 
               {/* Signatures + notary stamp */}
               <div className="relative grid grid-cols-2 gap-8 pt-10 mt-4">
-                {/* Ink signatures — Arabic handwriting in royal blue, slightly
-                    skewed per signatory so each reads as an individual stroke. */}
+                {/* Calligraphic ink signatures — freehand SVG strokes in royal
+                    blue (NOT names), each skewed slightly to feel hand-signed. */}
                 {[
-                  { label: contract.clientSign[lang], name: "محمد العتيبي", rot: -3 },
-                  { label: contract.providerSign[lang], name: "سلطان المطيري", rot: 2.5 },
+                  { label: contract.clientSign[lang], rot: -3 },
+                  { label: contract.providerSign[lang], rot: 2.5 },
                 ].map((p, i) => (
                   <div key={i} className="text-center">
                     <div
                       className="text-[#1D4ED8] mb-2 inline-block select-none"
-                      style={{
-                        fontFamily: "'Aref Ruqaa', 'IBM Plex Sans Arabic', serif",
-                        fontSize: "1.4rem",
-                        fontWeight: 700,
-                        transform: `rotate(${p.rot}deg)`,
-                        letterSpacing: "0.02em",
-                        textShadow: "0 0.5px 0 rgba(29,78,216,0.12)",
-                      }}
+                      style={{ transform: `rotate(${p.rot}deg)` }}
                     >
-                      {p.name}
+                      <SignatureMark variant={i} />
                     </div>
                     <div className="border-t border-[#232023]/70 mx-4" />
                     <div className="text-[#232023]/55 text-[11px] mt-1.5">{p.label}</div>
