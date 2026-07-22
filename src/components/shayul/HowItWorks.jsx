@@ -168,7 +168,7 @@ export default function HowItWorks() {
                 <FileCheck size={14} className="text-[#D97706]" /> {lang === "ar" ? "عقد إلكتروني موثّق" : "Notarized contract"}
               </span>
               <span className="inline-flex items-center gap-1.5 text-white/55 text-xs bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
-                <Clock size={14} className="text-[#FCD34D]" /> {lang === "ar" ? "تسليم اليوم أو التالي" : "Same / next-day delivery"}
+                <Clock size={14} className="text-[#FCD34D]" /> {lang === "ar" ? "تسليم اليوم أو التالي (حسب التوفّر)" : "Same / next-day delivery (based on availability)"}
               </span>
             </div>
           </div>
