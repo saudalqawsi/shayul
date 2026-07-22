@@ -130,7 +130,7 @@ export default function ClientDashboard() {
   const pastItems = items.filter((r) => r.status === "completed");
 
   return (
-    <div className="min-h-screen bg-[#0C0A09] text-white" dir="rtl">
+    <div className="min-h-screen bg-[#1C1917] text-white" dir="rtl">
       <DashboardChrome
         roleLabel={{ ar: "بوابة العميل", en: "Client Portal" }}
         onLogout={logout}

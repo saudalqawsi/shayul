@@ -47,7 +47,7 @@ export default function Navbar({ scrolled }) {
         {/* CTA */}
         <div className="flex items-center gap-3">
           <a
-            href="#request"
+            href="/#request"
             className="hidden md:flex items-center gap-2 bg-[#D97706] hover:bg-[#B45309] text-white px-5 py-2.5 rounded-sm text-sm font-bold transition-colors duration-200"
           >
             <span>{navCta[lang]}</span>
@@ -87,7 +87,7 @@ export default function Navbar({ scrolled }) {
             </a>
           ))}
           <a
-            href="#request"
+            href="/#request"
             onClick={() => setMenuOpen(false)}
             className="bg-[#D97706] text-white py-3 text-center rounded-sm font-bold mt-2"
           >

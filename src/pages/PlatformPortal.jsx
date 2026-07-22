@@ -12,6 +12,7 @@ import {
   Inbox,
 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import Navbar from "@/components/shayul/Navbar";
 import ApprovalsBoard from "@/components/platform/ApprovalsBoard";
 import PlatformProviders from "@/components/platform/PlatformProviders";
 import PlatformFleet from "@/components/platform/PlatformFleet";
@@ -75,7 +76,7 @@ export default function PlatformPortal() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-[#0C0A09]">
+      <div className="fixed inset-0 flex items-center justify-center bg-[#1C1917]">
         <div className="w-8 h-8 border-4 border-white/20 border-t-[#D97706] rounded-full animate-spin" />
       </div>
     );
@@ -83,7 +84,7 @@ export default function PlatformPortal() {
 
   if (!me) {
     return (
-      <div className="min-h-screen bg-[#0C0A09] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
+      <div className="min-h-screen bg-[#1C1917] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
         <Lock size={30} className="text-white/40" />
         <p className="text-white/70">يلزم تسجيل الدخول للوصول إلى بوابة المنصة.</p>
         <Link to="/login" className="bg-[#D97706] hover:bg-[#B45309] px-5 py-2 rounded-sm text-sm font-bold">تسجيل الدخول</Link>
@@ -93,7 +94,7 @@ export default function PlatformPortal() {
 
   if (me.role !== "admin") {
     return (
-      <div className="min-h-screen bg-[#0C0A09] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
+      <div className="min-h-screen bg-[#1C1917] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
         <Lock size={32} className="text-red-400/70" />
         <p className="text-white font-bold">هذه البوابة مخصّصة لمشغّلي منصة شيول فقط</p>
         <p className="text-white/45 text-sm">حسابك الحالي لا يملك صلاحية إدارة العمليات والموافقات.</p>
@@ -108,27 +109,25 @@ export default function PlatformPortal() {
   const availableEq = equipment.filter((e) => e.status === "available").length;
 
   return (
-    <div className="min-h-screen bg-[#0C0A09] text-white" dir="rtl">
-      <header className="border-b border-white/10 bg-[#1C1917] sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-[#1C1917] text-white" dir="rtl">
+      <Navbar scrolled />
+      <div className="h-16" />
+      <div className="bg-[#1C1917] border-b border-white/10 sticky top-16 z-20">
+        <div className="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-sm bg-[#F59E0B]/15 flex items-center justify-center">
-              <ShieldCheck size={18} className="text-[#F59E0B]" />
+            <div className="w-7 h-7 rounded-sm bg-[#F59E0B]/15 flex items-center justify-center">
+              <ShieldCheck size={14} className="text-[#F59E0B]" />
             </div>
-            <div>
-              <div className="font-bold leading-none">شيول · بوابة المنصة</div>
-              <div className="text-white/40 text-[11px] mt-1">إدارة العمليات والموافقات</div>
-            </div>
+            <span className="text-white/60 text-xs font-bold tracking-widest uppercase">بوابة المنصة</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-[#F59E0B] text-[10px] font-bold bg-[#F59E0B]/10 border border-[#F59E0B]/30 px-2.5 py-1 rounded-full">مشغّل</span>
-            <a href="/" className="text-white/50 hover:text-white text-sm">← العودة للموقع</a>
             <button onClick={logout} className="flex items-center gap-1.5 text-white/50 hover:text-white text-sm">
               <LogOut size={15} /> خروج
             </button>
           </div>
         </div>
-      </header>
+      </div>
 
       <main className="max-w-6xl mx-auto px-5 py-8">
         <div className="mb-8">

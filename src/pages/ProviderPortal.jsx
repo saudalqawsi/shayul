@@ -25,7 +25,7 @@ export default function ProviderPortal() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-[#0C0A09]">
+      <div className="fixed inset-0 flex items-center justify-center bg-[#1C1917]">
         <div className="w-8 h-8 border-4 border-white/20 border-t-[#D97706] rounded-full animate-spin" />
       </div>
     );
@@ -33,7 +33,7 @@ export default function ProviderPortal() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#0C0A09] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
+      <div className="min-h-screen bg-[#1C1917] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
         <p className="text-white/70">يلزم تسجيل الدخول للوصول إلى بوابة المزوّد.</p>
         <Link to="/login" className="bg-[#D97706] hover:bg-[#B45309] px-5 py-2 rounded-sm text-sm font-bold">تسجيل الدخول</Link>
       </div>

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import StarBadge from "@/components/StarBadge";
+import Navbar from "@/components/shayul/Navbar";
 import EquipmentBadge from "@/components/shayul/EquipmentBadge";
 const STATUS_AR = {
   available: { label: "متاحة", cls: "bg-[#D97706]/10 text-[#D97706] border-[#D97706]/30" },
@@ -105,7 +106,7 @@ export default function ProviderProfile() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0C0A09] flex items-center justify-center">
+      <div className="min-h-screen bg-[#1C1917] flex items-center justify-center">
         <div className="w-8 h-8 border-4 border-white/20 border-t-[#D97706] rounded-full animate-spin" />
       </div>
     );
@@ -113,7 +114,7 @@ export default function ProviderProfile() {
 
   if (err || !provider) {
     return (
-      <div className="min-h-screen bg-[#0C0A09] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
+      <div className="min-h-screen bg-[#1C1917] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
         <Inbox size={36} className="text-white/30" />
         <p className="text-white/60 font-medium">لم يتم العثور على المزوّد</p>
         <Link to="/providers" className="text-[#D97706] text-sm font-bold hover:underline">العودة لدليل المزوّدين</Link>
@@ -124,14 +125,9 @@ export default function ProviderProfile() {
   const available = fleet.filter((e) => e.status === "available").length;
 
   return (
-    <div className="min-h-screen bg-[#0C0A09] text-white" dir="rtl">
-      {/* header */}
-      <header className="border-b border-white/10 bg-[#1C1917] sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
-          <Link to="/providers" className="text-white/40 text-xs hover:text-white/70">← دليل المزوّدين</Link>
-          <span className="text-[#D97706] font-mono text-sm font-bold tracking-widest">SHAYWAL</span>
-        </div>
-      </header>
+    <div className="min-h-screen bg-[#1C1917] text-white" dir="rtl">
+      <Navbar scrolled />
+      <div className="h-16" />
 
       <main className="max-w-6xl mx-auto px-5 py-10">
         {/* profile header */}

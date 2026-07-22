@@ -8,7 +8,7 @@ import PricingSection from "@/components/shayul/PricingSection";
 import RequestForm from "@/components/shayul/RequestForm";
 import FAQ from "@/components/shayul/FAQ";
 import FooterSection from "@/components/shayul/FooterSection";
-import { LanguageProvider, useI18n } from "@/lib/i18n";
+import { useI18n } from "@/lib/i18n";
 
 function HomeContent() {
   const { dir } = useI18n();
@@ -36,9 +36,5 @@ function HomeContent() {
 }
 
 export default function Home() {
-  return (
-    <LanguageProvider>
-      <HomeContent />
-    </LanguageProvider>
-  );
+  return <HomeContent />;
 }

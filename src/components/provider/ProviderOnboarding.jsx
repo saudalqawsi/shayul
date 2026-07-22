@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import Navbar from "@/components/shayul/Navbar";
 
 export default function ProviderOnboarding({ onComplete }) {
   const { toast } = useToast();
@@ -49,15 +50,12 @@ export default function ProviderOnboarding({ onComplete }) {
   const inputCls = "bg-white/5 border-white/15 text-white placeholder:text-white/30";
 
   return (
-    <div className="min-h-screen bg-[#081626] text-white" dir="rtl">
-      <header className="border-b border-white/10 bg-[#0A1A30]">
-        <div className="max-w-3xl mx-auto px-5 py-4">
-          <Link to="/" className="text-white/40 text-xs hover:text-white/70">← العودة للموقع</Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-[#1C1917] text-white" dir="rtl">
+      <Navbar scrolled />
+      <div className="h-16" />
 
       <main className="max-w-3xl mx-auto px-5 py-10">
-        <div className="flex items-center gap-2 text-[#0696B0] text-xs font-bold tracking-widest uppercase mb-4">
+        <div className="flex items-center gap-2 text-[#FCD34D] text-xs font-bold tracking-widest uppercase mb-4">
           <HardHat size={14} /> بوابة المزوّد
         </div>
         <h1 className="text-white font-bold text-3xl mb-3">سجّل شركتك في شبكة شيول</h1>
@@ -88,7 +86,7 @@ export default function ProviderOnboarding({ onComplete }) {
               <Label className="text-white/70 flex items-center gap-1.5"><Truck size={12} /> حجم الأسطول (عدد المعدات)</Label>
               <Input type="number" value={form.fleet} onChange={set("fleet")} placeholder="5" className={inputCls} />
             </div>
-            <Button type="submit" disabled={saving} className="bg-[#009466] hover:bg-[#007a54] text-white w-full">
+            <Button type="submit" disabled={saving} className="bg-[#D97706] hover:bg-[#B45309] text-white w-full">
               {saving ? "جاري التسجيل..." : "أكمل التسجيل وأضف أسطولك"}
               {!saving && <ArrowLeft size={15} className="ms-2 rotate-180" />}
             </Button>
@@ -101,7 +99,7 @@ export default function ProviderOnboarding({ onComplete }) {
               <ul className="space-y-3">
                 {reqs.map((r, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-[#0696B0] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 size={16} className="text-[#FCD34D] flex-shrink-0 mt-0.5" />
                     <span className="text-white/60 text-sm leading-relaxed">{r}</span>
                   </li>
                 ))}

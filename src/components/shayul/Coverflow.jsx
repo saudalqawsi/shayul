@@ -7,36 +7,28 @@ import Riyal from "@/components/shayul/Riyal";
 import EquipmentBadge from "@/components/shayul/EquipmentBadge";
 import { motion } from "framer-motion";
 
-// Calibration reference (3-card carousel = "bobcat" ratio/size, looks perfect).
-// Every other carousel (more cards → tighter rotation step → larger ring
-// radius R → stronger perspective scale) shrinks its card width/hight so the
-// perspective-inflated display size stays identical to the bobcat's (same
-// 347×440 rendered pixels, same 300:380 aspect ratio), giving a uniform frame.
-const CARD_W_REF = 300;
-const CARD_H_REF = 380;
-const PERSPECTIVE_D = 1500;
-const ACTIVE_SCALE = 1.06;
-const BOBCAT_R = Math.round(CARD_W_REF / (2 * Math.tan((120 * Math.PI) / 360))) + 40;
-const BOBCAT_PS = PERSPECTIVE_D / (PERSPECTIVE_D - BOBCAT_R);
-const TARGET_DISPLAY_W = CARD_W_REF * ACTIVE_SCALE * BOBCAT_PS; // ≈347
-const TARGET_DISPLAY_H = CARD_H_REF * ACTIVE_SCALE * BOBCAT_PS; // ≈440
-const STAGE_HEIGHT = Math.ceil(TARGET_DISPLAY_H + 30); // 470, with bobcat-style buffer
-const ASPECT = CARD_H_REF / CARD_W_REF; // 380/300, preserved across carousels
+// Flat coverflow: every card faces the camera (no rotateY / no ring), so all
+// three carousels look identical regardless of how many items each holds.
+// Active card sits centered at scale 1; side cards translate horizontally,
+// shrink slightly, and fade out as they get further from the centre —
+// giving the clean, flat side-card look the home page uses.
+const CARD_W = 300;
+const CARD_H = 380;
+const ACTIVE_SCALE = 1.04;
+const SIDE_SCALE = 0.78;
+const SIDE_GAP = 220;      // horizontal distance between adjacent card centres
+const STAGE_HEIGHT = CARD_H + 24;
+const MAX_VISIBLE = 4;      // cards beyond this distance are hidden
 
-// Normalise an angle (degrees) to the shortest representation in [-180, 180].
-function norm(a) {
-  let r = a % 360;
-  if (r > 180) r -= 360;
-  if (r < -180) r += 360;
-  return r;
+// Shortest signed circular offset between index i and the active index,
+// so the carousel wraps seamlessly in either direction.
+function signedRel(i, activeIdx, N) {
+  let d = i - activeIdx;
+  while (d > N / 2) d -= N;
+  while (d <= -N / 2) d += N;
+  return d;
 }
 
-/**
- * Coverflow carousel — a true circular ring. Cards are evenly placed around
- * a vertical axis and the whole ring rotates as one; there is no "first" or
- * "last" card, so scrolling loops endlessly and smoothly in both directions.
- * `active` is an unbounded rotation index; the visible card is `active % N`.
- */
 export default function Coverflow({ items }) {
   const { lang, num } = useI18n();
   const [active, setActive] = useState(0);
@@ -45,36 +37,10 @@ export default function Coverflow({ items }) {
 
   if (!total) return null;
 
-  const step = total > 1 ? 360 / total : 360; // spacing between cards (deg)
-  // Solve per-carousel card width so the perspective-inflated display size
-  // matches the bobcat (3-card) reference. Iterate to converge — ~6 loops are
-  // stable. Tighter step (more cards) → larger R → larger ps → smaller cardW.
-  let cardW = CARD_W_REF;
-  let R = 0;
-  let ps = BOBCAT_PS;
-  if (step < 180) {
-    for (let i = 0; i < 6; i++) {
-      R = Math.round(cardW / (2 * Math.tan((step * Math.PI) / 360))) + 40;
-      ps = PERSPECTIVE_D / (PERSPECTIVE_D - R);
-      cardW = Math.round(TARGET_DISPLAY_W / (ACTIVE_SCALE * ps));
-    }
-  } else {
-    ps = 1;
-    cardW = Math.round(TARGET_DISPLAY_W / ACTIVE_SCALE);
-  }
-  const cardH = Math.round(cardW * ASPECT);
-
   const activeIdx = ((active % total) + total) % total;
-  const stageHeight = STAGE_HEIGHT;
 
   const go = (d) => setActive((a) => a + d);
-  const goToCard = (i) => {
-    const delta = i - activeIdx;
-    let best = delta;
-    if (Math.abs(delta + total) < Math.abs(best)) best = delta + total;
-    if (Math.abs(delta - total) < Math.abs(best)) best = delta - total;
-    setActive((a) => a + best);
-  };
+  const goToCard = (i) => setActive((a) => a + signedRel(i, ((a % total) + total) % total, total));
 
   return (
     <motion.div
@@ -87,8 +53,8 @@ export default function Coverflow({ items }) {
       {/* stage */}
       <div
         dir="ltr"
-        className="relative [perspective:1500px] overflow-hidden touch-pan-y"
-        style={{ height: `${stageHeight}px` }}
+        className="relative overflow-hidden touch-pan-y"
+        style={{ height: `${STAGE_HEIGHT}px` }}
         onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           if (touchX.current == null) return;
@@ -97,99 +63,89 @@ export default function Coverflow({ items }) {
           touchX.current = null;
         }}
       >
-        <div
-          className="absolute inset-0"
-          style={{
-            transformStyle: "preserve-3d",
-            transform: `rotateY(${-active * step}deg)`,
-            transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1)",
-          }}
-        >
-          {items.map((it, i) => {
-            const rel = norm(i * step - active * step);
-            const abs = Math.abs(rel);
-            const visible = abs <= 115;
-            const isActive = abs < step / 2;
-            const opacity = !visible ? 0 : isActive ? 1 : Math.max(0.16, 1 - abs / 120);
-            const scale = isActive ? 1.06 : 0.9;
-            const clickable = visible && !isActive;
+        {items.map((it, i) => {
+          const rel = signedRel(i, activeIdx, total);
+          const abs = Math.abs(rel);
+          const visible = abs <= MAX_VISIBLE;
+          const isActive = abs === 0;
+          const scale = isActive ? ACTIVE_SCALE : SIDE_SCALE - Math.min(abs - 1, 3) * 0.04;
+          const x = rel * SIDE_GAP;
+          const opacity = !visible ? 0 : isActive ? 1 : Math.max(0.16, 1 - abs * 0.24);
+          const zIndex = Math.round(100 - abs);
+          const clickable = visible && !isActive;
 
-            return (
-              <button
-                key={it.name.en}
-                type="button"
-                onClick={() => clickable && goToCard(i)}
-                className="absolute top-1/2"
-                style={{
-                  left: "50%",
-                  width: cardW,
-                  height: cardH,
-                  marginLeft: -cardW / 2,
-                  marginTop: -cardH / 2,
-                  transform: `rotateY(${i * step}deg) translateZ(${R}px) scale(${scale})`,
-                  opacity,
-                  zIndex: Math.round(100 - abs),
-                  pointerEvents: visible || isActive ? "auto" : "none",
-                  backfaceVisibility: "hidden",
-                  WebkitBackfaceVisibility: "hidden",
-                  transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1)",
-                  transformStyle: "preserve-3d",
-                  cursor: clickable ? "pointer" : "default",
-                }}
-                aria-label={it.name[lang]}
+          return (
+            <button
+              key={it.name.en}
+              type="button"
+              onClick={() => clickable && goToCard(i)}
+              className="absolute top-1/2"
+              style={{
+                left: "50%",
+                width: CARD_W,
+                height: CARD_H,
+                marginLeft: -CARD_W / 2,
+                marginTop: -CARD_H / 2,
+                transform: `translateX(${x}px) scale(${scale})`,
+                opacity,
+                zIndex,
+                pointerEvents: visible || isActive ? "auto" : "none",
+                transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1), opacity 0.5s cubic-bezier(0.22,1,0.36,1)",
+                cursor: clickable ? "pointer" : "default",
+              }}
+              aria-label={it.name[lang]}
+            >
+              <div
+                className={`relative overflow-hidden h-full bg-[#1C1917] ${
+                  isActive ? "ring-1 ring-[#FCD34D]/60" : "ring-1 ring-white/5"
+                }`}
               >
-                <div
-                  className={`relative overflow-hidden h-full bg-[#1C1917] ${
-                    isActive ? "ring-1 ring-[#FCD34D]/60" : "ring-1 ring-white/5"
-                  }`}
-                >
-                  <Image
-                    src={it.img}
-                    alt={it.name[lang]}
-                    className="w-full h-full"
-                    fittingType="fill"
-                    focalPointX={0.5}
-                    focalPointY={0.5}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-                  {!isActive && <div className="absolute inset-0 bg-black/45 pointer-events-none" />}
-                  {isActive && (
-                    <div className="absolute top-3 end-3">
-                      <span className="text-[9px] tracking-[0.18em] uppercase px-3 py-1 bg-black/40 backdrop-blur-sm text-white/70 font-medium">
-                        {it.tag[lang]}
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute top-3 left-3 pointer-events-none">
-                    <EquipmentBadge name={it.name.en} width={32} />
+                <Image
+                  src={it.img}
+                  alt={it.name[lang]}
+                  className="w-full h-full"
+                  fittingType="fill"
+                  focalPointX={0.5}
+                  focalPointY={0.5}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                {!isActive && <div className="absolute inset-0 bg-black/45 pointer-events-none" />}
+                {isActive && (
+                  <div className="absolute top-3 end-3">
+                    <span className="text-[9px] tracking-[0.18em] uppercase px-3 py-1 bg-black/40 backdrop-blur-sm text-white/70 font-medium">
+                      {it.tag[lang]}
+                    </span>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-[10px] tracking-[0.18em] uppercase mb-1 text-[#FCD34D] font-medium">{it.nameAlt[lang]}</p>
-                    <h3 className="text-white font-bold text-lg leading-tight">{it.name[lang]}</h3>
-                    <p className="text-white/50 text-xs mt-1 leading-relaxed line-clamp-1">
-                      {Object.entries(it.specs || {})
-                        .filter(([k]) => k !== "weight")
-                        .map(([, v]) => v[lang])
-                        .join(" · ")}
-                    </p>
-                    <div className="flex items-end justify-between gap-2 mt-2.5 pt-2.5 border-t border-white/15">
-                      <div className="flex items-end gap-1">
-                        <span className="text-[#FCD34D] font-bold font-mono text-base">{num(it.daily)}</span>
-                        <Riyal size={12} />
-                        <span className="text-white/50 text-[10px]">{equipmentVault.perDay[lang]}</span>
-                      </div>
-                      <div className="flex items-end gap-1">
-                        <span className="text-white font-bold font-mono text-sm">{num(Math.round(it.daily * 6))}</span>
-                        <Riyal size={11} />
-                        <span className="text-white/50 text-[10px]">{equipmentVault.weeklyShort[lang]}</span>
-                      </div>
+                )}
+                <div className="absolute top-3 left-3 pointer-events-none">
+                  <EquipmentBadge name={it.name.en} width={32} />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <p className="text-[10px] tracking-[0.18em] uppercase mb-1 text-[#FCD34D] font-medium">{it.nameAlt[lang]}</p>
+                  <h3 className="text-white font-bold text-lg leading-tight">{it.name[lang]}</h3>
+                  <p className="text-white/50 text-xs mt-1 leading-relaxed line-clamp-1">
+                    {Object.entries(it.specs || {})
+                      .filter(([k]) => k !== "weight")
+                      .map(([, v]) => v[lang])
+                      .join(" · ")}
+                  </p>
+                  <div className="flex items-end justify-between gap-2 mt-2.5 pt-2.5 border-t border-white/15">
+                    <div className="flex items-end gap-1">
+                      <span className="text-[#FCD34D] font-bold font-mono text-base">{num(it.daily)}</span>
+                      <Riyal size={12} />
+                      <span className="text-white/50 text-[10px]">{equipmentVault.perDay[lang]}</span>
+                    </div>
+                    <div className="flex items-end gap-1">
+                      <span className="text-white font-bold font-mono text-sm">{num(Math.round(it.daily * 6))}</span>
+                      <Riyal size={11} />
+                      <span className="text-white/50 text-[10px]">{equipmentVault.weeklyShort[lang]}</span>
                     </div>
                   </div>
                 </div>
-              </button>
-            );
-          })}
-        </div>
+              </div>
+            </button>
+          );
+        })}
       </div>
 
       {/* nav arrows */}
@@ -198,7 +154,7 @@ export default function Coverflow({ items }) {
         onClick={() => go(-1)}
         aria-label="Previous"
         className="flex absolute -translate-y-1/2 left-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#1C1917] border border-white/15 text-white/80 hover:text-white hover:border-[#FCD34D] transition-colors"
-        style={{ top: `${stageHeight / 2}px` }}
+        style={{ top: `${STAGE_HEIGHT / 2}px` }}
       >
         <ChevronLeft size={18} />
       </button>
@@ -207,7 +163,7 @@ export default function Coverflow({ items }) {
         onClick={() => go(1)}
         aria-label="Next"
         className="flex absolute -translate-y-1/2 right-0 z-40 items-center justify-center w-10 h-10 rounded-full bg-[#1C1917] border border-white/15 text-white/80 hover:text-white hover:border-[#FCD34D] transition-colors"
-        style={{ top: `${stageHeight / 2}px` }}
+        style={{ top: `${STAGE_HEIGHT / 2}px` }}
       >
         <ChevronRight size={18} />
       </button>

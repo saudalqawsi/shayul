@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { Building2, MapPin, Truck, ArrowLeft, Inbox, ShieldCheck } from "lucide-react";
 import StarBadge from "@/components/StarBadge";
+import Navbar from "@/components/shayul/Navbar";
 import ProviderJoinSection from "@/components/shayul/ProviderJoinSection";
 import EquipmentBadge from "@/components/shayul/EquipmentBadge";
-import { LanguageProvider } from "@/lib/i18n";
 
 export default function ProvidersDirectory() {
   const [providers, setProviders] = useState([]);
@@ -50,15 +50,9 @@ export default function ProvidersDirectory() {
   }, []);
 
   return (
-    <LanguageProvider>
-    <div className="min-h-screen bg-[#0C0A09] text-white" dir="rtl">
-      {/* header */}
-      <header className="border-b border-white/10 bg-[#1C1917] sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
-          <Link to="/" className="text-white/40 text-xs hover:text-white/70">← العودة للموقع</Link>
-          <span className="text-[#D97706] font-mono text-sm font-bold tracking-widest">SHAYWAL</span>
-        </div>
-      </header>
+    <div className="min-h-screen bg-[#1C1917] text-white" dir="rtl">
+      <Navbar scrolled />
+      <div className="h-16" />
 
       <main className="max-w-6xl mx-auto px-5 py-10">
         {/* Process to register & enlist (merged "For Providers" content) */}
@@ -109,10 +103,18 @@ export default function ProvidersDirectory() {
                   </p>
 
                   {fleet.items && fleet.items.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {[...new Set(fleet.items.map((eq) => eq.type))].slice(0, 6).map((tp, i) => (
-                        <EquipmentBadge key={i} type={tp} width={26} />
-                      ))}
+                    <div className="flex flex-wrap gap-2.5 mb-4">
+                      {[...new Set(fleet.items.map((eq) => eq.type))].slice(0, 6).map((tp, i) => {
+                        const count = fleet.items.filter((eq) => eq.type === tp).length;
+                        return (
+                          <div key={i} className="flex flex-col items-center gap-1">
+                            <EquipmentBadge type={tp} width={28} />
+                            <span className="text-[11px] font-mono font-bold leading-none" style={{ color: "#D97706" }}>
+                              ×{count}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
 
@@ -138,6 +140,5 @@ export default function ProvidersDirectory() {
         )}
       </main>
     </div>
-    </LanguageProvider>
   );
 }
