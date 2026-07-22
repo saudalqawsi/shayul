@@ -10,12 +10,16 @@ import {
   FileCheck,
   Check,
   ArrowLeft,
+  Tag,
+  BadgeCheck,
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { how, requestForm } from "@/lib/content";
 import ContractPreview from "@/components/shayul/ContractPreview";
 
 const StepIcons = [ClipboardList, Search, Stamp, Truck];
+// Per-guarantee icons — one per card so the trust checklist reads at a glance.
+const GuaranteeIcons = [Stamp, Truck, Tag, BadgeCheck];
 
 export default function HowItWorks() {
   const { lang, dir } = useI18n();
@@ -108,20 +112,23 @@ export default function HowItWorks() {
             the reserve-form used to show (requestForm.guarantees). */}
         <div className="max-w-4xl mx-auto mt-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {requestForm.guarantees.map((g, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 border border-white/10 rounded-sm p-3.5 bg-[#0C0A09]"
-              >
-                <div className="w-8 h-8 rounded-sm bg-[#D97706]/15 border border-[#D97706]/30 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check size={14} className="text-[#D97706]" strokeWidth={2.5} />
+            {requestForm.guarantees.map((g, i) => {
+              const GIcon = GuaranteeIcons[i] || Check;
+              return (
+                <div
+                  key={i}
+                  className="flex items-start gap-3 border border-white/10 rounded-sm p-3.5 bg-[#0C0A09]"
+                >
+                  <div className="w-8 h-8 rounded-sm bg-[#D97706]/15 border border-[#D97706]/30 flex items-center justify-center shrink-0 mt-0.5">
+                    <GIcon size={14} className="text-[#D97706]" strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-white text-sm font-bold leading-tight">{g.title[lang]}</h4>
+                    <p className="text-white/45 text-xs leading-relaxed mt-1">{g.desc[lang]}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-white text-sm font-bold leading-tight">{g.title[lang]}</h4>
-                  <p className="text-white/45 text-xs leading-relaxed mt-1">{g.desc[lang]}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
