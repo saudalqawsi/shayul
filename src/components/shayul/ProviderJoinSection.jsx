@@ -110,20 +110,20 @@ export default function ProviderJoinSection() {
         </div>
 
         {/* Enlistment benefits */}
-        <div className="bg-[#1C1917] border border-white/10 rounded-sm p-6 hidden">
-          <div className="flex items-center gap-2 mb-4">
-            <Sparkles size={18} className="text-[#FCD34D]" />
-            <h3 className="font-bold text-white">{provider.benefitsTitle[lang]}</h3>
-          </div>
-          <ul className="space-y-3">
-            {provider.benefits.map((b, i) =>
-            <li key={i} className="flex items-start gap-2.5 text-white/55 text-sm leading-relaxed">
-                <CheckCircle2 size={16} className="text-[#16A34A] mt-0.5 shrink-0" />
-                <span>{b[lang]}</span>
-              </li>
-            )}
-          </ul>
-        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
 
       <Link
