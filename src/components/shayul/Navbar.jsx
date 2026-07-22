@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import Monogram from "@/components/shayul/Monogram";
+import RoleLoginMenu from "@/components/shayul/RoleLoginMenu";
 import { navLinks, logo, navCta, langToggle } from "@/lib/content";
 
 // Detect hash anchors (#section) vs SPA routes (/page) so hash-link CTAs scroll
@@ -60,7 +61,14 @@ export default function Navbar({ scrolled }) {
         </div>
 
         {/* CTA */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
+          {/* Role login — a single subtle "Log in" disclosure on the desktop
+              header, opening a small dropdown so client / provider / platform
+              managers each reach their own dashboard. It lives inline next to
+              the gold CTA so no new section ever clutters the home page. */}
+          <div className="hidden md:flex">
+            <RoleLoginMenu />
+          </div>
           <Link
             to="/#request"
             className="hidden md:flex items-center gap-2 bg-[#D97706] hover:bg-[#B45309] text-white px-5 py-2.5 rounded-sm text-sm font-bold transition-colors duration-200"
@@ -112,6 +120,7 @@ export default function Navbar({ scrolled }) {
               </Link>
             )
           )}
+          <RoleLoginMenu variant="expanded" />
           <Link
             to="/#request"
             onClick={() => setMenuOpen(false)}
