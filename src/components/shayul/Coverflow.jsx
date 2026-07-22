@@ -114,13 +114,13 @@ export default function Coverflow({ items }) {
                   fittingType="fill"
                   focalPointX={0.5}
                   focalPointY={0.5}
-                  style={{ filter: "saturate(1.6) brightness(1.5) contrast(1.02) sepia(0.28) hue-rotate(-12deg)" }}
+                  style={{ filter: "saturate(1.4) brightness(1.22) contrast(1.04) sepia(0.18) hue-rotate(-8deg)" }}
                 />
                 {/* Sunny-day light: warm amber tint + a top-right sun glow so
                     every coverflow card reads as a bright daytime shoot,
                     regardless of the source shot's actual weather. */}
-                <div className="absolute inset-0 bg-amber-300/15 mix-blend-soft-light pointer-events-none" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_5%,rgba(255,224,160,0.55),transparent_55%)] mix-blend-overlay pointer-events-none" />
+                <div className="absolute inset-0 bg-amber-300/10 mix-blend-soft-light pointer-events-none" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_5%,rgba(255,224,160,0.35),transparent_55%)] mix-blend-overlay pointer-events-none" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />
                 {!isActive && <div className="absolute inset-0 bg-black/20 pointer-events-none" />}
                 {isActive && (
