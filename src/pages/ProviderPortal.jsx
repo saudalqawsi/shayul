@@ -34,8 +34,8 @@ export default function ProviderPortal() {
   if (error) {
     return (
       <div className="min-h-screen bg-[#1C1917] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
-        <p className="text-white/70">يلزم تسجيل الدخول للوصول إلى بوابة المزوّد.</p>
-        <Link to="/login" className="bg-[#D97706] hover:bg-[#B45309] px-5 py-2 rounded-sm text-sm font-bold">تسجيل الدخول</Link>
+        <p className="text-white/70">يلزم تسجيل الدخول للوصول إلى لوحة المزوّد.</p>
+        <Link to="/login?from=/provider" className="bg-[#D97706] hover:bg-[#B45309] px-5 py-2 rounded-sm text-sm font-bold">تسجيل الدخول</Link>
       </div>
     );
   }

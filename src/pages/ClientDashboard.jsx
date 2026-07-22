@@ -132,7 +132,7 @@ export default function ClientDashboard() {
   return (
     <div className="min-h-screen bg-[#1C1917] text-white" dir="rtl">
       <DashboardChrome
-        roleLabel={{ ar: "بوابة العميل", en: "Client Portal" }}
+        roleLabel={{ ar: "لوحة العميل", en: "Client Dashboard" }}
         onLogout={logout}
       />
 

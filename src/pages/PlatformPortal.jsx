@@ -86,8 +86,8 @@ export default function PlatformPortal() {
     return (
       <div className="min-h-screen bg-[#1C1917] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
         <Lock size={30} className="text-white/40" />
-        <p className="text-white/70">يلزم تسجيل الدخول للوصول إلى بوابة المنصة.</p>
-        <Link to="/login" className="bg-[#D97706] hover:bg-[#B45309] px-5 py-2 rounded-sm text-sm font-bold">تسجيل الدخول</Link>
+        <p className="text-white/70">يلزم تسجيل الدخول للوصول إلى لوحة المنصة.</p>
+        <Link to="/login?from=/platform" className="bg-[#D97706] hover:bg-[#B45309] px-5 py-2 rounded-sm text-sm font-bold">تسجيل الدخول</Link>
       </div>
     );
   }
@@ -96,7 +96,7 @@ export default function PlatformPortal() {
     return (
       <div className="min-h-screen bg-[#1C1917] text-white flex flex-col items-center justify-center gap-4" dir="rtl">
         <Lock size={32} className="text-red-400/70" />
-        <p className="text-white font-bold">هذه البوابة مخصّصة لمشغّلي منصة شيول فقط</p>
+        <p className="text-white font-bold">هذه اللوحة مخصّصة لمشغّلي منصة شيول فقط</p>
         <p className="text-white/45 text-sm">حسابك الحالي لا يملك صلاحية إدارة العمليات والموافقات.</p>
         <Link to="/" className="text-[#D97706] text-sm font-bold hover:underline">العودة للموقع →</Link>
       </div>
@@ -118,7 +118,7 @@ export default function PlatformPortal() {
             <div className="w-7 h-7 rounded-sm bg-[#F59E0B]/15 flex items-center justify-center">
               <ShieldCheck size={14} className="text-[#F59E0B]" />
             </div>
-            <span className="text-white/60 text-xs font-bold tracking-widest uppercase">بوابة المنصة</span>
+            <span className="text-white/60 text-xs font-bold tracking-widest uppercase">لوحة المنصة</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-[#F59E0B] text-[10px] font-bold bg-[#F59E0B]/10 border border-[#F59E0B]/30 px-2.5 py-1 rounded-full">مشغّل</span>

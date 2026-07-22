@@ -43,7 +43,7 @@ export default function ProviderDashboard() {
 
   return (
     <div className="min-h-screen bg-[#1C1917] text-white" dir="rtl">
-      <DashboardChrome roleLabel={{ ar: "بوابة المزوّد", en: "Provider Portal" }} />
+      <DashboardChrome roleLabel={{ ar: "لوحة المزوّد", en: "Provider Dashboard" }} />
 
       <main className="max-w-6xl mx-auto px-5 py-8">
         {/* Stats */}
