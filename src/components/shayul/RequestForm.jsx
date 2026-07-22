@@ -6,6 +6,7 @@ import { base44 } from "@/api/base44Client";
 import { useCart } from "@/lib/cart";
 import EquipmentPicker from "@/components/shayul/EquipmentPicker";
 import Riyal from "@/components/shayul/Riyal";
+import { Link } from "react-router-dom";
 
 export default function RequestForm() {
   const { lang, dir, num } = useI18n();
@@ -101,6 +102,19 @@ export default function RequestForm() {
           {/* Right: Form */}
           <div className="bg-[#0C0A09] border border-white/10 rounded-sm p-8">
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Returning customer — login shortcut at the top of the request
+                  form, so existing users can skip the guest flow. Subtle gold
+                  link sitting on a thin divider rule — harmonious with the
+                  dark card. */}
+              <div className="flex items-center justify-end gap-2 pb-3 border-b border-white/5">
+                <span className="text-white/40 text-[11px]">
+                  {lang === "ar" ? "لديك حساب معنا؟" : "Already have an account?"}
+                </span>
+                <Link to="/login" className="text-[#FCD34D] hover:text-white text-[11px] font-bold transition-colors">
+                  {lang === "ar" ? "سجّل الدخول" : "Log in"}
+                </Link>
+              </div>
+
               {/* Contact info — name + phone squeezed into one row at every breakpoint */}
               <div className="grid grid-cols-2 gap-3">
                 <div>

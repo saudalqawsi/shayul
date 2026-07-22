@@ -78,7 +78,7 @@ export default function Coverflow({ items }) {
           const scale = isActive ? ACTIVE_SCALE : SIDE_SCALE - Math.min(abs - 1, 3) * 0.04;
           const x = rel * SIDE_GAP;
           const opacity = !visible ? 0 : isActive ? 1 : Math.max(0.16, 1 - abs * 0.24);
-          const zIndex = Math.round(100 - abs);
+          const zIndex = Math.round(10 - abs);
           const clickable = visible && !isActive;
 
           return (
