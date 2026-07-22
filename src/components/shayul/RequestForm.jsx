@@ -5,9 +5,10 @@ import { requestForm, equipment } from "@/lib/content";
 import { base44 } from "@/api/base44Client";
 import { useCart } from "@/lib/cart";
 import EquipmentPicker from "@/components/shayul/EquipmentPicker";
+import Riyal from "@/components/shayul/Riyal";
 
 export default function RequestForm() {
-  const { lang, dir } = useI18n();
+  const { lang, dir, num } = useI18n();
   const { cart, inc, dec, total, clear } = useCart();
   const [form, setForm] = useState({
     name: "", phone: "", company: "",
@@ -160,6 +161,57 @@ export default function RequestForm() {
                 <label className={labelClass}>{f.notes[lang]}</label>
                 <textarea name="notes" value={form.notes} onChange={handleChange} rows={3} placeholder={f.notesPh[lang]} className={`${inputClass} resize-none`} />
               </div>
+
+              {/* Indicative quote — appears once equipment & a durational
+                  option (day/week) are selected, so the user sees the rough
+                  cost before submitting. Scope/lump-sum defers to contract. */}
+              {(() => {
+                if (!hasItems || !form.duration) return null;
+                if (form.duration === "scope") {
+                  return (
+                    <div className="rounded-sm border border-white/15 bg-white/5 px-4 py-3">
+                      <p className="text-white/55 text-sm text-center">
+                        {lang === "ar"
+                          ? "سعر مقطوع — يُحدد في العقد الموثّق."
+                          : "Lump-sum — set in the notarized contract."}
+                      </p>
+                    </div>
+                  );
+                }
+                const dayTotal = Object.entries(cart)
+                  .filter(([, q]) => q > 0)
+                  .reduce((s, [key, qty]) => {
+                    const eq = equipment.find((e) => e.name.en === key);
+                    return s + qty * (eq?.daily || 0);
+                  }, 0);
+                if (dayTotal === 0) return null;
+                const factor = form.duration === "day" ? 1 : 6;
+                const quote = dayTotal * factor;
+                const headLabel =
+                  form.duration === "day"
+                    ? lang === "ar"
+                      ? "التكلفة التقديرية · يومي"
+                      : "Indicative cost · daily"
+                    : lang === "ar"
+                      ? "التكلفة التقديرية · أسبوعي"
+                      : "Indicative cost · weekly";
+                return (
+                  <div className="rounded-sm border border-[#D97706]/30 bg-[#D97706]/10 px-4 py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-[#FCD34D] text-xs font-bold tracking-widest uppercase">{headLabel}</p>
+                      <p className="text-white/45 text-[11px] mt-1 leading-relaxed">
+                        {lang === "ar"
+                          ? "تشمل السائق والوقود · السعر النهائي يحدده العقد الموثّق."
+                          : "Includes operator & fuel · final price is set by the notarized contract."}
+                      </p>
+                    </div>
+                    <div className="flex items-end gap-1 shrink-0">
+                      <span className="text-[#FCD34D] font-bold font-mono text-2xl leading-none">{num(quote)}</span>
+                      <Riyal size={15} />
+                    </div>
+                  </div>
+                );
+              })()}
 
               <button
                 type="submit"
