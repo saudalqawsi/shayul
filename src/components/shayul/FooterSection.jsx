@@ -2,6 +2,7 @@ import React from "react";
 import { Shield, MapPin } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { footer } from "@/lib/content";
+import Monogram from "@/components/shayul/Monogram";
 
 export default function FooterSection() {
   const { lang, dir } = useI18n();
@@ -13,9 +14,7 @@ export default function FooterSection() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 bg-[#D97706] rounded-sm flex items-center justify-center font-bold text-white text-xl">
-                S
-              </div>
+              <Monogram size={40} />
               <div>
                 <div className="text-white font-bold text-xl">{footer.brand[lang]}</div>
                 <div className="text-white/30 text-xs tracking-widest">{footer.brandEn[lang]}</div>

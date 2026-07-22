@@ -51,12 +51,12 @@ export default function HowItWorks() {
   };
 
   return (
-    <section id="how" className="py-24 bg-[#1C1917] relative" dir={dir}>
+    <section id="how" className="py-16 bg-[#1C1917] relative" dir={dir}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-4">
             {how.eyebrow[lang]}
           </p>
@@ -75,15 +75,17 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* Horizontal roadmap — desktop */}
-        <div className="hidden lg:block relative pb-2">
-          {/* dashed rail spanning node centers */}
-          <div className="absolute top-10 start-[12.5%] end-[12.5%] h-0 border-t-2 border-dashed border-[#D97706]/30" />
-          {/* chevrons between steps (RTL: next step is to the start side) */}
+        {/* Horizontal roadmap — scrolls horizontally on small screens so
+            the four steps stay in one continuous line rather than collapsing
+            into a long vertical timeline that prolongs the page. */}
+        <div className="relative pb-2 overflow-x-auto overscroll-x-contain">
+          {/* dashed rail spanning node centers (desktop only) */}
+          <div className="hidden lg:block absolute top-10 start-[12.5%] end-[12.5%] h-0 border-t-2 border-dashed border-[#D97706]/30" />
+          {/* chevrons between steps (desktop only) */}
           {[25, 50, 75].map((p) => (
             <div
               key={p}
-              className="absolute top-10 -translate-x-1/2 -translate-y-1/2"
+              className="hidden lg:block absolute top-10 -translate-x-1/2 -translate-y-1/2"
               style={{ left: `${p}%` }}
             >
               <div className="bg-[#1C1917] rounded-full p-0.5">
@@ -92,43 +94,15 @@ export default function HowItWorks() {
             </div>
           ))}
 
-          <div className="grid grid-cols-4 gap-4 relative">
+          <div className="grid grid-cols-4 gap-4 relative min-w-[640px]">
             {how.steps.map((step, i) => (
               <RoadmapStep key={step.num} step={step} i={i} />
             ))}
           </div>
         </div>
 
-        {/* Vertical roadmap — mobile */}
-        <div className="lg:hidden relative">
-          <div className="absolute start-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-[#D97706] via-[#FCD34D] to-[#D97706]" />
-          {how.steps.map((step, i) => {
-            const Icon = StepIcons[i] || ClipboardList;
-            return (
-              <div key={step.num} className="relative ps-16 pb-6 last:pb-0">
-                <div
-                  className="absolute start-0 w-12 h-12 rounded-full bg-[#1C1917] flex items-center justify-center z-10"
-                  style={{ border: `2px solid ${step.color}` }}
-                >
-                  <Icon size={20} style={{ color: step.color }} />
-                </div>
-                <div className="bg-white/4 border border-white/10 rounded-sm p-4">
-                  <span
-                    className="inline-block text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full border mb-2"
-                    style={{ color: step.color, borderColor: `${step.color}40`, backgroundColor: `${step.color}10` }}
-                  >
-                    {step.party[lang]}
-                  </span>
-                  <h3 className="text-white font-bold text-base">{step.title[lang]}</h3>
-                  <p className="text-white/45 text-sm leading-relaxed mt-1">{step.desc[lang]}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
         {/* Secured outcome */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-20 pt-16 border-t border-white/10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mt-12 pt-10 border-t border-white/10">
           <div className="order-2 lg:order-1">
             <ContractPreview />
           </div>

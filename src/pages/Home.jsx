@@ -9,6 +9,7 @@ import RequestForm from "@/components/shayul/RequestForm";
 import FAQ from "@/components/shayul/FAQ";
 import FooterSection from "@/components/shayul/FooterSection";
 import { useI18n } from "@/lib/i18n";
+import { CartProvider } from "@/lib/cart";
 
 function HomeContent() {
   const { dir } = useI18n();
@@ -22,15 +23,17 @@ function HomeContent() {
 
   return (
     <div className="bg-[#1C1917] text-white min-h-screen overflow-x-hidden" dir={dir}>
-      <Navbar scrolled={scrolled} />
-      <HeroSection />
-      <TrustLayer />
-      <EquipmentVault />
-      <HowItWorks />
-      <PricingSection />
-      <RequestForm />
-      <FAQ />
-      <FooterSection />
+      <CartProvider>
+        <Navbar scrolled={scrolled} />
+        <HeroSection />
+        <TrustLayer />
+        <EquipmentVault />
+        <HowItWorks />
+        <PricingSection />
+        <RequestForm />
+        <FAQ />
+        <FooterSection />
+      </CartProvider>
     </div>
   );
 }

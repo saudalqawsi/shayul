@@ -1,41 +1,54 @@
 import React, { useState } from "react";
-import { Shield, CheckCircle } from "lucide-react";
+import { CheckCircle, Check } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
-import { requestForm } from "@/lib/content";
+import { requestForm, equipment } from "@/lib/content";
 import { base44 } from "@/api/base44Client";
+import { useCart } from "@/lib/cart";
+import EquipmentPicker from "@/components/shayul/EquipmentPicker";
 
 export default function RequestForm() {
   const { lang, dir } = useI18n();
+  const { cart, inc, dec, total, clear } = useCart();
   const [form, setForm] = useState({
-    name: "", phone: "", company: "", equipType: "", quantity: "1",
-    location: "", duration: "", notes: ""
+    name: "", phone: "", company: "",
+    location: "", duration: "", notes: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Persist the request so the client can track it in their dashboard.
+    const items = Object.entries(cart).map(([key, qty]) => ({
+      equipment_name: key, qty,
+    }));
+    if (items.length === 0) return;
+    // Composite string for the legacy equipment_name field so existing
+    // dashboards keep showing something meaningful alongside the structured items list.
+    const summary = items.map((i) => `${i.equipment_name} ×${i.qty}`).join(lang === "ar" ? "، " : ", ");
     try {
       await base44.entities.RentalRequest.create({
-        equipment_name: form.equipType,
+        equipment_name: summary,
         client_name: form.name,
         phone: form.phone,
         company: form.company,
         location: form.location,
         duration: form.duration,
-        qty: Number(form.quantity) || 1,
+        qty: total,
         status: "pending",
-        notes: form.notes
+        notes: form.notes,
+        equipment_items: items,
       });
     } catch (err) {
-      // Non-fatal: public visitors without an account still see the success screen.
       console.warn("RentalRequest not saved:", err);
     }
     setSubmitted(true);
+    clear();
   };
 
   const f = requestForm.fields;
+  const itemCount = Object.values(cart).filter((n) => n > 0).length;
+  const hasItems = itemCount > 0;
 
   if (submitted) {
     return (
@@ -48,13 +61,13 @@ export default function RequestForm() {
           <p className="text-white/50 text-lg leading-relaxed mb-8">{requestForm.successDesc[lang]}</p>
           <button
             onClick={() => setSubmitted(false)}
-            className="bg-[#D97706] hover:bg-[#B45309] text-white px-8 py-3 rounded-sm font-bold transition-colors">
-            
+            className="bg-[#D97706] hover:bg-[#B45309] text-white px-8 py-3 rounded-sm font-bold transition-colors"
+          >
             {requestForm.newRequest[lang]}
           </button>
         </div>
-      </section>);
-
+      </section>
+    );
   }
 
   const inputClass = "w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-[#D97706] transition-colors";
@@ -73,31 +86,39 @@ export default function RequestForm() {
             </p>
             <h2
               className="text-white font-bold leading-tight mb-6"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.15 }}>
-              
+              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.15 }}
+            >
               {requestForm.title1[lang]}
               <br />
               <span className="text-white/40">{requestForm.title2[lang]}</span>
             </h2>
-            
+            <p className="text-white/55 text-base leading-relaxed max-w-md mb-8">
+              {requestForm.intro[lang]}
+            </p>
 
             {/* Guarantees */}
-            
-
-
-
-
-
-
-
-
-
-            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {requestForm.guarantees.map((g, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-3 border border-white/10 rounded-sm p-3.5 bg-[#0C0A09]"
+                >
+                  <div className="w-8 h-8 rounded-sm bg-[#D97706]/15 border border-[#D97706]/30 flex items-center justify-center shrink-0 mt-0.5">
+                    <Check size={14} className="text-[#D97706]" strokeWidth={2.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-white text-sm font-bold leading-tight">{g.title[lang]}</h4>
+                    <p className="text-white/45 text-xs leading-relaxed mt-1">{g.desc[lang]}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Right: Form */}
           <div className="bg-[#0C0A09] border border-white/10 rounded-sm p-8">
             <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Contact info */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>{f.name[lang]}</label>
@@ -114,22 +135,28 @@ export default function RequestForm() {
                 <input name="company" value={form.company} onChange={handleChange} placeholder={f.companyPh[lang]} className={inputClass} />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label className={labelClass}>{f.type[lang]}</label>
-                  <select name="equipType" required value={form.equipType} onChange={handleChange} className={`${inputClass} appearance-none`} style={{ backgroundColor: "rgba(8,22,38,1)" }}>
-                    <option value="" className="bg-[#0C0A09]">{f.typePh[lang]}</option>
-                    {requestForm.equipTypes[lang].map((e) =>
-                    <option key={e} value={e} className="bg-[#0C0A09]">{e}</option>
-                    )}
-                  </select>
+              {/* Equipment picker — multi-equipment, multi-count */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-white/50 text-xs font-bold tracking-wide">
+                    {lang === "ar" ? "اختر المعدات والعدد *" : "Select equipment & counts *"}
+                  </label>
+                  <span className={`text-[11px] font-mono ${hasItems ? "text-[#FCD34D]" : "text-white/30"}`}>
+                    {hasItems
+                      ? lang === "ar"
+                        ? `${itemCount} بنود · ${total} معدة`
+                        : `${itemCount} items · ${total} units`
+                      : lang === "ar"
+                        ? "اضغط + لإضافة معدة"
+                        : "Tap + to add a unit"}
+                  </span>
                 </div>
-                <div>
-                  <label className={labelClass}>{f.qty[lang]}</label>
-                  <input name="quantity" value={form.quantity} onChange={handleChange} type="number" min="1" max="50" className={`${inputClass} font-mono`} />
+                <div className="bg-black/30 border border-white/10 rounded-sm p-3">
+                  <EquipmentPicker items={equipment} value={cart} onInc={inc} onDec={dec} />
                 </div>
               </div>
 
+              {/* Project details */}
               <div>
                 <label className={labelClass}>{f.location[lang]}</label>
                 <input name="location" required value={form.location} onChange={handleChange} placeholder={f.locationPh[lang]} className={inputClass} />
@@ -150,7 +177,11 @@ export default function RequestForm() {
                 <textarea name="notes" value={form.notes} onChange={handleChange} rows={3} placeholder={f.notesPh[lang]} className={`${inputClass} resize-none`} />
               </div>
 
-              <button type="submit" className="w-full bg-[#D97706] hover:bg-[#B45309] text-white py-4 rounded-sm font-bold text-base transition-colors duration-200 tracking-wide">
+              <button
+                type="submit"
+                disabled={!hasItems}
+                className="w-full bg-[#D97706] hover:bg-[#B45309] disabled:bg-white/5 disabled:text-white/30 disabled:cursor-not-allowed text-white py-4 rounded-sm font-bold text-base transition-colors duration-200 tracking-wide"
+              >
                 {requestForm.submit[lang]}
               </button>
 
@@ -159,6 +190,6 @@ export default function RequestForm() {
           </div>
         </div>
       </div>
-    </section>);
-
+    </section>
+  );
 }
