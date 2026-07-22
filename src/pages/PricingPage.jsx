@@ -68,17 +68,23 @@ export default function PricingPage() {
                 {item.note && <p className="text-[10px] text-[#D97706] mt-0.5">{item.note[lang]}</p>}
               </div>
               <div className="flex items-center justify-center gap-1.5">
-                <span className="text-[#FCD34D] font-bold font-mono text-lg">{num(item.daily)}</span>
-                <Riyal size={13} />
+                {item.daily == null ? (
+                  <span className="text-[#FCD34D] font-bold text-sm tracking-widest">TBC</span>
+                ) : (
+                  <>
+                    <span className="text-[#FCD34D] font-bold font-mono text-lg">{num(item.daily)}</span>
+                    <Riyal size={13} />
+                  </>
+                )}
               </div>
               <div className="flex items-center justify-center gap-1.5">
-                {item.monthly ? (
+                {item.monthly == null ? (
+                  <span className="text-white/40 text-sm tracking-widest">{item.daily == null ? "TBC" : "—"}</span>
+                ) : (
                   <>
                     <span className="text-white/70 font-mono">{num(item.monthly)}</span>
                     <Riyal size={12} />
                   </>
-                ) : (
-                  <span className="text-white/20 text-sm">—</span>
                 )}
               </div>
             </div>

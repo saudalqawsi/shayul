@@ -293,6 +293,42 @@ export const equipment = [
     img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/6ba23693b_generated_image.png",
     tag: { ar: "متوفر الآن", en: "Available Now" },
   },
+  {
+    name: { ar: "مان لفت — Genie S-45 HF", en: "Man Lift — Genie S-45 HF" },
+    nameAlt: { ar: "Man Lift", en: "مان لفت" },
+    specs: {
+      weight: { ar: "٩ طن", en: "9 T" },
+      size: { ar: "٤٥ قدم", en: "45 ft" },
+    },
+    daily: null,
+    monthly: null,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/98602fea6_generated_image.png",
+    tag: { ar: "السعر قيد التحديث", en: "Pricing TBC" },
+  },
+  {
+    name: { ar: "سيزر لفت — Genie GS-1932", en: "Scissor Lift — Genie GS-1932" },
+    nameAlt: { ar: "Scissor Lift", en: "سيزر لفت" },
+    specs: {
+      weight: { ar: "٢ طن", en: "2 T" },
+      size: { ar: "١٩ قدم", en: "19 ft" },
+    },
+    daily: null,
+    monthly: null,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/6e9dc6864_generated_image.png",
+    tag: { ar: "السعر قيد التحديث", en: "Pricing TBC" },
+  },
+  {
+    name: { ar: "رصاصة يدوية", en: "Walk-Behind Roller" },
+    nameAlt: { ar: "Walk-Behind Roller", en: "رصاصة يدوية" },
+    specs: {
+      weight: { ar: "٧٠٠ كجم", en: "700 kg" },
+      size: { ar: "دكاكة يدوية", en: "Walk-Behind" },
+    },
+    daily: null,
+    monthly: null,
+    img: "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/2025aa3f1_generated_image.png",
+    tag: { ar: "السعر قيد التحديث", en: "Pricing TBC" },
+  },
 ];
 
 // White-background studio thumbnails used ONLY inside the reserve-form
@@ -495,6 +531,14 @@ export const pricing = {
         { name: { ar: "بلدوزر 800-D9", en: "Bulldozer 800-D9" }, daily: 3000, monthly: null, note: { ar: "يُشترط الدفع المقدّم", en: "Prepayment required" } },
         { name: { ar: "تليهاندلر", en: "Telehandler" }, daily: 1000, monthly: null, note: null },
         { name: { ar: "رصاصة / دكاكة", en: "Vibratory Roller" }, daily: 700, monthly: 16000, note: null },
+        { name: { ar: "رصاصة يدوية", en: "Walk-Behind Roller" }, daily: null, monthly: null, note: { ar: "السعر قيد التحديث", en: "Pricing TBC" } },
+      ],
+    },
+    {
+      name: { ar: "منصات وأوناش", en: "Lifts & Platforms" },
+      items: [
+        { name: { ar: "مان لفت — Genie S-45 HF", en: "Man Lift — Genie S-45 HF" }, daily: null, monthly: null, note: { ar: "السعر قيد التحديث", en: "Pricing TBC" } },
+        { name: { ar: "سيزر لفت — Genie GS-1932", en: "Scissor Lift — Genie GS-1932" }, daily: null, monthly: null, note: { ar: "السعر قيد التحديث", en: "Pricing TBC" } },
       ],
     },
   ],

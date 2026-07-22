@@ -144,14 +144,26 @@ export default function Coverflow({ items }) {
                   </p>
                   <div className="flex items-end justify-between gap-2 mt-2.5 pt-2.5 border-t border-white/15">
                     <div className="flex items-end gap-1">
-                      <span className="text-[#FCD34D] font-bold font-mono text-base">{num(it.daily)}</span>
-                      <Riyal size={12} />
-                      <span className="text-white/50 text-[10px]">{equipmentVault.perDay[lang]}</span>
+                      {it.daily == null ? (
+                        <span className="text-[#FCD34D] font-bold text-sm tracking-widest">TBC</span>
+                      ) : (
+                        <>
+                          <span className="text-[#FCD34D] font-bold font-mono text-base">{num(it.daily)}</span>
+                          <Riyal size={12} />
+                          <span className="text-white/50 text-[10px]">{equipmentVault.perDay[lang]}</span>
+                        </>
+                      )}
                     </div>
                     <div className="flex items-end gap-1">
-                      <span className="text-white font-bold font-mono text-sm">{num(Math.round(it.daily * 6))}</span>
-                      <Riyal size={11} />
-                      <span className="text-white/50 text-[10px]">{equipmentVault.weeklyShort[lang]}</span>
+                      {it.daily == null ? (
+                        <span className="text-white/70 font-bold text-sm tracking-widest">TBC</span>
+                      ) : (
+                        <>
+                          <span className="text-white font-bold font-mono text-sm">{num(Math.round(it.daily * 6))}</span>
+                          <Riyal size={11} />
+                          <span className="text-white/50 text-[10px]">{equipmentVault.weeklyShort[lang]}</span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
