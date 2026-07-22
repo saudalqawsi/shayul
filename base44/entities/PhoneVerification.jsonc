@@ -1,0 +1,34 @@
+{
+  "name": "PhoneVerification",
+  "type": "object",
+  "properties": {
+    "phone": {
+      "type": "string",
+      "title": "Phone number (E.164)"
+    },
+    "code": {
+      "type": "string",
+      "title": "OTP code"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Expiration time"
+    },
+    "verified": {
+      "type": "boolean",
+      "title": "Verified",
+      "default": false
+    },
+    "attempts": {
+      "type": "number",
+      "title": "Wrong attempts",
+      "default": 0
+    }
+  },
+  "required": [
+    "phone",
+    "code",
+    "expires_at"
+  ]
+}
