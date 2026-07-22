@@ -70,7 +70,7 @@ export default function RequestForm() {
     );
   }
 
-  const inputClass = "w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3.5 text-white placeholder-white/25 text-sm focus:outline-none focus:border-[#D97706] transition-colors";
+  const inputClass = "w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3 text-white placeholder-white/25 text-sm focus:outline-none focus:border-[#D97706] transition-colors";
   const labelClass = "text-white/50 text-xs font-bold tracking-wide block mb-2";
 
   return (
@@ -117,7 +117,7 @@ export default function RequestForm() {
 
           {/* Right: Form */}
           <div className="bg-[#0C0A09] border border-white/10 rounded-sm p-8">
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4">
               {/* Contact info — name + phone squeezed into one row at every breakpoint */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
@@ -130,9 +130,16 @@ export default function RequestForm() {
                 </div>
               </div>
 
-              <div>
-                <label className={labelClass}>{f.company[lang]}</label>
-                <input name="company" value={form.company} onChange={handleChange} placeholder={f.companyPh[lang]} className={inputClass} />
+              {/* Company + location paired on one row */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className={labelClass}>{f.company[lang]}</label>
+                  <input name="company" value={form.company} onChange={handleChange} placeholder={f.companyPh[lang]} className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>{f.location[lang]}</label>
+                  <input name="location" required value={form.location} onChange={handleChange} placeholder={f.locationPh[lang]} className={inputClass} />
+                </div>
               </div>
 
               {/* Equipment picker — multi-equipment, multi-count */}
@@ -156,21 +163,15 @@ export default function RequestForm() {
                 </div>
               </div>
 
-              {/* Project details — location + duration squeezed into one row */}
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className={labelClass}>{f.location[lang]}</label>
-                  <input name="location" required value={form.location} onChange={handleChange} placeholder={f.locationPh[lang]} className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>{f.duration[lang]}</label>
-                  <select name="duration" required value={form.duration} onChange={handleChange} className={`${inputClass} appearance-none`} style={{ backgroundColor: "rgba(8,22,38,1)" }}>
-                    <option value="" className="bg-[#0C0A09]">{f.durationPh[lang]}</option>
-                    <option value="day" className="bg-[#0C0A09]">{lang === "ar" ? "يومي (وردية واحدة)" : "Daily (single shift)"}</option>
-                    <option value="week" className="bg-[#0C0A09]">{lang === "ar" ? "أسبوعي" : "Weekly"}</option>
-                    <option value="scope" className="bg-[#0C0A09]">{lang === "ar" ? "مقطوعة — نطاق عمل محدد" : "Lump-sum — defined scope"}</option>
-                  </select>
-                </div>
+              {/* Duration alone — the select with descriptive AR options needs the full row */}
+              <div>
+                <label className={labelClass}>{f.duration[lang]}</label>
+                <select name="duration" required value={form.duration} onChange={handleChange} className={`${inputClass} appearance-none`} style={{ backgroundColor: "rgba(8,22,38,1)" }}>
+                  <option value="" className="bg-[#0C0A09]">{f.durationPh[lang]}</option>
+                  <option value="day" className="bg-[#0C0A09]">{lang === "ar" ? "يومي (وردية واحدة)" : "Daily (single shift)"}</option>
+                  <option value="week" className="bg-[#0C0A09]">{lang === "ar" ? "أسبوعي" : "Weekly"}</option>
+                  <option value="scope" className="bg-[#0C0A09]">{lang === "ar" ? "مقطوعة — نطاق عمل محدد" : "Lump-sum — defined scope"}</option>
+                </select>
               </div>
 
               <div>
