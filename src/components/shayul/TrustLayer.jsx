@@ -24,7 +24,7 @@ function Pillar({ pillar, dir, lang }) {
           e.preventDefault();
         }
       }}
-      className="group bg-[#1C1917] border rounded-md p-6 pt-8 flex flex-col items-center cursor-pointer transition-all duration-400 shrink-0 w-[260px] lg:w-auto lg:flex-1"
+      className="group bg-[#1C1917] border rounded-md p-6 pt-8 flex flex-col items-center cursor-pointer transition-all duration-400 h-full"
       style={{ borderColor: open ? "rgba(217,119,6,0.5)" : "#292524" }}
     >
       <div className="w-14 h-14 rounded-md bg-[#292524] flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110">
@@ -77,10 +77,9 @@ export default function TrustLayer() {
           </h2>
         </div>
 
-        {/* Pillars — horizontal line at every breakpoint; on wide screens the
-            four pillars share a row, on narrow ones you scan through a
-            single track instead of stacking into a long column. */}
-        <div dir="ltr" className="flex gap-4 overflow-x-auto overscroll-x-contain pb-2 lg:gap-5 lg:justify-between lg:overflow-visible">
+        {/* Pillars — 4-up on desktop (fits the page width), 2×2 grid on tablet,
+            single column on phone — no horizontal scroll track anywhere. */}
+        <div dir="ltr" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
           {trust.pillars.map((p) => (
             <Pillar key={p.num} pillar={p} dir={dir} lang={lang} />
           ))}

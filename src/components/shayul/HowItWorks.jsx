@@ -79,13 +79,14 @@ export default function HowItWorks() {
             the four steps stay in one continuous line rather than collapsing
             into a long vertical timeline that prolongs the page. */}
         <div className="relative pb-2 overflow-x-auto overscroll-x-contain">
-          {/* dashed rail spanning node centers (desktop only) */}
-          <div className="hidden lg:block absolute top-10 start-[12.5%] end-[12.5%] h-0 border-t-2 border-dashed border-[#D97706]/30" />
-          {/* chevrons between steps (desktop only) */}
+          {/* dashed rail spanning node centers (visible at every breakpoint so
+              the sequential order is obvious even while horizontally scrolling) */}
+          <div className="absolute top-10 start-[12.5%] end-[12.5%] h-0 border-t-2 border-dashed border-[#D97706]/30" />
+          {/* chevrons between steps — always visible */}
           {[25, 50, 75].map((p) => (
             <div
               key={p}
-              className="hidden lg:block absolute top-10 -translate-x-1/2 -translate-y-1/2"
+              className="absolute top-10 -translate-x-1/2 -translate-y-1/2"
               style={{ left: `${p}%` }}
             >
               <div className="bg-[#1C1917] rounded-full p-0.5">

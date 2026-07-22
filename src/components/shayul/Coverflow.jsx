@@ -41,6 +41,13 @@ export default function Coverflow({ items }) {
 
   const go = (d) => setActive((a) => a + d);
   const goToCard = (i) => setActive((a) => a + signedRel(i, ((a % total) + total) % total, total));
+  // Every card click routes the visitor down to the request form — the
+  // carousel still turns via its arrows and dots, but a tap on any card
+  // (active or side) is treated as "I want to reserve this unit".
+  const goToRequest = () => {
+    const el = document.getElementById("request");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <motion.div
@@ -78,7 +85,7 @@ export default function Coverflow({ items }) {
             <button
               key={it.name.en}
               type="button"
-              onClick={() => clickable && goToCard(i)}
+              onClick={goToRequest}
               className="absolute top-1/2"
               style={{
                 left: "50%",
@@ -91,9 +98,9 @@ export default function Coverflow({ items }) {
                 zIndex,
                 pointerEvents: visible || isActive ? "auto" : "none",
                 transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1), opacity 0.5s cubic-bezier(0.22,1,0.36,1)",
-                cursor: clickable ? "pointer" : "default",
+                cursor: "pointer",
               }}
-              aria-label={it.name[lang]}
+              aria-label={`${it.name[lang]} — ${lang === "ar" ? "احجز" : "reserve"}`}
             >
               <div
                 className={`relative overflow-hidden h-full bg-[#1C1917] ${
