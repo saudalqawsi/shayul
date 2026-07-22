@@ -9,15 +9,32 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { base44 } from "@/api/base44Client";
+import { useI18n } from "@/lib/i18n";
 
 const norm = (p) => (p || "").replace(/[\s()-]/g, "");
 const validPhone = (p) => /^\+?\d{8,15}$/.test(norm(p));
 
-// Step 1 of the unified login: phone verification gate. Sends a 6-digit
-// SMS code via the `sendPhoneOtp` backend function, then verifies it via
-// `verifyPhoneOtp`. On success, calls onVerified(normalizedPhone) so the
-// parent page can reveal the email/password sign-in step.
+// Localized strings so the OTP gate never reads English-only when Arabic
+// is the active site language.
+const S = {
+  phone: { ar: "رقم الجوال", en: "Phone number" },
+  sendCode: { ar: "أرسل رمز التحقق", en: "Send verification code" },
+  sending: { ar: "جارٍ الإرسال...", en: "Sending..." },
+  enterCode: { ar: "أدخل الرمز المكوّن من ٦ أرقام", en: "Enter the 6-digit code we sent" },
+  verify: { ar: "تأكيد الرمز", en: "Verify code" },
+  verifying: { ar: "جارٍ التحقق...", en: "Verifying..." },
+  resend: { ar: "إعادة الإرسال", en: "Resend code" },
+  resendIn: { ar: "إعادة الإرسال بعد", en: "Resend available in" },
+  badPhone: { ar: "أدخل رقم هاتف صحيح، مثل +966512345678", en: "Enter a valid phone, e.g. +966512345678" },
+  badCode: { ar: "الرمز غير صحيح", en: "Invalid code" },
+  sendFail: { ar: "فشل إرسال الرمز", en: "Failed to send code" },
+};
+
+// Standalone SMS sign-in flow. Sends a 6-digit code via `sendPhoneOtp` and
+// verifies via `verifyPhoneOtp`; on success calls onVerified(normalizedPhone)
+// so the parent page decides what "logged in by phone" means.
 export default function PhoneOtpGate({ onVerified }) {
+  const { lang } = useI18n();
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
   const [sent, setSent] = useState(false);
@@ -35,7 +52,7 @@ export default function PhoneOtpGate({ onVerified }) {
     setError("");
     const p = norm(phone);
     if (!validPhone(phone)) {
-      setError("Enter a valid phone (e.g. +966512345678)");
+      setError(S.badPhone[lang]);
       return;
     }
     setLoading(true);
@@ -44,7 +61,7 @@ export default function PhoneOtpGate({ onVerified }) {
       setSent(true);
       setCooldown(60);
     } catch (e) {
-      setError(e?.response?.data?.error || e?.message || "Failed to send code");
+      setError(e?.response?.data?.error || e?.message || S.sendFail[lang]);
     } finally {
       setLoading(false);
     }
@@ -61,7 +78,7 @@ export default function PhoneOtpGate({ onVerified }) {
       });
       onVerified?.(norm(phone));
     } catch (e) {
-      setError(e?.response?.data?.error || e?.message || "Invalid code");
+      setError(e?.response?.data?.error || e?.message || S.badCode[lang]);
     } finally {
       setLoading(false);
     }
@@ -70,7 +87,7 @@ export default function PhoneOtpGate({ onVerified }) {
   return (
     <div className="space-y-3">
       <div className="space-y-2">
-        <Label htmlFor="phone">Phone number</Label>
+        <Label htmlFor="phone">{S.phone[lang]}</Label>
         <div className="relative">
           <Phone
             className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground"
@@ -101,10 +118,10 @@ export default function PhoneOtpGate({ onVerified }) {
           {loading ? (
             <>
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              Sending...
+              {S.sending[lang]}
             </>
           ) : (
-            "Send verification code"
+            S.sendCode[lang]
           )}
         </Button>
       )}
@@ -112,7 +129,7 @@ export default function PhoneOtpGate({ onVerified }) {
       {sent && (
         <div className="space-y-3">
           <div className="space-y-2">
-            <Label>Enter the 6-digit code we sent</Label>
+            <Label>{S.enterCode[lang]}</Label>
             <div className="flex justify-center">
               <InputOTP maxLength={6} value={code} onChange={setCode}>
                 <InputOTPGroup>
@@ -135,22 +152,22 @@ export default function PhoneOtpGate({ onVerified }) {
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Verifying...
+                {S.verifying[lang]}
               </>
             ) : (
-              "Verify code"
+              S.verify[lang]
             )}
           </Button>
           <p className="text-center text-xs text-muted-foreground">
             {cooldown > 0 ? (
-              `Resend available in ${cooldown}s`
+              `${S.resendIn[lang]} ${cooldown}s`
             ) : (
               <button
                 type="button"
                 onClick={handleSend}
                 className="text-primary font-medium hover:underline"
               >
-                Resend code
+                {S.resend[lang]}
               </button>
             )}
           </p>

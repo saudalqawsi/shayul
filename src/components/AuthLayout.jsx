@@ -1,8 +1,26 @@
 import React from "react";
+import { useI18n } from "@/lib/i18n";
 
+// Shared auth-page shell. Reads language + direction from the global i18n
+// provider so every auth page renders RTL when Arabic is selected, without
+// each page re-wiring it. A small corner toggle lets users switch language
+// even though no public navbar is visible on these pages.
 export default function AuthLayout({ icon: Icon, title, subtitle, footer, children }) {
+  const { lang, toggle, dir } = useI18n();
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+    <div
+      className="relative min-h-screen flex items-center justify-center bg-background px-4"
+      dir={dir}
+    >
+      <button
+        type="button"
+        onClick={toggle}
+        className="absolute top-4 end-4 z-10 text-xs font-bold text-muted-foreground hover:text-foreground border border-border rounded-md px-2.5 py-1.5 transition-colors"
+        aria-label="Toggle language"
+      >
+        {lang === "ar" ? "EN" : "ع"}
+      </button>
+
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary mb-4">

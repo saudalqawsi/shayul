@@ -1,13 +1,15 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 
 const ROLE_TABS = [
-  { value: "client", label: "Client" },
-  { value: "provider", label: "Provider" },
-  { value: "platform", label: "Platform" },
+  { value: "client", label: { ar: "عميل", en: "Client" } },
+  { value: "provider", label: { ar: "مزوّد", en: "Provider" } },
+  { value: "platform", label: { ar: "المنصة", en: "Platform" } },
 ];
 
 export default function RoleTabs({ role, onChange }) {
+  const { lang } = useI18n();
   return (
     <div className="flex gap-1 p-1 bg-muted rounded-lg mb-6" role="tablist">
       {ROLE_TABS.map((t) => (
@@ -24,7 +26,7 @@ export default function RoleTabs({ role, onChange }) {
               : "text-muted-foreground hover:text-foreground"
           )}
         >
-          {t.label}
+          {t.label[lang]}
         </button>
       ))}
     </div>
