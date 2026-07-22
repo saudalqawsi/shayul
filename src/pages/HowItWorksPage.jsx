@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   ClipboardList, Search, Stamp, Truck, ArrowLeft,
   ShieldCheck, Clock, FileCheck, User, Database, CheckCircle2
@@ -23,9 +24,9 @@ export default function HowItWorksPage() {
       {/* Hero */}
       <div className="bg-[#0C0A09] border-b border-white/10 py-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <a href="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm mb-8 transition-colors">
+          <Link to="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm mb-8 transition-colors">
             <ArrowLeft size={14} /> {lang === "ar" ? "الرئيسية" : "Home"}
-          </a>
+          </Link>
           <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-4">{how.eyebrow[lang]}</p>
           <h1 className="text-white font-bold mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>
             {how.title1[lang]}<br />
@@ -177,12 +178,12 @@ export default function HowItWorksPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href="/#request" className="bg-[#D97706] hover:bg-[#B45309] text-white px-7 py-3 rounded-sm text-sm font-bold transition-colors">
+            <Link to="/#request" className="bg-[#D97706] hover:bg-[#B45309] text-white px-7 py-3 rounded-sm text-sm font-bold transition-colors">
               {lang === "ar" ? "اطلب معدة الآن" : "Request a unit"}
-            </a>
-            <a href="/pricing" className="border border-white/20 text-white/60 hover:text-white px-7 py-3 rounded-sm text-sm font-bold transition-colors">
+            </Link>
+            <Link to="/pricing" className="border border-white/20 text-white/60 hover:text-white px-7 py-3 rounded-sm text-sm font-bold transition-colors">
               {lang === "ar" ? "دليل الأسعار" : "Pricing Guide"}
-            </a>
+            </Link>
           </div>
         </section>
       </main>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ShieldCheck, Zap, BadgeCheck, MapPin, FileText, ArrowLeft, CheckCircle2 } from "lucide-react";
 import Navbar from "@/components/shayul/Navbar";
 import FooterSection from "@/components/shayul/FooterSection";
@@ -68,12 +69,12 @@ export default function TrustPage() {
               : "Because insurance is the single selling point that removes the fear of renting — we built it first."}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
-            <a href="/#request" className="bg-[#D97706] hover:bg-[#B45309] text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors">
+            <Link to="/#request" className="bg-[#D97706] hover:bg-[#B45309] text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors">
               {lang === "ar" ? "اطلب معدتك الآن" : "Request a unit now"}
-            </a>
-            <a href="/providers" className="border border-white/20 hover:border-white/40 text-white/70 hover:text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors">
+            </Link>
+            <Link to="/providers" className="border border-white/20 hover:border-white/40 text-white/70 hover:text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors">
               {lang === "ar" ? "دليل المزوّدين" : "Provider Directory"}
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -233,12 +234,12 @@ export default function TrustPage() {
               : "Every request on Shaywal is covered by contract and insurance — whether you're a project owner or equipment provider."}
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
-            <a href="/#request" className="bg-[#D97706] hover:bg-[#B45309] text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors">
+            <Link to="/#request" className="bg-[#D97706] hover:bg-[#B45309] text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors">
               {lang === "ar" ? "اطلب معدة الآن" : "Request a unit"}
-            </a>
-            <a href="/providers" className="border border-white/20 hover:border-white/40 text-white/70 hover:text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors inline-flex items-center gap-2">
+            </Link>
+            <Link to="/providers" className="border border-white/20 hover:border-white/40 text-white/70 hover:text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors inline-flex items-center gap-2">
               {lang === "ar" ? "عرض المزوّدين" : "View Providers"} <ArrowLeft size={14} className="rotate-180" />
-            </a>
+            </Link>
           </div>
         </section>
       </main>

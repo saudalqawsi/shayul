@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Shield, Info, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/shayul/Navbar";
 import FooterSection from "@/components/shayul/FooterSection";
@@ -20,9 +21,9 @@ export default function PricingPage() {
       {/* Hero */}
       <div className="bg-[#0C0A09] border-b border-white/10 py-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <a href="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm mb-8 transition-colors">
+          <Link to="/" className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm mb-8 transition-colors">
             <ArrowLeft size={14} /> {lang === "ar" ? "الرئيسية" : "Home"}
-          </a>
+          </Link>
           <p className="text-[#D97706] text-xs font-bold tracking-widest uppercase mb-4">{pricing.eyebrow[lang]}</p>
           <h1 className="text-white font-bold mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>
             {pricing.title1[lang]}<br />
@@ -115,9 +116,9 @@ export default function PricingPage() {
               {lang === "ar" ? "أرسل طلبك وسنؤكّد السعر النهائي خلال ساعتين." : "Submit your request and we'll confirm the final price within 2 hours."}
             </p>
           </div>
-          <a href="/#request" className="bg-[#D97706] hover:bg-[#B45309] text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors shrink-0 whitespace-nowrap">
+          <Link to="/#request" className="bg-[#D97706] hover:bg-[#B45309] text-white px-8 py-3 rounded-sm text-sm font-bold transition-colors shrink-0 whitespace-nowrap">
             {lang === "ar" ? "اطلب المعدة" : "Request a unit"}
-          </a>
+          </Link>
         </div>
       </main>
 
