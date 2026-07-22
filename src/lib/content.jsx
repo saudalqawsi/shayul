@@ -361,7 +361,7 @@ export const pickerImgs = {
   "Excavator": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/502d8d2ba_generated_image.png",
   "Crusher Excavator": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/b30733543_generated_image.png",
   "Motor Grader G14": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/0101da91a_generated_image.png",
-  "Bulldozer 800-D9": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/d3f34b4ad_generated_image.png",
+  "Bulldozer 800-D9": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/8ef36e414_generated_image.png",
   "Telehandler": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/dcfa9fda9_generated_image.png",
   "Vibratory Roller": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/d33448dc0_generated_image.png",
   "Man Lift — Genie S-45 HF": "https://media.base44.com/images/public/6a5e151f76837cda81644b8e/2d63b9ad7_generated_image.png",
