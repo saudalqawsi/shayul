@@ -8,10 +8,11 @@ import {
   ShieldCheck,
   Clock,
   FileCheck,
+  Check,
   ArrowLeft,
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
-import { how } from "@/lib/content";
+import { how, requestForm } from "@/lib/content";
 import ContractPreview from "@/components/shayul/ContractPreview";
 
 const StepIcons = [ClipboardList, Search, Stamp, Truck];
@@ -98,6 +99,28 @@ export default function HowItWorks() {
           <div className="grid grid-cols-4 gap-4 relative min-w-[640px]">
             {how.steps.map((step, i) => (
               <RoadmapStep key={step.num} step={step} i={i} />
+            ))}
+          </div>
+        </div>
+
+        {/* Guarantees — relocated beneath the roadmap so the trust checklist
+            sits in one cluster with the booking flow. Reuses the same data
+            the reserve-form used to show (requestForm.guarantees). */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {requestForm.guarantees.map((g, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 border border-white/10 rounded-sm p-3.5 bg-[#0C0A09]"
+              >
+                <div className="w-8 h-8 rounded-sm bg-[#D97706]/15 border border-[#D97706]/30 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check size={14} className="text-[#D97706]" strokeWidth={2.5} />
+                </div>
+                <div>
+                  <h4 className="text-white text-sm font-bold leading-tight">{g.title[lang]}</h4>
+                  <p className="text-white/45 text-xs leading-relaxed mt-1">{g.desc[lang]}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CheckCircle, Check } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { requestForm, equipment } from "@/lib/content";
 import { base44 } from "@/api/base44Client";
@@ -95,24 +95,6 @@ export default function RequestForm() {
             <p className="text-white/55 text-base leading-relaxed max-w-md mb-8">
               {requestForm.intro[lang]}
             </p>
-
-            {/* Guarantees */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {requestForm.guarantees.map((g, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-3 border border-white/10 rounded-sm p-3.5 bg-[#0C0A09]"
-                >
-                  <div className="w-8 h-8 rounded-sm bg-[#D97706]/15 border border-[#D97706]/30 flex items-center justify-center shrink-0 mt-0.5">
-                    <Check size={14} className="text-[#D97706]" strokeWidth={2.5} />
-                  </div>
-                  <div>
-                    <h4 className="text-white text-sm font-bold leading-tight">{g.title[lang]}</h4>
-                    <p className="text-white/45 text-xs leading-relaxed mt-1">{g.desc[lang]}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right: Form */}
